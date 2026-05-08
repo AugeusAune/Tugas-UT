@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Rekap Bahan Ajar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      body {
+        background: #f1f5f9;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      /* Navbar */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #0f172a;
+        border-bottom: 1px solid #1e293b;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      .nav-brand span {
+        color: #fbbf24;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .nav-links a:hover {
+        color: white;
+        background: #1e293b;
+      }
+      .nav-links a.active {
+        color: white;
+        background: #1e40af;
+      }
+      .nav-dropdown {
+        position: relative;
+      }
+      .nav-dropdown:hover .dropdown-panel {
+        display: block;
+      }
+      .dropdown-panel {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 0.5rem;
+        min-width: 220px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        z-index: 200;
+      }
+      .dropdown-panel a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-decoration: none;
+      }
+      .dropdown-panel a:hover {
+        background: #334155;
+        color: white;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-avatar {
+        width: 34px;
+        height: 34px;
+        background: #1d4ed8;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: white;
+      }
+      .nav-name {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #cbd5e1;
+      }
+      .btn-logout {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: #f87171;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: background 0.15s;
+      }
+      .btn-logout:hover {
+        background: rgba(239, 68, 68, 0.2);
+      }
+
+      /* Page */
+      .page {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 2rem 2rem 4rem;
+      }
+      .page-title {
+        margin-bottom: 2rem;
+      }
+      .page-title h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .page-title p {
+        font-size: 0.875rem;
+        color: #64748b;
+        margin-top: 0.25rem;
+      }
+
+      /* Two col layout */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      @media (max-width: 900px) {
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Card */
+      .card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .card-header h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      /* Bar Chart */
+      .bar-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.65rem;
+      }
+      .bar-item:last-child {
+        margin-bottom: 0;
+      }
+      .bar-label {
+        flex: 0 0 160px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #475569;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .bar-track {
+        flex: 1;
+        height: 26px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+      }
+      .bar-fill {
+        height: 100%;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: 0.5rem;
+        transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .bar-fill span {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: white;
+        white-space: nowrap;
+      }
+      .bar-fill.green {
+        background: #2563eb;
+      }
+      .bar-fill.amber {
+        background: #2563eb;
+      }
+      .bar-fill.red {
+        background: #2563eb;
+      }
+
+      /* Donut legend */
+      .donut-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+      .donut-ring {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        position: relative;
+        margin-bottom: 1.25rem;
+        /* will be set via JS inline style */
+      }
+      .donut-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .donut-center .num {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: #0f172a;
+        line-height: 1;
+      }
+      .donut-center .lbl {
+        font-size: 0.65rem;
+        color: #94a3b8;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .legend {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #475569;
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      /* Table */
+      .table-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .table-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .table-card-header h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .print-date {
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 500;
+      }
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.86rem;
+      }
+      thead tr {
+        background: #f8fafc;
+      }
+      th {
+        padding: 0.75rem 1.25rem;
+        text-align: left;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        border-bottom: 1px solid #e2e8f0;
+        white-space: nowrap;
+      }
+      td {
+        padding: 0.85rem 1.25rem;
+        color: #334155;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: middle;
+      }
+      tbody tr:hover {
+        background: #f8fafc;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+      tfoot td {
+        padding: 0.9rem 1.25rem;
+        font-weight: 600;
+        background: #f8fafc;
+        border-top: 2px solid #e2e8f0;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+      }
+      .badge-green {
+        background: #f0fdf4;
+        color: #16a34a;
+      }
+      .badge-amber {
+        background: #fffbeb;
+        color: #b45309;
+      }
+      .badge-red {
+        background: #fef2f2;
+        color: #dc2626;
+      }
+      .badge-blue {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      code.kode {
+        background: #f1f5f9;
+        color: #1e40af;
+        padding: 0.15rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <script src="js/data.js"></script>
+
+    <nav class="navbar">
+      <a href="dashboard.html" class="nav-brand">SITTA <span>UT</span></a>
+      <ul class="nav-links">
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
+        <li class="nav-dropdown">
+          <a href="#" class="active">Laporan ▾</a>
+          <div class="dropdown-panel">
+            <a href="laporan_do.html">Monitoring Progress DO</a>
+            <a href="laporan_rekap.html">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+        <li><a href="histori.html">Histori Transaksi</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-avatar" id="navAvatar">AD</div>
+        <span class="nav-name" id="navNama">Admin</span>
+        <button class="btn-logout" onclick="doLogout()">Keluar</button>
+        <button
+          class="nav-mobile-toggle"
+          onclick="toggleMobileNav()"
+          aria-label="Menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="stok.html"
+        ><iconify-icon
+          icon="mdi:book-open-blank-variant"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Informasi Bahan Ajar</a
+      >
+      <a href="tracking.html"
+        ><iconify-icon
+          icon="mdi:truck-delivery"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Tracking Pengiriman</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="laporan_do.html"
+        ><iconify-icon
+          icon="mdi:chart-line"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Monitoring Progress DO</a
+      >
+      <a href="laporan_rekap.html"
+        ><iconify-icon
+          icon="mdi:clipboard-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Rekap Bahan Ajar</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="histori.html"
+        ><iconify-icon
+          icon="mdi:script-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Histori Transaksi</a
+      >
+    </div>
+
+    <div class="page">
+      <div class="page-title">
+        <h1>
+          <iconify-icon icon="mdi:clipboard-text-outline"></iconify-icon> Rekap
+          Bahan Ajar
+        </h1>
+        <p>Laporan rekapitulasi dan visualisasi distribusi stok bahan ajar</p>
+      </div>
+
+      <!-- Stat Cards -->
+      <div
+        style="
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1rem;
+          margin-bottom: 1.5rem;
+        "
+      >
+        <div class="card" style="padding: 1.25rem 1.5rem">
+          <p
+            style="
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: #94a3b8;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              margin-bottom: 0.5rem;
+            "
+          >
+            Stok Aman
+          </p>
+          <p
+            style="
+              font-size: 2rem;
+              font-weight: 600;
+              color: #16a34a;
+              line-height: 1;
+            "
+            id="cardAman"
+          >
+            —
+          </p>
+          <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.35rem">
+            Lebih dari 300 eksemplar
+          </p>
+        </div>
+        <div class="card" style="padding: 1.25rem 1.5rem">
+          <p
+            style="
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: #94a3b8;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              margin-bottom: 0.5rem;
+            "
+          >
+            Stok Cukup
+          </p>
+          <p
+            style="
+              font-size: 2rem;
+              font-weight: 600;
+              color: #b45309;
+              line-height: 1;
+            "
+            id="cardCukup"
+          >
+            —
+          </p>
+          <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.35rem">
+            151 – 300 eksemplar
+          </p>
+        </div>
+        <div class="card" style="padding: 1.25rem 1.5rem">
+          <p
+            style="
+              font-size: 0.75rem;
+              font-weight: 600;
+              color: #94a3b8;
+              text-transform: uppercase;
+              letter-spacing: 0.06em;
+              margin-bottom: 0.5rem;
+            "
+          >
+            Stok Menipis
+          </p>
+          <p
+            style="
+              font-size: 2rem;
+              font-weight: 600;
+              color: #dc2626;
+              line-height: 1;
+            "
+            id="cardMenipis"
+          >
+            —
+          </p>
+          <p style="font-size: 0.78rem; color: #64748b; margin-top: 0.35rem">
+            150 eksemplar atau kurang
+          </p>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="table-card">
+        <div class="table-card-header">
+          <h2>
+            <iconify-icon icon="mdi:file-document-outline"></iconify-icon> Tabel
+            Rekapitulasi Lengkap
+          </h2>
+          <span class="print-date" id="tanggalCetak"></span>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Kode Barang</th>
+                <th>Nama Bahan Ajar</th>
+                <th>Kode Lokasi</th>
+                <th>Jenis</th>
+                <th>Edisi</th>
+                <th style="text-align: right">Stok</th>
+                <th>Kondisi</th>
+              </tr>
+            </thead>
+            <tbody id="tabelRekap"></tbody>
+            <tfoot>
+              <tr>
+                <td colspan="6" style="color: #1e40af; font-weight: 600">
+                  TOTAL KESELURUHAN
+                </td>
+                <td
+                  style="text-align: right; color: #1e40af; font-size: 1rem"
+                  id="totalStokFooter"
+                >
+                  —
+                </td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var user = JSON.parse(sessionStorage.getItem('loggedUser') || 'null');
+      if (!user) window.location.href = 'index.html';
+      document.getElementById('navNama').textContent = user ? user.nama : '';
+      document.getElementById('navAvatar').textContent = user
+        ? user.nama
+            .split(' ')
+            .map(function (n) {
+              return n[0];
+            })
+            .join('')
+            .substring(0, 2)
+            .toUpperCase()
+        : 'AD';
+
+      document.getElementById('tanggalCetak').textContent =
+        'Dicetak: ' +
+        new Date().toLocaleDateString('id-ID', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+
+      var aman = dataBahanAjar.filter(function (d) {
+        return d.stok > 300;
+      }).length;
+      var cukup = dataBahanAjar.filter(function (d) {
+        return d.stok > 150 && d.stok <= 300;
+      }).length;
+      var menipis = dataBahanAjar.filter(function (d) {
+        return d.stok <= 150;
+      }).length;
+      document.getElementById('cardAman').textContent = aman + ' jenis';
+      document.getElementById('cardCukup').textContent = cukup + ' jenis';
+      document.getElementById('cardMenipis').textContent = menipis + ' jenis';
+
+      // Build Table
+      var tbody = document.getElementById('tabelRekap');
+      var grandTotal = 0;
+      dataBahanAjar.forEach(function (item, i) {
+        grandTotal += item.stok;
+        var cond =
+          item.stok > 300
+            ? ['badge-green', 'Aman']
+            : item.stok > 150
+              ? ['badge-amber', 'Cukup']
+              : ['badge-red', 'Menipis'];
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td style="color:#94a3b8;font-size:.8rem">' +
+          (i + 1) +
+          '</td>' +
+          '<td style="font-weight: 600;color:#1e40af">' +
+          item.kodeBarang +
+          '</td>' +
+          '<td style="font-weight:600;color:#1e293b">' +
+          item.namaBarang +
+          '</td>' +
+          '<td><code class="kode">' +
+          item.kodeLokasi +
+          '</code></td>' +
+          '<td><span class="badge badge-blue">' +
+          item.jenisBarang +
+          '</span></td>' +
+          '<td style="color:#64748b">Ed. ' +
+          item.edisi +
+          '</td>' +
+          '<td style="font-weight: 600;text-align:right">' +
+          item.stok.toLocaleString('id-ID') +
+          '</td>' +
+          '<td><span class="badge ' +
+          cond[0] +
+          '">' +
+          cond[1] +
+          '</span></td>';
+        tbody.appendChild(tr);
+      });
+      document.getElementById('totalStokFooter').textContent =
+        grandTotal.toLocaleString('id-ID') + ' eksemplar';
+
+      function doLogout() {
+        sessionStorage.removeItem('loggedUser');
+        window.location.href = 'index.html';
+      }
+
+      function toggleMobileNav() {
+        var d = document.getElementById('navDrawer');
+        d.classList.toggle('open');
+      }
+      // Close drawer on outside click
+      document.addEventListener('click', function (e) {
+        var d = document.getElementById('navDrawer');
+        var btn = document.querySelector('.nav-mobile-toggle');
+        if (d && btn && !d.contains(e.target) && !btn.contains(e.target)) {
+          d.classList.remove('open');
+        }
+      });
+    </script>
+  </body>
+</html>

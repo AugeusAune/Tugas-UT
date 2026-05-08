@@ -1,0 +1,876 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Tracking Pengiriman</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      body {
+        background: #f1f5f9;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      /* Reused Navbar */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #0f172a;
+        border-bottom: 1px solid #1e293b;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      .nav-brand span {
+        color: #fbbf24;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .nav-links a:hover {
+        color: white;
+        background: #1e293b;
+      }
+      .nav-links a.active {
+        color: white;
+        background: #1e40af;
+      }
+      .nav-dropdown {
+        position: relative;
+      }
+      .nav-dropdown:hover .dropdown-panel {
+        display: block;
+      }
+      .dropdown-panel {
+        display: none;
+        position: absolute;
+        top: calc(100% + 0.5rem);
+        left: 0;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 0.5rem;
+        min-width: 220px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        z-index: 200;
+      }
+      .dropdown-panel a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-decoration: none;
+      }
+      .dropdown-panel a:hover {
+        background: #334155;
+        color: white;
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-avatar {
+        width: 34px;
+        height: 34px;
+        background: #1d4ed8;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: white;
+      }
+      .nav-name {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #cbd5e1;
+      }
+      .btn-logout {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: #f87171;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: background 0.15s;
+      }
+      .btn-logout:hover {
+        background: rgba(239, 68, 68, 0.2);
+      }
+
+      /* Page */
+      .page {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 1.5rem 1.5rem 3rem;
+      }
+
+      .page-title {
+        margin-bottom: 1.5rem;
+      }
+      .page-title h1 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .page-title p {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-top: 0.2rem;
+      }
+
+      .search-box {
+        background: white;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 1.25rem;
+      }
+      .search-label {
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 0.4rem;
+        display: block;
+      }
+      .search-row {
+        display: flex;
+        gap: 0.6rem;
+      }
+      .search-input-wrap {
+        flex: 1;
+        position: relative;
+      }
+      .search-input-wrap input {
+        width: 100%;
+        background: #f8fafc;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 7px;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.875rem;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .search-input-wrap input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+      }
+      .btn-cari {
+        background: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        padding: 0 1.1rem;
+        font-size: 0.825rem;
+        font-weight: 600;
+        cursor: pointer;
+        white-space: nowrap;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: opacity 0.2s;
+      }
+      .btn-cari:hover {
+        opacity: 0.88;
+      }
+      .btn-reset-sm {
+        background: white;
+        border: 1.5px solid #e2e8f0;
+        color: #94a3b8;
+        border-radius: 7px;
+        padding: 0 0.85rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition: background 0.15s;
+      }
+      .btn-reset-sm:hover {
+        background: #f1f5f9;
+      }
+      .search-hint {
+        margin-top: 0.6rem;
+        font-size: 0.75rem;
+        color: #cbd5e1;
+      }
+      .search-hint strong {
+        color: #94a3b8;
+      }
+
+      .alert-danger {
+        display: none;
+        align-items: center;
+        gap: 0.6rem;
+        background: #fff1f2;
+        border: 1px solid #fecdd3;
+        color: #e11d48;
+        border-radius: 7px;
+        padding: 0.5rem 0.9rem;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .alert-danger.show {
+        display: flex;
+      }
+
+      #resultTracking {
+        display: none;
+      }
+
+      .status-header {
+        background: white;
+        border-radius: 8px;
+        padding: 1.25rem 1.5rem;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 1rem;
+      }
+      .status-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 1.25rem;
+      }
+      .do-label {
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .do-number {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e3a8a;
+      }
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .pill-green {
+        background: #f0fdf4;
+        color: #16a34a;
+      }
+      .pill-blue {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .pill-amber {
+        background: #fffbeb;
+        color: #b45309;
+      }
+      .pill-gray {
+        background: #f1f5f9;
+        color: #64748b;
+      }
+
+      .steps-track {
+        display: flex;
+        align-items: center;
+        position: relative;
+        margin-bottom: 0.5rem;
+      }
+      .step-dot {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #e2e8f0;
+        border: 2px solid white;
+        box-shadow: 0 0 0 2px #e2e8f0;
+        flex-shrink: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.6rem;
+        color: #94a3b8;
+        font-weight: 600;
+        transition: all 0.3s;
+      }
+      .step-dot.done {
+        background: #16a34a;
+        box-shadow: 0 0 0 2px #dcfce7;
+        color: white;
+      }
+      .step-dot.active {
+        background: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        color: white;
+      }
+      .step-line {
+        flex: 1;
+        height: 3px;
+        background: #e2e8f0;
+        transition: background 0.3s;
+      }
+      .step-line.done {
+        background: #16a34a;
+      }
+      .steps-labels {
+        display: flex;
+        justify-content: space-between;
+      }
+      .step-lbl {
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: #cbd5e1;
+        text-align: center;
+        flex: 1;
+      }
+      .step-lbl.done {
+        color: #16a34a;
+      }
+      .step-lbl.active {
+        color: #2563eb;
+      }
+
+      .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+      @media (max-width: 600px) {
+        .detail-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .detail-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .detail-card-head {
+        background: #f8fafc;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .detail-card-head h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
+      }
+      .detail-card-body {
+        padding: 1rem;
+      }
+
+      .detail-row {
+        display: flex;
+        padding: 0.4rem 0;
+        border-bottom: 1px dashed #f1f5f9;
+      }
+      .detail-row:last-child {
+        border-bottom: none;
+      }
+      .detail-key {
+        flex: 0 0 40%;
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 600;
+      }
+      .detail-val {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #334155;
+      }
+
+      .timeline-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .timeline-card-head {
+        background: #f8fafc;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .timeline-card-head h4 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #475569;
+      }
+      .timeline-card-body {
+        padding: 1.25rem 1rem;
+      }
+
+      .timeline {
+        position: relative;
+        padding-left: 1.75rem;
+      }
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 1.5px;
+        background: #e2e8f0;
+      }
+      .tl-item {
+        position: relative;
+        margin-bottom: 1.25rem;
+      }
+      .tl-item:last-child {
+        margin-bottom: 0;
+      }
+      .tl-dot {
+        position: absolute;
+        left: -1.75rem;
+        top: 3px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 2px solid white;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        background: #cbd5e1;
+      }
+      .tl-item.latest .tl-dot {
+        background: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.12);
+      }
+      .tl-time {
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: #94a3b8;
+        margin-bottom: 0.15rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .tl-item.latest .tl-time {
+        color: #16a34a;
+      }
+      .tl-text {
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: #475569;
+      }
+
+      .toast-box {
+        position: fixed;
+        bottom: 1.5rem;
+        right: 1.5rem;
+        z-index: 99999;
+        padding: 0.5rem 1rem;
+        border-radius: 7px;
+        font-size: 0.825rem;
+        font-weight: 600;
+        color: white;
+        opacity: 0;
+        transform: translateY(12px);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+      }
+      .toast-box.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <script src="js/data.js"></script>
+
+    <nav class="navbar">
+      <a href="dashboard.html" class="nav-brand">SITTA <span>UT</span></a>
+      <ul class="nav-links">
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html" class="active">Tracking Pengiriman</a></li>
+        <li class="nav-dropdown">
+          <a href="#">Laporan ▾</a>
+          <div class="dropdown-panel">
+            <a href="laporan_do.html">Monitoring Progress DO</a>
+            <a href="laporan_rekap.html">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+        <li><a href="histori.html">Histori Transaksi</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-avatar" id="navAvatar">AD</div>
+        <span class="nav-name" id="navNama">Admin</span>
+        <button class="btn-logout" onclick="doLogout()">Keluar</button>
+        <button
+          class="nav-mobile-toggle"
+          onclick="toggleMobileNav()"
+          aria-label="Menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="stok.html"
+        ><iconify-icon
+          icon="mdi:book-open-blank-variant"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Informasi Bahan Ajar</a
+      >
+      <a href="tracking.html"
+        ><iconify-icon
+          icon="mdi:truck-delivery"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Tracking Pengiriman</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="laporan_do.html"
+        ><iconify-icon
+          icon="mdi:chart-line"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Monitoring Progress DO</a
+      >
+      <a href="laporan_rekap.html"
+        ><iconify-icon
+          icon="mdi:clipboard-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Rekap Bahan Ajar</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="histori.html"
+        ><iconify-icon
+          icon="mdi:script-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Histori Transaksi</a
+      >
+    </div>
+
+    <div class="page">
+      <div class="page-title">
+        <h1>
+          <iconify-icon icon="mdi:truck-delivery"></iconify-icon> Tracking
+          Pengiriman
+        </h1>
+        <p>
+          Lacak status pengiriman bahan ajar berdasarkan Nomor Delivery Order
+        </p>
+      </div>
+
+      <!-- Search -->
+      <div class="search-box">
+        <span class="search-label">Nomor Delivery Order (DO)</span>
+        <div class="search-row">
+          <div class="search-input-wrap">
+            <input type="text" id="inputDO" placeholder="Contoh: 2023001234" />
+          </div>
+          <button class="btn-cari" onclick="cariTracking()">
+            <iconify-icon icon="mdi:magnify"></iconify-icon> Cari
+          </button>
+          <button class="btn-reset-sm" onclick="resetTracking()">Reset</button>
+        </div>
+        <p class="search-hint">
+          Coba nomor: <strong>2023001234</strong> atau
+          <strong>2023005678</strong>
+        </p>
+      </div>
+
+      <!-- Alert -->
+      <div id="alertTracking" class="alert-danger">
+        <span
+          ><iconify-icon icon="mdi:close-circle-outline"></iconify-icon
+        ></span>
+        <span id="alertMsg">Nomor DO tidak ditemukan.</span>
+      </div>
+
+      <!-- Result -->
+      <div id="resultTracking">
+        <!-- Status Header -->
+        <div class="status-header">
+          <div class="status-top">
+            <div>
+              <div class="do-label">Nomor Delivery Order</div>
+              <div class="do-number" id="rNomorDO">—</div>
+            </div>
+            <div id="rStatusBadge"></div>
+          </div>
+
+          <!-- Progress Steps -->
+          <div>
+            <div class="steps-track" id="stepsTrack"></div>
+            <div class="steps-labels" id="stepsLabels"></div>
+          </div>
+        </div>
+
+        <!-- Detail Grid -->
+        <div class="detail-grid">
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <h4>
+                <iconify-icon icon="mdi:account-outline"></iconify-icon>
+                Informasi Penerima
+              </h4>
+            </div>
+            <div class="detail-card-body">
+              <div class="detail-row">
+                <div class="detail-key">Nama</div>
+                <div class="detail-val" id="rNama">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Jenis Paket</div>
+                <div class="detail-val" id="rPaket">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Total Pembayaran</div>
+                <div class="detail-val" id="rTotal" style="color: #1d4ed8">
+                  —
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-card">
+            <div class="detail-card-head">
+              <h4>
+                <iconify-icon icon="mdi:package-variant-closed"></iconify-icon>
+                Informasi Pengiriman
+              </h4>
+            </div>
+            <div class="detail-card-body">
+              <div class="detail-row">
+                <div class="detail-key">Ekspedisi</div>
+                <div class="detail-val" id="rEkspedisi">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Tanggal Kirim</div>
+                <div class="detail-val" id="rTanggal">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Status</div>
+                <div class="detail-val" id="rStatus">—</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-card">
+          <div class="timeline-card-head">
+            <h4>
+              <iconify-icon icon="mdi:map-marker-path"></iconify-icon>
+              Perjalanan Paket
+            </h4>
+          </div>
+          <div class="timeline-card-body">
+            <div class="timeline" id="timelineContainer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastEl" class="toast-box"></div>
+
+    <script>
+      var user = JSON.parse(sessionStorage.getItem('loggedUser') || 'null');
+      if (!user) window.location.href = 'index.html';
+
+      document.getElementById('navNama').textContent = user ? user.nama : '';
+      document.getElementById('navAvatar').textContent = user
+        ? user.nama
+            .split(' ')
+            .map(function (n) {
+              return n[0];
+            })
+            .join('')
+            .substring(0, 2)
+            .toUpperCase()
+        : 'AD';
+
+      var statusSteps = ['Diterima', 'Dalam Perjalanan', 'Dikirim', 'Selesai'];
+
+      function cariTracking() {
+        var nomor = document.getElementById('inputDO').value.trim();
+        var alertEl = document.getElementById('alertTracking');
+        var resultEl = document.getElementById('resultTracking');
+
+        alertEl.classList.remove('show');
+        resultEl.style.display = 'none';
+
+        if (!nomor) {
+          document.getElementById('alertMsg').textContent =
+            'Masukkan nomor Delivery Order terlebih dahulu.';
+          alertEl.classList.add('show');
+          return;
+        }
+
+        var data = dataTracking[nomor];
+        if (!data) {
+          document.getElementById('alertMsg').textContent =
+            'Nomor DO "' +
+            nomor +
+            '" tidak ditemukan. Pastikan nomor yang dimasukkan benar.';
+          alertEl.classList.add('show');
+          return;
+        }
+
+        // Populate header
+        document.getElementById('rNomorDO').textContent = data.nomorDO;
+        document.getElementById('rNama').textContent = data.nama;
+        document.getElementById('rPaket').textContent = data.paket;
+        document.getElementById('rTotal').textContent = data.total;
+        document.getElementById('rEkspedisi').textContent = data.ekspedisi;
+        document.getElementById('rTanggal').textContent = data.tanggalKirim;
+        document.getElementById('rStatus').textContent = data.status;
+
+        // Status badge
+        var pillClass =
+          data.status === 'Selesai'
+            ? 'pill-green'
+            : data.status === 'Dikirim'
+              ? 'pill-blue'
+              : 'pill-amber';
+        var emoji =
+          data.status === 'Selesai'
+            ? '<iconify-icon icon="mdi:check-circle-outline"></iconify-icon>'
+            : data.status === 'Dikirim'
+              ? '<iconify-icon icon="mdi:truck-delivery"></iconify-icon>'
+              : '<iconify-icon icon="mdi:package-variant-closed"></iconify-icon>';
+        document.getElementById('rStatusBadge').innerHTML =
+          '<span class="status-pill ' +
+          pillClass +
+          '">' +
+          emoji +
+          ' ' +
+          data.status +
+          '</span>';
+
+        // Progress Steps
+        var currentIdx = statusSteps.indexOf(data.status);
+        if (currentIdx === -1) currentIdx = 1;
+
+        var trackEl = document.getElementById('stepsTrack');
+        var labelsEl = document.getElementById('stepsLabels');
+        trackEl.innerHTML = '';
+        labelsEl.innerHTML = '';
+
+        statusSteps.forEach(function (s, i) {
+          if (i > 0) {
+            var line = document.createElement('div');
+            line.className = 'step-line' + (i <= currentIdx ? ' done' : '');
+            trackEl.appendChild(line);
+          }
+          var dot = document.createElement('div');
+          var dotClass =
+            i < currentIdx ? 'done' : i === currentIdx ? 'active' : '';
+          dot.className = 'step-dot ' + dotClass;
+          dot.textContent = i < currentIdx ? '✓' : String(i + 1);
+          trackEl.appendChild(dot);
+
+          var lbl = document.createElement('div');
+          lbl.className = 'step-lbl ' + dotClass;
+          lbl.textContent = s;
+          labelsEl.appendChild(lbl);
+        });
+
+        // Timeline
+        var tl = document.getElementById('timelineContainer');
+        tl.innerHTML = '';
+        var perjalanan = data.perjalanan.slice().reverse();
+        perjalanan.forEach(function (p, i) {
+          var item = document.createElement('div');
+          item.className = 'tl-item' + (i === 0 ? ' latest' : '');
+          item.innerHTML =
+            '<div class="tl-dot"></div>' +
+            '<div class="tl-time">' +
+            p.waktu +
+            '</div>' +
+            '<div class="tl-text">' +
+            p.keterangan +
+            '</div>';
+          tl.appendChild(item);
+        });
+
+        resultEl.style.display = 'block';
+        resultEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function resetTracking() {
+        document.getElementById('inputDO').value = '';
+        document.getElementById('alertTracking').classList.remove('show');
+        document.getElementById('resultTracking').style.display = 'none';
+      }
+
+      document
+        .getElementById('inputDO')
+        .addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') cariTracking();
+        });
+
+      function doLogout() {
+        sessionStorage.removeItem('loggedUser');
+        window.location.href = 'index.html';
+      }
+
+      function toggleMobileNav() {
+        var d = document.getElementById('navDrawer');
+        d.classList.toggle('open');
+      }
+      // Close drawer on outside click
+      document.addEventListener('click', function (e) {
+        var d = document.getElementById('navDrawer');
+        var btn = document.querySelector('.nav-mobile-toggle');
+        if (d && btn && !d.contains(e.target) && !btn.contains(e.target)) {
+          d.classList.remove('open');
+        }
+      });
+    </script>
+  </body>
+</html>

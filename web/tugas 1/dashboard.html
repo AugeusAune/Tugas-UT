@@ -1,0 +1,811 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Dashboard</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      body {
+        background: #f1f5f9;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: #0f172a;
+        border-bottom: 1px solid #1e293b;
+        padding: 0 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+      .nav-brand {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: white;
+        text-decoration: none;
+        letter-spacing: -0.01em;
+      }
+      .nav-brand span {
+        color: #fbbf24;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        padding: 0.4rem 0.8rem;
+        border-radius: 8px;
+        transition:
+          color 0.15s,
+          background 0.15s;
+      }
+      .nav-links a:hover {
+        color: white;
+        background: #1e293b;
+      }
+      .nav-links a.active {
+        color: white;
+        background: #1e40af;
+      }
+
+      .nav-dropdown {
+        position: relative;
+      }
+      .nav-dropdown:hover .dropdown-panel {
+        display: block;
+      }
+      .dropdown-panel {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 0.5rem;
+        min-width: 220px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        z-index: 200;
+      }
+      .dropdown-panel a {
+        display: block;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-decoration: none;
+      }
+      .dropdown-panel a:hover {
+        background: #334155;
+        color: white;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      .nav-avatar {
+        width: 34px;
+        height: 34px;
+        background: #1d4ed8;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: white;
+      }
+      .nav-name {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: #cbd5e1;
+      }
+      .btn-logout {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        color: #f87171;
+        font-size: 0.78rem;
+        font-weight: 600;
+        padding: 0.35rem 0.85rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        transition:
+          background 0.15s,
+          color 0.15s;
+      }
+      .btn-logout:hover {
+        background: rgba(239, 68, 68, 0.2);
+        color: #fca5a5;
+      }
+
+      /* PAGE LAYOUT */
+      .page {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 2rem 2rem 4rem;
+      }
+
+      /* HERO BANNER */
+      .hero {
+        background: #2563eb;
+        border-radius: 8px;
+        padding: 2.5rem 2.5rem 2.5rem 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        right: -80px;
+        top: -80px;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .hero::after {
+        content: '';
+        position: absolute;
+        left: 40%;
+        bottom: -40px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(251, 191, 36, 0.06);
+      }
+      .hero-left {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-tag {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #93c5fd;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.3rem 0.75rem;
+        border-radius: 999px;
+        display: inline-block;
+        margin-bottom: 0.9rem;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+      .hero h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: -0.035em;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+      }
+      .hero-sub {
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.55);
+        max-width: 400px;
+      }
+      .hero-emoji {
+        font-size: 5rem;
+        position: relative;
+        z-index: 1;
+        opacity: 0.85;
+        line-height: 1;
+      }
+
+      /* STATS ROW */
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-bottom: 2.25rem;
+      }
+      @media (max-width: 900px) {
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 500px) {
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .stat-card {
+        background: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        border: 1px solid #e2e8f0;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        transition:
+          box-shadow 0.2s,
+          transform 0.2s;
+      }
+      .stat-card:hover {
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+      }
+      .stat-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.6rem;
+        flex-shrink: 0;
+      }
+      .stat-icon.blue {
+        background: #dbeafe;
+      }
+      .stat-icon.green {
+        background: #dcfce7;
+      }
+      .stat-icon.amber {
+        background: #fef9c3;
+      }
+      .stat-icon.red {
+        background: #fee2e2;
+      }
+      .stat-label {
+        font-size: 0.78rem;
+        color: #94a3b8;
+        font-weight: 600;
+        margin-bottom: 0.2rem;
+      }
+      .stat-value {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.375rem;
+        font-weight: 600;
+        color: #0f172a;
+        line-height: 1;
+      }
+
+      /* SECTION TITLE */
+      .section-head {
+        margin-bottom: 1.25rem;
+      }
+      .section-head h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        color: #0f172a;
+        letter-spacing: -0.02em;
+      }
+      .section-head p {
+        font-size: 0.83rem;
+        color: #94a3b8;
+        margin-top: 0.2rem;
+      }
+
+      /* MENU CARDS */
+      .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
+        margin-bottom: 2.25rem;
+      }
+      @media (max-width: 1100px) {
+        .menu-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (max-width: 700px) {
+        .menu-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .menu-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .menu-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        padding: 1.5rem;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .menu-card:hover {
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      }
+      .menu-card-icon {
+        font-size: 2.25rem;
+        margin-bottom: 0.75rem;
+        display: block;
+      }
+      .menu-card-title {
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: #1e40af;
+        margin-bottom: 0.35rem;
+      }
+      .menu-card-desc {
+        font-size: 0.73rem;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+
+      /* TABLE CARD */
+      .table-card {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+      }
+      .table-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .table-card-header h3 {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .btn-view-all {
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #2563eb;
+        text-decoration: none;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        padding: 0.4rem 0.85rem;
+        border-radius: 8px;
+        transition: background 0.15s;
+      }
+      .btn-view-all:hover {
+        background: #dbeafe;
+      }
+
+      /* scrollable if needed */
+      .table-scroll {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.86rem;
+      }
+      thead tr {
+        background: #f8fafc;
+      }
+      th {
+        padding: 0.75rem 1.25rem;
+        text-align: left;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        border-bottom: 1px solid #e2e8f0;
+        white-space: nowrap;
+      }
+      td {
+        padding: 0.9rem 1.25rem;
+        color: #334155;
+        border-bottom: 1px solid #f1f5f9;
+        vertical-align: middle;
+      }
+      tbody tr:hover {
+        background: #f8fafc;
+      }
+      tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 0.25rem 0.65rem;
+        border-radius: 999px;
+      }
+      .badge-blue {
+        background: #eff6ff;
+        color: #1d4ed8;
+      }
+      .badge-green {
+        background: #f0fdf4;
+        color: #16a34a;
+      }
+      .badge-amber {
+        background: #fffbeb;
+        color: #b45309;
+      }
+      .badge-red {
+        background: #fef2f2;
+        color: #dc2626;
+      }
+
+      code.kode {
+        background: #f1f5f9;
+        color: #1e40af;
+        padding: 0.15rem 0.5rem;
+        border-radius: 6px;
+        font-size: 0.78rem;
+        font-weight: 600;
+      }
+
+      .toast-box {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 99999;
+        padding: 0.6rem 1.1rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: white;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+      }
+      .toast-box.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <script src="js/data.js"></script>
+
+    <nav class="navbar">
+      <a href="dashboard.html" class="nav-brand">SITTA <span>UT</span></a>
+
+      <ul class="nav-links">
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
+        <li class="nav-dropdown">
+          <a href="#">Laporan ▾</a>
+          <div class="dropdown-panel">
+            <a href="laporan_do.html">Monitoring Progress DO</a>
+            <a href="laporan_rekap.html">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+        <li><a href="histori.html">Histori Transaksi</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <div class="nav-avatar" id="navAvatar">AD</div>
+        <span class="nav-name" id="navNama">Admin</span>
+        <button class="btn-logout" onclick="doLogout()">Keluar</button>
+        <button
+          class="nav-mobile-toggle"
+          onclick="toggleMobileNav()"
+          aria-label="Menu"
+        >
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="stok.html"
+        ><iconify-icon
+          icon="mdi:book-open-blank-variant"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Informasi Bahan Ajar</a
+      >
+      <a href="tracking.html"
+        ><iconify-icon
+          icon="mdi:truck-delivery"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Tracking Pengiriman</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="laporan_do.html"
+        ><iconify-icon
+          icon="mdi:chart-line"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Monitoring Progress DO</a
+      >
+      <a href="laporan_rekap.html"
+        ><iconify-icon
+          icon="mdi:clipboard-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Rekap Bahan Ajar</a
+      >
+      <div class="nav-drawer-sep"></div>
+      <a href="histori.html"
+        ><iconify-icon
+          icon="mdi:script-text-outline"
+          style="vertical-align: -0.125em"
+        ></iconify-icon>
+        Histori Transaksi</a
+      >
+    </div>
+
+    <div class="page">
+      <!-- Hero Banner -->
+      <div class="hero">
+        <div class="hero-left">
+          <span class="hero-tag" id="greetTime">—</span>
+          <h2 id="greetMsg">Selamat Datang!</h2>
+          <p class="hero-sub" id="greetSub">
+            Dashboard Aplikasi SITTA — Universitas Terbuka
+          </p>
+        </div>
+        <div class="hero-emoji">
+          <iconify-icon icon="mdi:package-variant-closed"></iconify-icon>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <iconify-icon icon="mdi:bookshelf"></iconify-icon>
+          </div>
+          <div>
+            <div class="stat-label">Jenis Bahan Ajar</div>
+            <div class="stat-value" id="statJenis">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <iconify-icon icon="mdi:package-variant-closed"></iconify-icon>
+          </div>
+          <div>
+            <div class="stat-label">Total Stok Tersedia</div>
+            <div class="stat-value" id="statStok">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon amber">
+            <iconify-icon icon="mdi:truck-delivery"></iconify-icon>
+          </div>
+          <div>
+            <div class="stat-label">Pengiriman Aktif</div>
+            <div class="stat-value" id="statDO">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon red">
+            <iconify-icon icon="mdi:account-group"></iconify-icon>
+          </div>
+          <div>
+            <div class="stat-label">Total Pengguna</div>
+            <div class="stat-value" id="statUser">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu Cards -->
+      <div class="section-head">
+        <h3>Navigasi Menu</h3>
+        <p>Akses cepat ke modul-modul pengelolaan bahan ajar</p>
+      </div>
+      <div class="menu-grid">
+        <a href="stok.html" class="menu-card">
+          <span class="menu-card-icon"
+            ><iconify-icon icon="mdi:bookshelf"></iconify-icon
+          ></span>
+          <div class="menu-card-title">Informasi Bahan Ajar</div>
+          <div class="menu-card-desc">Kelola stok & data modul buku</div>
+        </a>
+        <a href="tracking.html" class="menu-card">
+          <span class="menu-card-icon"
+            ><iconify-icon icon="mdi:truck-delivery"></iconify-icon
+          ></span>
+          <div class="menu-card-title">Tracking Pengiriman</div>
+          <div class="menu-card-desc">Lacak status delivery order</div>
+        </a>
+        <a href="laporan_do.html" class="menu-card">
+          <span class="menu-card-icon"
+            ><iconify-icon icon="mdi:chart-line"></iconify-icon
+          ></span>
+          <div class="menu-card-title">Monitoring DO</div>
+          <div class="menu-card-desc">Progress delivery order</div>
+        </a>
+        <a href="laporan_rekap.html" class="menu-card">
+          <span class="menu-card-icon"
+            ><iconify-icon icon="mdi:clipboard-text-outline"></iconify-icon
+          ></span>
+          <div class="menu-card-title">Rekap Bahan Ajar</div>
+          <div class="menu-card-desc">Laporan distribusi & cetakan</div>
+        </a>
+        <a href="histori.html" class="menu-card">
+          <span class="menu-card-icon"
+            ><iconify-icon icon="mdi:script-text-outline"></iconify-icon
+          ></span>
+          <div class="menu-card-title">Histori Transaksi</div>
+          <div class="menu-card-desc">Riwayat transaksi & pengiriman</div>
+        </a>
+      </div>
+
+      <!-- Data Preview Table -->
+      <div class="table-card">
+        <div class="table-card-header">
+          <h3>
+            <iconify-icon icon="mdi:package-variant-closed"></iconify-icon> Stok
+            Bahan Ajar Terkini
+          </h3>
+          <a href="stok.html" class="btn-view-all">Lihat Semua →</a>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Kode Barang</th>
+                <th>Nama Bahan Ajar</th>
+                <th>Jenis</th>
+                <th>Edisi</th>
+                <th style="text-align: right">Stok</th>
+              </tr>
+            </thead>
+            <tbody id="tabelDashboard"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="toastEl" class="toast-box"></div>
+
+    <script>
+      var user = JSON.parse(sessionStorage.getItem('loggedUser') || 'null');
+      if (!user) window.location.href = 'index.html';
+
+      document.getElementById('navNama').textContent = user ? user.nama : '';
+      document.getElementById('navAvatar').textContent = user
+        ? user.nama
+            .split(' ')
+            .map(function (n) {
+              return n[0];
+            })
+            .join('')
+            .substring(0, 2)
+            .toUpperCase()
+        : 'AD';
+
+      function setGreeting() {
+        var now = new Date(),
+          h = now.getHours();
+        var sapa =
+          h < 12
+            ? '<iconify-icon icon="mdi:weather-partly-cloudy" style="vertical-align:-0.125em"></iconify-icon> Selamat Pagi'
+            : h < 15
+              ? '<iconify-icon icon="mdi:white-balance-sunny" style="vertical-align:-0.125em"></iconify-icon> Selamat Siang'
+              : h < 19
+                ? '<iconify-icon icon="mdi:weather-sunset" style="vertical-align:-0.125em"></iconify-icon> Selamat Sore'
+                : '<iconify-icon icon="mdi:weather-night" style="vertical-align:-0.125em"></iconify-icon> Selamat Malam';
+        var opts = {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        };
+        document.getElementById('greetTime').textContent =
+          now.toLocaleDateString('id-ID', opts);
+        document.getElementById('greetMsg').innerHTML =
+          sapa + ', ' + (user ? user.nama : '') + '!';
+        document.getElementById('greetSub').textContent =
+          'Role: ' +
+          (user ? user.role : '') +
+          ' — ' +
+          (user ? user.lokasi : '');
+      }
+      setGreeting();
+
+      if (typeof dataBahanAjar !== 'undefined') {
+        var totalStok = dataBahanAjar.reduce(function (a, b) {
+          return a + b.stok;
+        }, 0);
+        var activeDO =
+          typeof dataTracking !== 'undefined'
+            ? Object.values(dataTracking).filter(function (d) {
+                return d.status !== 'Selesai';
+              }).length
+            : 0;
+        document.getElementById('statJenis').textContent = dataBahanAjar.length;
+        document.getElementById('statStok').textContent =
+          totalStok.toLocaleString('id-ID');
+        document.getElementById('statDO').textContent = activeDO;
+        document.getElementById('statUser').textContent =
+          typeof dataPengguna !== 'undefined' ? dataPengguna.length : 0;
+
+        var tbody = document.getElementById('tabelDashboard');
+        dataBahanAjar.slice(0, 8).forEach(function (item) {
+          var badgeClass =
+            item.stok > 300
+              ? 'badge-green'
+              : item.stok > 150
+                ? 'badge-amber'
+                : 'badge-red';
+          var tr = document.createElement('tr');
+          tr.innerHTML =
+            '<td><code class="kode">' +
+            item.kodeBarang +
+            '</code></td>' +
+            '<td style="font-weight:600;color:#1e293b">' +
+            item.namaBarang +
+            '</td>' +
+            '<td><span class="badge badge-blue">' +
+            item.jenisBarang +
+            '</span></td>' +
+            '<td style="color:#64748b">Edisi ' +
+            item.edisi +
+            '</td>' +
+            '<td style="text-align:right"><span class="badge ' +
+            badgeClass +
+            '">' +
+            item.stok.toLocaleString('id-ID') +
+            ' eks</span></td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      function doLogout() {
+        sessionStorage.removeItem('loggedUser');
+        window.location.href = 'index.html';
+      }
+
+      function showToast(msg, color) {
+        var t = document.getElementById('toastEl');
+        t.innerHTML = msg;
+        t.style.background = color || '#2563eb';
+        t.classList.add('show');
+        setTimeout(function () {
+          t.classList.remove('show');
+        }, 3000);
+      }
+
+      function toggleMobileNav() {
+        var d = document.getElementById('navDrawer');
+        d.classList.toggle('open');
+      }
+      // Close drawer on outside click
+      document.addEventListener('click', function (e) {
+        var d = document.getElementById('navDrawer');
+        var btn = document.querySelector('.nav-mobile-toggle');
+        if (d && btn && !d.contains(e.target) && !btn.contains(e.target)) {
+          d.classList.remove('open');
+        }
+      });
+    </script>
+  </body>
+</html>

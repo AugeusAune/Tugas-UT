@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Histori Transaksi</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      body { background:#f1f5f9; font-family:'Plus Jakarta Sans',sans-serif; }
+
+      /* Navbar */
+      .navbar { position:sticky;top:0;z-index:100;background:#0f172a;border-bottom:1px solid #1e293b;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:60px; }
+      .nav-brand { font-family:'Inter', sans-serif;font-size:1.125rem;font-weight: 600;color:white;text-decoration:none;letter-spacing:-0.01em; }
+      .nav-brand span { color:#fbbf24; }
+      .nav-links { display:flex;align-items:center;gap:.25rem;list-style:none;margin:0;padding:0; }
+      .nav-links a { text-decoration:none;font-size:.82rem;font-weight:600;color:#94a3b8;padding:.4rem .8rem;border-radius:8px;transition:color .15s,background .15s; }
+      .nav-links a:hover { color:white;background:#1e293b; }
+      .nav-links a.active { color:white;background:#1e40af; }
+      .nav-dropdown { position:relative; }
+      .nav-dropdown:hover .dropdown-panel { display:block; }
+      .dropdown-panel { display:none;position:absolute;top:100%;left:0;background:#1e293b;border:1px solid #334155;border-radius: 8px;padding:.5rem;min-width:220px;box-shadow:0 16px 40px rgba(0,0,0,.4);z-index:200; }
+      .dropdown-panel a { display:block;padding:.5rem .75rem;border-radius:8px;font-size:.82rem;font-weight:600;color:#94a3b8;text-decoration:none; }
+      .dropdown-panel a:hover { background:#334155;color:white; }
+      .nav-right { display:flex;align-items:center;gap:1rem; }
+      .nav-avatar { width:34px;height:34px;background:#1d4ed8;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight: 600;color:white; }
+      .nav-name { font-size:.82rem;font-weight:600;color:#cbd5e1; }
+      .btn-logout { background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#f87171;font-size:.78rem;font-weight: 600;padding:.35rem .85rem;border-radius:8px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s; }
+      .btn-logout:hover { background:rgba(239,68,68,.2); }
+
+      /* Page */
+      .page { max-width:1320px;margin:0 auto;padding:2rem 2rem 4rem; }
+      .page-title { margin-bottom:2rem; }
+      .page-title h1 { font-family:'Inter', sans-serif;font-size:1.375rem;font-weight: 600;color:#0f172a; }
+      .page-title p  { font-size:.875rem;color:#64748b;margin-top:.25rem; }
+
+      /* Table Card */
+      .table-card { background:white;border-radius: 8px;border:1px solid #e2e8f0;overflow:hidden; }
+      .table-card-header { display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding:1.25rem 1.5rem;border-bottom:1px solid #f1f5f9; }
+      .table-card-header h2 { font-family:'Inter', sans-serif;font-size:.95rem;font-weight: 600;color:#0f172a; }
+      .filter-row { display:flex;gap:.75rem;align-items:center;flex-wrap:wrap; }
+
+      .search-input { background:#f8fafc;border:1.5px solid #e2e8f0;border-radius: 8px;padding:.5rem 1rem;font-size:.85rem;color:#0f172a;outline:none;font-family:'Plus Jakarta Sans',sans-serif;width:220px;transition:border-color .2s,box-shadow .2s; }
+      .search-input:focus { border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.1); }
+      .filter-select { background:#f8fafc;border:1.5px solid #e2e8f0;border-radius: 8px;padding:.5rem .9rem;font-size:.85rem;color:#0f172a;outline:none;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer;transition:border-color .2s; }
+      .filter-select:focus { border-color:#2563eb; }
+
+      .table-scroll { overflow-x:auto; }
+      table { width:100%;border-collapse:collapse;font-size:.86rem; }
+      thead tr { background:#f8fafc; }
+      th { padding:.75rem 1.25rem;text-align:left;font-size:.7rem;font-weight: 600;color:#94a3b8;text-transform:uppercase;letter-spacing:.07em;border-bottom:1px solid #e2e8f0;white-space:nowrap; }
+      td { padding:.9rem 1.25rem;color:#334155;border-bottom:1px solid #f1f5f9;vertical-align:middle; }
+      tbody tr:hover { background:#f8fafc; }
+      tbody tr:last-child td { border-bottom:none; }
+
+      .badge { display:inline-flex;align-items:center;font-size:.7rem;font-weight: 600;padding:.25rem .65rem;border-radius:999px; }
+      .badge-green { background:#f0fdf4;color:#16a34a; }
+      .badge-blue  { background:#eff6ff;color:#1d4ed8; }
+      .badge-amber { background:#fffbeb;color:#b45309; }
+      code.kode { background:#f1f5f9;color:#1e40af;padding:.15rem .5rem;border-radius:6px;font-size:.78rem;font-weight: 600; }
+
+      .btn-detail { font-size:.75rem;font-weight: 600;color:#2563eb;background:#eff6ff;border:1px solid #bfdbfe;padding:.3rem .75rem;border-radius:8px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;transition:background .15s;white-space:nowrap; }
+      .btn-detail:hover { background:#dbeafe; }
+
+      .empty-state { text-align:center;padding:3rem;color:#94a3b8; }
+      .empty-state p:first-child { font-size:2.5rem;margin-bottom:.5rem; }
+
+      /* Modal */
+      .modal-bg { display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(6px);z-index:9999;align-items:center;justify-content:center;padding:1rem; }
+      .modal-bg.open { display:flex; }
+      .modal-box { background:#fff;border-radius: 8px;width:100%;max-width:540px;box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);overflow:hidden;animation:popIn .25s ease-out; }
+      @keyframes popIn { from{opacity:0;transform:scale(.93) translateY(16px)} to{opacity:1;transform:scale(1) translateY(0)} }
+      .modal-top { display:flex;justify-content:space-between;align-items:center;padding:1.25rem 1.5rem;border-bottom:1px solid #f1f5f9; }
+      .modal-top h3 { font-family:'Inter', sans-serif;font-size:0.9375rem;font-weight: 600;color:#0f172a; }
+      .modal-close-btn { background:none;border:none;color:#94a3b8;font-size:1.4rem;line-height:1;cursor:pointer;padding:0;transition:color .15s; }
+      .modal-close-btn:hover { color:#1e293b; }
+      .modal-body { padding:1.5rem; }
+      .modal-footer { display:flex;justify-content:flex-end;padding:1.25rem 1.5rem;border-top:1px solid #f1f5f9;background:#f8fafc; }
+      .btn-cancel { background:white;border:1.5px solid #e2e8f0;color:#64748b;padding:.6rem 1.25rem;border-radius: 8px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.875rem;font-weight:600;cursor:pointer;transition:background .15s; }
+      .btn-cancel:hover { background:#f1f5f9; }
+
+      /* DO Info Bar */
+      .do-info-bar { display:flex;gap:1.5rem;flex-wrap:wrap;background:#f8fafc;border-radius: 8px;padding:.875rem 1rem;margin-bottom:1.25rem;font-size:.82rem; }
+      .do-info-item strong { display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:#94a3b8;font-weight: 600;margin-bottom:.15rem; }
+      .do-info-item span { font-weight: 600;color:#1e293b; }
+
+      /* Timeline in Modal */
+      .timeline { position:relative;padding-left:2rem; }
+      .timeline::before { content:'';position:absolute;left:9px;top:0;bottom:0;width:2px;background: #2563eb; }
+      .tl-item { position:relative;margin-bottom:1.25rem; }
+      .tl-item:last-child { margin-bottom:0; }
+      .tl-dot { position:absolute;left:-2rem;top:4px;width:18px;height:18px;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,.12);background:#94a3b8; }
+      .tl-item.latest .tl-dot { background:#16a34a;box-shadow:0 0 0 4px rgba(22,163,74,.15); }
+      .tl-time { font-size:.72rem;font-weight: 600;color:#94a3b8;margin-bottom:.2rem;text-transform:uppercase;letter-spacing:.04em; }
+      .tl-item.latest .tl-time { color:#16a34a; }
+      .tl-text { font-size:.875rem;font-weight:600;color:#334155; }
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <script src="js/data.js"></script>
+
+    <nav class="navbar">
+      <a href="dashboard.html" class="nav-brand">SITTA <span>UT</span></a>
+      <ul class="nav-links">
+        <li><a href="stok.html">Informasi Bahan Ajar</a></li>
+        <li><a href="tracking.html">Tracking Pengiriman</a></li>
+        <li class="nav-dropdown">
+          <a href="#">Laporan ▾</a>
+          <div class="dropdown-panel">
+            <a href="laporan_do.html">Monitoring Progress DO</a>
+            <a href="laporan_rekap.html">Rekap Bahan Ajar</a>
+          </div>
+        </li>
+        <li><a href="histori.html" class="active">Histori Transaksi</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="nav-avatar" id="navAvatar">AD</div>
+        <span class="nav-name" id="navNama">Admin</span>
+        <button class="btn-logout" onclick="doLogout()">Keluar</button>
+        <button class="nav-mobile-toggle" onclick="toggleMobileNav()" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav-drawer" id="navDrawer">
+      <a href="stok.html"><iconify-icon icon="mdi:book-open-blank-variant" style="vertical-align:-0.125em"></iconify-icon> Informasi Bahan Ajar</a>
+      <a href="tracking.html"><iconify-icon icon="mdi:truck-delivery" style="vertical-align:-0.125em"></iconify-icon> Tracking Pengiriman</a>
+      <div class="nav-drawer-sep"></div>
+      <a href="laporan_do.html"><iconify-icon icon="mdi:chart-line" style="vertical-align:-0.125em"></iconify-icon> Monitoring Progress DO</a>
+      <a href="laporan_rekap.html"><iconify-icon icon="mdi:clipboard-text-outline" style="vertical-align:-0.125em"></iconify-icon> Rekap Bahan Ajar</a>
+      <div class="nav-drawer-sep"></div>
+      <a href="histori.html"><iconify-icon icon="mdi:script-text-outline" style="vertical-align:-0.125em"></iconify-icon> Histori Transaksi</a>
+    </div>
+
+    <div class="page">
+      <div class="page-title">
+        <h1><iconify-icon icon="mdi:script-text-outline"></iconify-icon> Histori Transaksi</h1>
+        <p>Riwayat seluruh transaksi pengiriman bahan ajar UT</p>
+      </div>
+
+      <div class="table-card">
+        <div class="table-card-header">
+          <h2><iconify-icon icon="mdi:clipboard-text-outline"></iconify-icon> Riwayat Transaksi Pengiriman</h2>
+          <div class="filter-row">
+            <input
+              type="text"
+              id="searchHistori"
+              class="search-input"
+              placeholder="Cari nama / nomor DO..."
+              oninput="filterHistori()"
+            />
+            <select id="filterStatus" class="filter-select" onchange="filterHistori()">
+              <option value="">Semua Status</option>
+              <option value="Diterima">Diterima</option>
+              <option value="Dalam Perjalanan">Dalam Perjalanan</option>
+              <option value="Dikirim">Dikirim</option>
+              <option value="Selesai">Selesai</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nomor DO</th>
+                <th>Nama Penerima</th>
+                <th>Ekspedisi</th>
+                <th>Tgl Kirim</th>
+                <th>Paket</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tabelHistori"></tbody>
+          </table>
+          <div id="emptyMsg" class="empty-state" style="display:none">
+            <p><iconify-icon icon="mdi:magnify"></iconify-icon></p>
+            <p>Tidak ada data yang sesuai pencarian.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Detail Perjalanan -->
+    <div id="modalPerjalanan" class="modal-bg">
+      <div class="modal-box">
+        <div class="modal-top">
+          <h3><iconify-icon icon="mdi:map-marker-path"></iconify-icon> Detail Perjalanan Paket</h3>
+          <button class="modal-close-btn" onclick="document.getElementById('modalPerjalanan').classList.remove('open')">&times;</button>
+        </div>
+        <div class="modal-body" id="modalPerjalananContent"></div>
+        <div class="modal-footer">
+          <button class="btn-cancel" onclick="document.getElementById('modalPerjalanan').classList.remove('open')">Tutup</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var user = JSON.parse(sessionStorage.getItem('loggedUser') || 'null');
+      if (!user) window.location.href = 'index.html';
+      document.getElementById('navNama').textContent = user ? user.nama : '';
+      document.getElementById('navAvatar').textContent = user
+        ? user.nama.split(' ').map(function(n){ return n[0]; }).join('').substring(0,2).toUpperCase() : 'AD';
+
+      var listDO = Object.values(dataTracking);
+
+      function badgeClass(status) {
+        return status === 'Selesai' ? 'badge-green' : status === 'Dikirim' ? 'badge-blue' : 'badge-amber';
+      }
+
+      function renderTable(data) {
+        var tbody = document.getElementById('tabelHistori');
+        tbody.innerHTML = '';
+        document.getElementById('emptyMsg').style.display = data.length === 0 ? 'block' : 'none';
+        data.forEach(function(item, i) {
+          var tr = document.createElement('tr');
+          tr.innerHTML =
+            '<td style="color:#94a3b8;font-size:.8rem">' + (i+1) + '</td>' +
+            '<td style="font-weight: 600;color:#1e40af">' + item.nomorDO + '</td>' +
+            '<td style="font-weight:600;color:#1e293b">' + item.nama + '</td>' +
+            '<td>' + item.ekspedisi + '</td>' +
+            '<td style="color:#64748b">' + item.tanggalKirim + '</td>' +
+            '<td><code class="kode">' + item.paket + '</code></td>' +
+            '<td style="font-weight: 600;color:#1d4ed8">' + item.total + '</td>' +
+            '<td><span class="badge ' + badgeClass(item.status) + '">' + item.status + '</span></td>' +
+            '<td><button class="btn-detail" onclick="lihatPerjalanan(\'' + item.nomorDO + '\')">Lihat Jejak</button></td>';
+          tbody.appendChild(tr);
+        });
+      }
+
+      function filterHistori() {
+        var kw     = document.getElementById('searchHistori').value.toLowerCase();
+        var status = document.getElementById('filterStatus').value;
+        var filtered = listDO.filter(function(d) {
+          return (d.nama.toLowerCase().includes(kw) || d.nomorDO.toLowerCase().includes(kw))
+            && (!status || d.status === status);
+        });
+        renderTable(filtered);
+      }
+
+      function lihatPerjalanan(nomorDO) {
+        var item = dataTracking[nomorDO];
+        if (!item) return;
+
+        // Status badge colour
+        var pillMap = { 'Selesai':'#dcfce7:#16a34a', 'Dikirim':'#dbeafe:#1d4ed8', 'Dalam Perjalanan':'#fef9c3:#b45309', 'Diterima':'#f1f5f9:#475569' };
+        var colors  = (pillMap[item.status] || '#f1f5f9:#475569').split(':');
+
+        var html =
+          '<div class="do-info-bar">' +
+            '<div class="do-info-item"><strong>No. DO</strong><span>' + item.nomorDO + '</span></div>' +
+            '<div class="do-info-item"><strong>Penerima</strong><span>' + item.nama + '</span></div>' +
+            '<div class="do-info-item"><strong>Ekspedisi</strong><span>' + item.ekspedisi + '</span></div>' +
+            '<div class="do-info-item"><strong>Status</strong>' +
+              '<span style="display:inline-block;background:' + colors[0] + ';color:' + colors[1] + ';padding:.2rem .65rem;border-radius:999px;font-size:.75rem;">' + item.status + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="timeline">';
+
+        item.perjalanan.slice().reverse().forEach(function(p, i) {
+          html +=
+            '<div class="tl-item' + (i === 0 ? ' latest' : '') + '">' +
+              '<div class="tl-dot"></div>' +
+              '<div class="tl-time">' + p.waktu + '</div>' +
+              '<div class="tl-text">' + p.keterangan + '</div>' +
+            '</div>';
+        });
+        html += '</div>';
+
+        document.getElementById('modalPerjalananContent').innerHTML = html;
+        document.getElementById('modalPerjalanan').classList.add('open');
+      }
+
+      renderTable(listDO);
+
+      function doLogout() { sessionStorage.removeItem('loggedUser'); window.location.href='index.html'; }
+
+      function toggleMobileNav() {
+        var d = document.getElementById('navDrawer');
+        d.classList.toggle('open');
+      }
+      // Close drawer on outside click
+      document.addEventListener('click', function(e) {
+        var d = document.getElementById('navDrawer');
+        var btn = document.querySelector('.nav-mobile-toggle');
+        if (d && btn && !d.contains(e.target) && !btn.contains(e.target)) {
+          d.classList.remove('open');
+        }
+      });
+    </script>
+  </body>
+</html>
