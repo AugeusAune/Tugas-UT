@@ -1,8 +1,3 @@
-/*!
- * SITTA UT — Shared Navbar Responsive CSS
- * Tambahkan ke setiap halaman sebagai <link> atau copy inline
- */
-
 /* ──────────────────── NAVBAR DROPDOWN FIX ──────────────────── */
 .nav-dropdown > .dropdown-panel::before {
   content: '';
