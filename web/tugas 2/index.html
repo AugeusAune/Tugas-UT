@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Portal Utama</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      body { background: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; color: #334155; margin: 0; }
+      .container { max-width: 1000px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 2rem; }
+      
+      .hero-c { background: #0f172a; border-radius: 20px; padding: 3rem; color: white; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); margin-bottom: 2.5rem; }
+      .badge-t { display: inline-block; background: #fbbf24; color: #92400e; font-size: 0.65rem; font-weight: 800; padding: 0.25rem 0.8rem; border-radius: 999px; text-transform: uppercase; margin-bottom: 1rem; }
+      .hero-c h1 { font-family: 'Inter', sans-serif; font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+      .hero-c h1 span { color: #fbbf24; }
+      .hero-c p { font-size: 0.95rem; opacity: 0.7; max-width: 500px; margin: 0 auto; line-height: 1.5; }
+
+      .menu-g { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .menu-i { background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 2.5rem 1.5rem; text-align: center; text-decoration: none; transition: 0.3s; }
+      .menu-i:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1); }
+      
+      .ico-b { font-size: 3rem; margin-bottom: 1rem; display: block; }
+      .m-title { font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: 700; color: #1e3a8a; margin-bottom: 0.5rem; }
+      .m-desc { font-size: 0.85rem; color: #64748b; line-height: 1.4; padding: 0 1rem; }
+
+      .foot { margin-top: 3rem; text-align: center; font-size: 0.75rem; color: #94a3b8; font-weight: 600; }
+    </style>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-c">
+        <div class="badge-t">Tugas Praktik 2 — Vue.js</div>
+        <h1>SITTA <span>UT</span></h1>
+        <p>Sistem Informasi Tiras & Transaksi Bahan Ajar berbasis Vue.js dengan antarmuka yang rapi, bersih, dan fungsional.</p>
+      </div>
+
+      <div class="menu-g">
+        <a href="stok.html" class="menu-i">
+          <span class="ico-b"><iconify-icon icon="mdi:bookshelf" style="color: #3b82f6"></iconify-icon></span>
+          <div class="m-title">Stok Bahan Ajar</div>
+          <div class="m-desc">Manajemen inventori modul, pemantauan stok menipis, dan filter wilayah terpadu.</div>
+        </a>
+        <a href="tracking.html" class="menu-i">
+          <span class="ico-b"><iconify-icon icon="mdi:truck-delivery" style="color: #16a34a"></iconify-icon></span>
+          <div class="m-title">Lacak Pengiriman</div>
+          <div class="m-desc">Pelacakan status kiriman secara real-time dan pembuatan Delivery Order baru.</div>
+        </a>
+      </div>
+
+      <div class="foot">
+        &copy; 2025 Farhan — Universitas Terbuka
+      </div>
+    </div>
+  </body>
+</html>

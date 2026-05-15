@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SITTA UT — Stok Bahan Ajar</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <style>
+      :root { --nav-h: 60px; --action-h: 64px; --primary: #2563eb; }
+      body { background: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; color: #334155; margin: 0; font-size: 0.875rem; }
+      html { overflow-y: scroll; }
+      
+      /* ── Navbar ── */
+      .navbar { position: sticky; top: 0; z-index: 2000; background: #0f172a; height: var(--nav-h); }
+      .nav-container { max-width: 1200px; height: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+      .nav-brand { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; text-decoration: none; }
+      .nav-brand span { color: #fbbf24; }
+      .nav-menu { display: flex; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+      .nav-item { text-decoration: none; font-size: 0.8rem; font-weight: 600; color: #94a3b8; padding: 0.45rem 0.9rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; transition: 0.2s; }
+      .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+      .nav-item.active { color: #fff; background: #1d4ed8; }
+      .nav-right { display: flex; align-items: center; gap: 1rem; }
+      .nav-profile { display: flex; align-items: center; gap: 0.75rem; color: #cbd5e1; font-size: 0.8rem; font-weight: 600; }
+      .nav-avatar { width: 30px; height: 30px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: #fff; font-weight: 800; }
+      .btn-logout { background: transparent; border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; font-size: 0.75rem; font-weight: 700; padding: 0.35rem 0.8rem; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+      .btn-logout:hover { background: #ef4444; color: white; border-color: #ef4444; }
+
+      /* ── Action Bar ── */
+      .action-bar { position: sticky; top: var(--nav-h); z-index: 1000; background: #fff; border-bottom: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); }
+      .action-container { max-width: 1200px; height: var(--action-h); margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+      .search-group { display: flex; align-items: center; gap: 0.75rem; }
+      .f-field { background: #f1f5f9; border: 1.5px solid transparent; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.825rem; outline: none; transition: 0.2s; }
+      .f-field:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08); }
+      .btn-add { background: #16a34a; color: white; border: none; padding: 0.45rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+      /* ── Layout & Stats ── */
+      .main { max-width: 1200px; margin: 1.5rem auto; padding: 0 1.5rem; }
+      .stats-box { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+      .card-stat { background: white; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; }
+      .icon-circle { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; }
+      .stat-title { font-size: 0.65rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-bottom: 0.15rem; letter-spacing: 0.02em; }
+      .stat-number { font-family: 'Inter', sans-serif; font-size: 1.25rem; font-weight: 700; color: #0f172a; }
+
+      /* ── Table ── */
+      .table-card { background: white; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; }
+      .table-hdr { padding: 1rem 1.25rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center; }
+      .table-hdr h2 { font-size: 0.9rem; font-weight: 700; color: #1e3a8a; margin: 0; }
+      table { width: 100%; border-collapse: collapse; }
+      th { background: #f8fafc; padding: 0.75rem 1.25rem; text-align: left; font-size: 0.65rem; font-weight: 700; color: #94a3b8; text-transform: uppercase; border-bottom: 1px solid #e2e8f0; letter-spacing: 0.02em; }
+      td { padding: 0.85rem 1.25rem; border-bottom: 1px solid #f1f5f9; font-size: 0.825rem; color: #475569; transition: 0.2s; }
+      tr:hover td { background: #f8fafc; color: #0f172a; }
+      
+      .badge { font-size: 0.62rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.02em; }
+      .st-safe { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+      .st-warning { background: #fffbeb; color: #d97706; border: 1px solid #fef3c7; }
+      .st-danger { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+
+      .m-overlay { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(2px); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+      .m-content { background: white; width: 100%; max-width: 480px; border-radius: 12px; padding: 1.5rem; }
+      
+      [v-cloak] { display: none; }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="index.html" class="nav-brand">SITTA <span>UT</span></a>
+          <ul class="nav-menu">
+            <li><a href="stok.html" class="nav-item active"><iconify-icon icon="mdi:bookshelf"></iconify-icon> Stok Bahan Ajar</a></li>
+            <li><a href="tracking.html" class="nav-item"><iconify-icon icon="mdi:truck-delivery"></iconify-icon> Tracking Pengiriman</a></li>
+          </ul>
+          <div class="nav-right">
+            <div class="nav-profile">
+              <div class="nav-avatar">AD</div>
+              <span>Administrator</span>
+            </div>
+            <button class="btn-logout" @click="logout">Keluar</button>
+          </div>
+        </div>
+      </nav>
+
+      <div class="action-bar">
+        <div class="action-container">
+          <div class="search-group">
+            <input v-model="filters.search" class="f-field" placeholder="Cari Kode..." style="width: 220px;">
+            <select v-model="filters.upbjj" class="f-field">
+              <option value="">Semua UPBJJ</option>
+              <option v-for="u in upbjjList" :value="u">{{ u }}</option>
+            </select>
+            <select v-model="filters.kategori" class="f-field" v-if="filters.upbjj">
+              <option value="">Semua Kategori</option>
+              <option v-for="k in kategoriList" :value="k">{{ k }}</option>
+            </select>
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer; font-size:0.7rem; font-weight:700; color:#64748b">
+              <input type="checkbox" v-model="filters.lowStockOnly"> Stok Kritis
+            </label>
+          </div>
+          <button class="btn-add" @click="openAddModal">+ Tambah Data</button>
+        </div>
+      </div>
+
+      <div class="main">
+        <div class="stats-box">
+          <div class="card-stat">
+            <div class="icon-circle" style="background:#dbeafe; color:#2563eb"><iconify-icon icon="mdi:book-multiple"></iconify-icon></div>
+            <div><div class="stat-title">Jenis Buku</div><div class="stat-number">{{ stok.length }}</div></div>
+          </div>
+          <div class="card-stat">
+            <div class="icon-circle" style="background:#dcfce7; color:#16a34a"><iconify-icon icon="mdi:package-variant"></iconify-icon></div>
+            <div><div class="stat-title">Total Stok</div><div class="stat-number">{{ totalStok.toLocaleString('id-ID') }}</div></div>
+          </div>
+          <div class="card-stat">
+            <div class="icon-circle" style="background:#fee2e2; color:#dc2626"><iconify-icon icon="mdi:alert-circle"></iconify-icon></div>
+            <div><div class="stat-title">Stok Rendah</div><div class="stat-number" style="color:#ef4444">{{ countMenipis + countKosong }}</div></div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-hdr">
+            <h2>Daftar Inventori</h2>
+            <select @change="sortBy($event.target.value)" class="f-field" style="font-size:0.75rem; padding: 0.35rem 0.6rem">
+              <option value="judul">Sort: Nama</option>
+              <option value="qty">Sort: Stok</option>
+            </select>
+          </div>
+          <div style="overflow-x: auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode MK</th>
+                  <th>Judul Bahan Ajar</th>
+                  <th>Lokasi</th>
+                  <th style="text-align: right">Unit</th>
+                  <th style="text-align: center">Status</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in filteredStok" :key="item.kode">
+                  <td><code style="font-weight:700; color:#2563eb; font-size:0.75rem">{{ item.kode }}</code></td>
+                  <td>
+                    <div style="font-weight:600; color:#334155">{{ item.judul }}</div>
+                    <div style="font-size:0.7rem; color:#94a3b8">{{ item.kategori }}</div>
+                  </td>
+                  <td style="font-weight:500; font-size: 0.75rem;">{{ item.upbjj }}</td>
+                  <td style="text-align: right">
+                    <div style="font-weight:700">{{ item.qty.toLocaleString('id-ID') }}</div>
+                    <div style="font-size:0.6rem; color:#94a3b8">MIN: {{ item.safety }}</div>
+                  </td>
+                  <td style="text-align: center">
+                    <span v-if="item.qty === 0" class="badge st-danger">KOSONG</span>
+                    <span v-else-if="item.qty < item.safety" class="badge st-warning">MENIPIS</span>
+                    <span v-else class="badge st-safe">AMAN</span>
+                  </td>
+                  <td><button @click="editItem(item)" style="background:none; border:none; color:#2563eb; font-weight:700; cursor:pointer; font-size:0.7rem">UBAH</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div v-if="showModal" class="m-overlay">
+        <div class="m-content">
+          <h3 style="margin-top:0; color:#1e3a8a; font-size: 1rem">{{ isEdit ? 'Detail Data' : 'Tambah Produk' }}</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1.5rem">
+            <div><label class="stat-title">Kode MK</label><input v-model="formData.kode" class="f-field" style="width:100%" :disabled="isEdit"></div>
+            <div><label class="stat-title">Judul</label><input v-model="formData.judul" class="f-field" style="width:100%"></div>
+            <div><label class="stat-title">Kategori</label><select v-model="formData.kategori" class="f-field" style="width:100%"><option v-for="k in kategoriList" :value="k">{{ k }}</option></select></div>
+            <div><label class="stat-title">UPBJJ</label><select v-model="formData.upbjj" class="f-field" style="width:100%"><option v-for="u in upbjjList" :value="u">{{ u }}</option></select></div>
+            <div><label class="stat-title">Stok</label><input type="number" v-model.number="formData.qty" class="f-field" style="width:100%"></div>
+            <div><label class="stat-title">Safety</label><input type="number" v-model.number="formData.safety" class="f-field" style="width:100%"></div>
+          </div>
+          <div style="margin-top:2rem; display:flex; justify-content:flex-end; gap:0.75rem">
+            <button @click="closeModal" style="background:none; border:none; color:#94a3b8; font-weight:700; cursor:pointer; font-size:0.75rem">TUTUP</button>
+            <button @click="saveItem" class="btn-add">SIMPAN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/stok-app.js"></script>
+  </body>
+</html>

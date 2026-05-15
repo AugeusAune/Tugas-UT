@@ -1,0 +1,215 @@
+/* ──────────────────── NAVBAR DROPDOWN FIX ──────────────────── */
+.nav-dropdown > .dropdown-panel::before {
+  content: '';
+  position: absolute;
+  top: -15px; /* Cover the gap height */
+  left: 0;
+  right: 0;
+  height: 15px;
+  background: transparent;
+}
+.nav-dropdown > .dropdown-panel {
+  margin-top: 0.4rem;
+}
+
+/* ──────────────────── NAVBAR MOBILE ──────────────────── */
+@media (max-width: 820px) {
+  .navbar {
+    padding: 0 1rem;
+    height: 56px;
+  }
+
+  /* Sembunyikan nav links dan nama user di mobile */
+  .nav-links,
+  .nav-name {
+    display: none !important;
+  }
+
+  /* Hamburger menu toggle button */
+  .nav-mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    padding: 6px;
+    border: none;
+    background: none;
+  }
+  .nav-mobile-toggle span {
+    width: 22px;
+    height: 2px;
+    background: #94a3b8;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+
+  /* Mobile nav drawer */
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    border-bottom: 1px solid #1e293b;
+    z-index: 99;
+    padding: 0.75rem 1rem 1rem;
+    flex-direction: column;
+    gap: 0.25rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    display: block;
+    padding: 0.6rem 0.875rem;
+    border-radius: 10px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-drawer a:hover { background: #1e293b; color: white; }
+  .nav-drawer a.active { background: #1e40af; color: white; }
+  .nav-drawer-sep {
+    height: 1px;
+    background: #1e293b;
+    margin: 0.5rem 0;
+  }
+}
+
+/* Sembunyikan toggle di desktop */
+@media (min-width: 821px) {
+  .nav-mobile-toggle { display: none; }
+  .nav-drawer        { display: none !important; }
+}
+
+/* ──────────────────── PAGE LAYOUT MOBILE ──────────────────── */
+@media (max-width: 820px) {
+  .page {
+    padding: 1.25rem 1rem 3rem !important;
+  }
+
+  .hero {
+    padding: 1.5rem !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+  .hero-emoji { display: none; }
+  .hero h2 { font-size: 1.375rem !important; }
+
+  /* Stats */
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem !important;
+  }
+
+  /* Menu Cards */
+  .menu-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.875rem !important;
+  }
+  .menu-card { padding: 1.25rem 1rem !important; }
+
+  /* Table card header */
+  .table-card-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+  .table-actions {
+    width: 100% !important;
+  }
+  .search-input { width: 100% !important; }
+
+  /* Two-col → one-col */
+  .two-col {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Detail Grid on tracking */
+  .detail-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Search row on tracking */
+  .search-row {
+    flex-direction: column !important;
+  }
+  .btn-cari, .btn-reset-sm {
+    width: 100% !important;
+    padding: 0.75rem !important;
+  }
+
+  /* Tracking page - Progress steps wrapper */
+  .status-header > div:last-child {
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .steps-track,
+  .steps-labels {
+    min-width: 400px;
+  }
+
+  /* Form grid in modal */
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Page title */
+  .page-title h1 {
+    font-size: 1.25rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-row {
+    grid-template-columns: 1fr !important;
+  }
+  .menu-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .filter-row {
+    flex-direction: column !important;
+    width: 100%;
+  }
+  .filter-select,
+  .search-input {
+    width: 100% !important;
+  }
+  .left-stats {
+    gap: 1rem !important;
+  }
+}
+
+/* ──────────────────── LOGIN PAGE MOBILE ──────────────────── */
+@media (max-width: 900px) {
+  .login-page {
+    flex-direction: column !important;
+  }
+  .login-left {
+    padding: 3rem 2rem !important;
+    justify-content: center !important;
+  }
+  .left-headline {
+    font-size: 1.75rem !important;
+  }
+  .left-sub {
+    font-size: 0.85rem !important;
+    margin-bottom: 2rem !important;
+  }
+  .login-right {
+    width: 100% !important;
+    padding: 3rem 2rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .left-stats {
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  .login-right {
+    padding: 2.5rem 1.5rem !important;
+  }
+}
