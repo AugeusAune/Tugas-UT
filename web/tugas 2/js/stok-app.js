@@ -60,6 +60,7 @@ new Vue({
       lokasiRak: '',
       qty: 0,
       safety: 0,
+      harga: 0,
       catatanHTML: '',
     },
     filters: {
@@ -99,7 +100,7 @@ new Vue({
 
       // Filter: Low Stock (< Safety or 0)
       if (this.filters.lowStockOnly) {
-        result = result.filter((item) => item.qty < item.safety);
+        result = result.filter((item) => item.qty < item.safety || item.qty === 0);
       }
 
       // Sort
@@ -175,6 +176,7 @@ new Vue({
         lokasiRak: '',
         qty: 0,
         safety: 10,
+        harga: 0,
         catatanHTML: '',
       };
       this.showModal = true;
@@ -193,9 +195,15 @@ new Vue({
         !this.formData.kode ||
         !this.formData.judul ||
         !this.formData.kategori ||
-        !this.formData.upbjj
+        !this.formData.upbjj ||
+        !this.formData.lokasiRak
       ) {
-        alert('Mohon lengkapi seluruh field wajib.');
+        alert('Mohon lengkapi seluruh field wajib termasuk Lokasi Rak.');
+        return;
+      }
+
+      if (this.formData.qty < 0 || this.formData.safety < 0) {
+        alert('Jumlah stok dan safety tidak boleh negatif.');
         return;
       }
 

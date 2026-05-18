@@ -373,6 +373,19 @@
               <input type="checkbox" v-model="filters.lowStockOnly" /> Stok
               Kritis
             </label>
+            <button
+              @click="resetFilters"
+              class="f-field"
+              style="
+                background: #f1f5f9;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
+                font-weight: 700;
+                color: #64748b;
+              "
+            >
+              Reset
+            </button>
           </div>
           <button class="btn-add" @click="openAddModal">+ Tambah Data</button>
         </div>
@@ -431,20 +444,22 @@
               style="font-size: 0.75rem; padding: 0.35rem 0.6rem"
             >
               <option value="judul">Sort: Nama</option>
-              <option value="qty">Sort: Stok</option>
-            </select>
+               <option value="qty">Sort: Stok</option>
+               <option value="harga">Sort: Harga</option>
+             </select>
           </div>
           <div style="overflow-x: auto">
             <table>
               <thead>
                 <tr>
-                  <th>Kode MK</th>
-                  <th>Judul Bahan Ajar</th>
-                  <th>Lokasi</th>
-                  <th style="text-align: right">Unit</th>
-                  <th style="text-align: center">Status</th>
-                  <th></th>
-                </tr>
+                   <th>Kode MK</th>
+                   <th>Judul Bahan Ajar</th>
+                   <th>UPBJJ / Lokasi Rak</th>
+                   <th style="text-align: right">Stok / Harga</th>
+                   <th style="text-align: center">Status</th>
+                   <th>Catatan</th>
+                   <th></th>
+                 </tr>
               </thead>
               <tbody>
                 <tr v-for="item in filteredStok" :key="item.kode">
@@ -466,28 +481,35 @@
                       {{ item.kategori }}
                     </div>
                   </td>
-                  <td style="font-weight: 500; font-size: 0.75rem">
-                    {{ item.upbjj }}
-                  </td>
-                  <td style="text-align: right">
-                    <div style="font-weight: 700">
-                      {{ item.qty.toLocaleString('id-ID') }}
-                    </div>
-                    <div style="font-size: 0.6rem; color: #94a3b8">
-                      MIN: {{ item.safety }}
-                    </div>
-                  </td>
-                  <td style="text-align: center">
-                    <span v-if="item.qty === 0" class="badge st-danger"
-                      >KOSONG</span
-                    >
-                    <span
-                      v-else-if="item.qty < item.safety"
-                      class="badge st-warning"
-                      >MENIPIS</span
-                    >
-                    <span v-else class="badge st-safe">AMAN</span>
-                  </td>
+                   <td style="font-weight: 500; font-size: 0.75rem">
+                     <div>{{ item.upbjj }}</div>
+                     <div style="font-size: 0.65rem; color: #94a3b8">{{ item.lokasiRak }}</div>
+                   </td>
+                   <td style="text-align: right">
+                     <div style="font-weight: 700">
+                       {{ item.qty.toLocaleString('id-ID') }}
+                     </div>
+                     <div style="font-size: 0.65rem; color: #2563eb; font-weight: 600;">
+                       Rp {{ item.harga.toLocaleString('id-ID') }}
+                     </div>
+                     <div style="font-size: 0.6rem; color: #94a3b8">
+                       MIN: {{ item.safety }}
+                     </div>
+                   </td>
+                   <td style="text-align: center">
+                     <span v-if="item.qty === 0" class="badge st-danger"
+                       >KOSONG</span
+                     >
+                     <span
+                       v-else-if="item.qty < item.safety"
+                       class="badge st-warning"
+                       >MENIPIS</span
+                     >
+                     <span v-else class="badge st-safe">AMAN</span>
+                   </td>
+                   <td style="max-width: 150px">
+                     <div v-html="item.catatanHTML" style="font-size: 0.7rem; color: #64748b; font-style: italic;"></div>
+                   </td>
                   <td>
                     <button
                       @click="editItem(item)"
@@ -570,14 +592,41 @@
               />
             </div>
             <div>
-              <label class="stat-title">Safety</label
-              ><input
-                type="number"
-                v-model.number="formData.safety"
-                class="f-field"
-                style="width: 100%"
-              />
-            </div>
+               <label class="stat-title">Safety</label
+               ><input
+                 type="number"
+                 v-model.number="formData.safety"
+                 class="f-field"
+                 style="width: 100%"
+               />
+             </div>
+             <div>
+               <label class="stat-title">Lokasi Rak</label
+               ><input
+                 v-model="formData.lokasiRak"
+                 class="f-field"
+                 style="width: 100%"
+                 placeholder="Contoh: R1-A1"
+               />
+             </div>
+             <div>
+               <label class="stat-title">Harga</label
+               ><input
+                 type="number"
+                 v-model.number="formData.harga"
+                 class="f-field"
+                 style="width: 100%"
+               />
+             </div>
+             <div style="grid-column: span 2">
+               <label class="stat-title">Catatan (HTML)</label
+               ><input
+                 v-model="formData.catatanHTML"
+                 class="f-field"
+                 style="width: 100%"
+                 placeholder="Contoh: <b>Edisi Terbaru</b>"
+               />
+             </div>
           </div>
           <div
             style="

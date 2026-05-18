@@ -167,7 +167,16 @@ new Vue({
       const newDO = this.nextDONumber;
       const packet = this.selectedPacket;
 
-      if (!packet) return;
+      // Simple validation
+      if (!this.form.nim || !this.form.nama || !this.form.ekspedisi || !this.form.paketKode) {
+        alert('Mohon lengkapi seluruh field (NIM, Nama, Ekspedisi, dan Paket).');
+        return;
+      }
+
+      if (isNaN(this.form.nim)) {
+        alert('NIM harus berupa angka.');
+        return;
+      }
 
       // Reactively add new tracking entry
       Vue.set(this.tracking, newDO, {
