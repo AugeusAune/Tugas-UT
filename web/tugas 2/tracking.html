@@ -449,7 +449,9 @@
           <div class="info-grid">
             <div class="info-card">
               <div class="i-lb">Penerima</div>
-              <div class="i-tx" :title="'Penerima: ' + data.nama">{{ data.nama }} (<span v-text="data.nim"></span>)</div>
+              <div class="i-tx" :title="'Penerima: ' + data.nama">
+                {{ data.nama }} (<span v-text="data.nim"></span>)
+              </div>
             </div>
             <div class="info-card">
               <div class="i-lb">Ekspedisi</div>
@@ -581,19 +583,39 @@
               margin-top: 1.5rem;
             "
           >
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                <div class="i-lb">ISI PAKET</div>
-                <div class="i-lb">ESTIMASI BIAYA</div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.5rem;
+              "
+            >
+              <div class="i-lb">ISI PAKET</div>
+              <div class="i-lb">ESTIMASI BIAYA</div>
             </div>
-            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div style="font-size: 0.75rem; font-weight: 600; color: #475569;">
-                    <ul style="margin: 0; padding-left: 1.2rem;">
-                        <li v-for="mk in selectedPacket.isi">{{ mk }}</li>
-                    </ul>
-                </div>
-                <div style="font-size: 1.25rem; font-weight: 900; color: #2563eb; text-align: right;">
-                  Rp {{ selectedPacket.harga.toLocaleString('id-ID') }}
-                </div>
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+              "
+            >
+              <div style="font-size: 0.75rem; font-weight: 600; color: #475569">
+                <ul style="margin: 0; padding-left: 1.2rem">
+                  <li v-for="mk in selectedPacket.isi">{{ mk }}</li>
+                </ul>
+              </div>
+              <div
+                style="
+                  font-size: 1.25rem;
+                  font-weight: 900;
+                  color: #2563eb;
+                  text-align: right;
+                "
+              >
+                Rp {{ selectedPacket.harga.toLocaleString('id-ID') }}
+              </div>
             </div>
           </div>
           <div
