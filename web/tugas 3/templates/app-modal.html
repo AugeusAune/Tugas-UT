@@ -1,0 +1,9 @@
+<div v-if="visible" class="m-overlay" style="position:fixed;inset:0;background:rgba(15,23,42,0.6);z-index:3000;display:flex;align-items:center;justify-content:center;padding:1rem">
+  <div class="m-content" style="background:white;width:100%;max-width:520px;border-radius:12px;padding:1.5rem;max-height:90vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <h3 style="margin:0;color:#1e3a8a;font-size:1rem">{{ title }}</h3>
+      <button @click="close" style="background:none;border:none;color:#94a3b8;font-size:1.2rem;cursor:pointer;padding:0.25rem">&times;</button>
+    </div>
+    <slot></slot>
+  </div>
+</div>

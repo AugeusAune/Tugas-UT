@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SITTA UT — Tugas 3 (Vue.js Component)</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    :root { --nav-h: 60px; --primary: #2563eb; }
+    body { background: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; color: #334155; margin: 0; font-size: 0.875rem; }
+    html { overflow-y: scroll; }
+
+    .navbar { position: sticky; top: 0; z-index: 2000; background: #0f172a; height: var(--nav-h); }
+    .nav-container { max-width: 1200px; height: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+    .nav-brand { font-family: 'Inter', sans-serif; font-size: 1.1rem; font-weight: 700; color: #fff; text-decoration: none; }
+    .nav-brand span { color: #fbbf24; }
+    .nav-menu { display: flex; gap: 0.25rem; list-style: none; margin: 0; padding: 0; }
+    .nav-item { text-decoration: none; font-size: 0.8rem; font-weight: 600; color: #94a3b8; padding: 0.45rem 0.9rem; border-radius: 8px; display: flex; align-items: center; gap: 0.5rem; transition: 0.2s; cursor: pointer; background: none; border: none; font-family: inherit; }
+    .nav-item:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .nav-item.active { color: #fff; background: #1d4ed8; }
+
+    .badge { font-size: 0.62rem; font-weight: 800; padding: 0.25rem 0.6rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.02em; }
+    .st-safe { background: #f0fdf4; color: #16a34a; border: 1px solid #dcfce7; }
+    .st-warning { background: #fffbeb; color: #d97706; border: 1px solid #fef3c7; }
+    .st-danger { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+
+    .pill { font-size: 0.68rem; font-weight: 800; padding: 0.35rem 1rem; border-radius: 999px; text-transform: uppercase; border: 1.5px solid transparent; }
+    .pill-green { background: #f0fdf4; color: #16a34a; border-color: #dcfce7; }
+    .pill-amber { background: #fffbeb; color: #d97706; border-color: #fef3c7; }
+    .pill-blue { background: #eff6ff; color: #2563eb; border-color: #dbeafe; }
+
+    .f-field { background: #f1f5f9; border: 1.5px solid transparent; border-radius: 6px; padding: 0.45rem 0.75rem; font-size: 0.825rem; outline: none; transition: 0.2s; }
+    .f-field:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+
+    .btn-add { background: #16a34a; color: white; border: none; padding: 0.45rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer; }
+
+    .m-overlay { position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(2px); z-index: 3000; display: flex; align-items: center; justify-content: center; padding: 1rem; }
+    .m-content { background: white; width: 100%; max-width: 520px; border-radius: 12px; padding: 1.5rem; max-height: 90vh; overflow-y: auto; }
+
+    .action-bar { position: sticky; top: var(--nav-h); z-index: 1000; background: #fff; border-bottom: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.03); }
+    .action-container { max-width: 1200px; height: 64px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 1.5rem; }
+
+    [v-cloak] { display: none; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app" v-cloak>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="#" class="nav-brand">SITTA <span>UT</span></a>
+        <ul class="nav-menu">
+          <li><button class="nav-item" :class="{ active: tab === 'stok' }" @click="tab='stok'">Stok</button></li>
+          <li><button class="nav-item" :class="{ active: tab === 'tracking' }" @click="tab='tracking'">Tracking DO</button></li>
+          <li><button class="nav-item" :class="{ active: tab === 'order' }" @click="tab='order'">Pemesanan</button></li>
+        </ul>
+      </div>
+    </nav>
+
+    <section v-show="tab==='stok'">
+      <ba-stock-table ref="stockTable" :items="stok" :upbjj-list="upbjjList" :kategori-list="kategoriList" @open-add="openAdd" @edit-item="editItem" @delete-item="deleteItem"></ba-stock-table>
+    </section>
+
+    <section v-show="tab==='tracking'">
+      <do-tracking :data="tracking"></do-tracking>
+    </section>
+
+    <section v-show="tab==='order'">
+      <order-form :paket="paket" :ekspedisi="pengirimanList" :auto-do="nextDONumber" @created="handleNewDO"></order-form>
+    </section>
+
+    <app-modal :title="isEdit ? 'Edit Bahan Ajar' : 'Tambah Bahan Ajar'" :visible="showModal" @close="closeModal">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Kode MK</label><input v-model="formData.kode" class="f-field" style="width:100%" :disabled="isEdit" /></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Judul</label><input v-model="formData.judul" class="f-field" style="width:100%" /></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Kategori</label><select v-model="formData.kategori" class="f-field" style="width:100%"><option v-for="k in kategoriList" :value="k">{{ k }}</option></select></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">UPBJJ</label><select v-model="formData.upbjj" class="f-field" style="width:100%"><option v-for="u in upbjjList" :value="u">{{ u }}</option></select></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Stok</label><input type="number" v-model.number="formData.qty" class="f-field" style="width:100%" /></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Safety</label><input type="number" v-model.number="formData.safety" class="f-field" style="width:100%" /></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Lokasi Rak</label><input v-model="formData.lokasiRak" class="f-field" style="width:100%" placeholder="R1-A1" /></div>
+        <div><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Harga</label><input type="number" v-model.number="formData.harga" class="f-field" style="width:100%" /></div>
+        <div style="grid-column:span 2"><label style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Catatan (HTML)</label><input v-model="formData.catatanHTML" class="f-field" style="width:100%" placeholder="&lt;b&gt;Edisi Terbaru&lt;/b&gt;" /></div>
+      </div>
+      <div style="margin-top:2rem;display:flex;justify-content:flex-end;gap:0.75rem">
+        <button @click="closeModal" style="background:none;border:none;color:#94a3b8;font-weight:700;cursor:pointer;font-size:0.75rem">Tutup</button>
+        <button @click="saveEdit" class="btn-add">Simpan</button>
+      </div>
+    </app-modal>
+  </div>
+
+  <script src="js/services/api.js"></script>
+  <script src="js/components/status-badge.js"></script>
+  <script src="js/components/stock-table.js"></script>
+  <script src="js/components/do-tracking.js"></script>
+  <script src="js/components/order-form.js"></script>
+  <script src="js/components/app-modal.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

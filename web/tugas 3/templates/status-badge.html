@@ -1,0 +1,14 @@
+<span
+  class="badge"
+  :class="badgeClass"
+  @mouseover="showTooltip = true"
+  @mouseout="showTooltip = false"
+  style="position:relative;cursor:help"
+>
+  {{ label }}
+  <div
+    v-if="showTooltip && catatanHTML"
+    v-html="catatanHTML"
+    style="position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#0f172a;color:#fff;font-size:0.65rem;padding:0.4rem 0.75rem;border-radius:6px;white-space:nowrap;z-index:100;font-weight:400;font-style:normal"
+  ></div>
+</span>

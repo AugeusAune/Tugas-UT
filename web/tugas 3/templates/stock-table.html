@@ -1,0 +1,81 @@
+<div>
+  <div class="action-bar" style="position:sticky;top:60px;z-index:1000;background:#fff;border-bottom:1px solid #e2e8f0">
+    <div class="action-container" style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;height:64px">
+      <div class="search-group" style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap">
+        <input v-model="filters.search" class="f-field" placeholder="Cari Kode/Nama..." style="width:200px" @keyup.enter="applyFilter" />
+        <select v-model="filters.upbjj" class="f-field">
+          <option value="">Semua UPBJJ</option>
+          <option v-for="u in upbjjList" :value="u">{{ u }}</option>
+        </select>
+        <select v-if="filters.upbjj" v-model="filters.kategori" class="f-field">
+          <option value="">Semua Kategori</option>
+          <option v-for="k in kategoriList" :value="k">{{ k }}</option>
+        </select>
+        <label style="display:flex;align-items:center;gap:0.3rem;cursor:pointer;font-size:0.7rem;font-weight:700;color:#64748b">
+          <input type="checkbox" v-model="filters.lowStock" /> Stok Menipis
+        </label>
+        <label style="display:flex;align-items:center;gap:0.3rem;cursor:pointer;font-size:0.7rem;font-weight:700;color:#64748b">
+          <input type="checkbox" v-model="filters.outOfStock" /> Stok Kosong
+        </label>
+        <button @click="resetFilter" class="f-field" style="background:#f1f5f9;border:1px solid #e2e8f0;cursor:pointer;font-weight:700;color:#64748b">Reset</button>
+      </div>
+      <button class="btn-add" @click="openAdd">+ Tambah</button>
+    </div>
+  </div>
+
+  <div class="main" style="max-width:1200px;margin:1.5rem auto;padding:0 1.5rem">
+    <div class="table-card" style="background:white;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
+      <div class="table-hdr" style="padding:1rem 1.25rem;border-bottom:1px solid #f1f5f9;display:flex;justify-content:space-between;align-items:center">
+        <h2 style="font-size:0.9rem;font-weight:700;color:#1e3a8a;margin:0">Daftar Inventori</h2>
+        <select @change="sortBy($event.target.value)" class="f-field" style="font-size:0.75rem;padding:0.35rem 0.6rem">
+          <option value="judul">Sort: Nama</option>
+          <option value="qty">Sort: Stok</option>
+          <option value="harga">Sort: Harga</option>
+        </select>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:left;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Kode/Nama MK</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:left;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Kategori</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:left;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">UT-Daerah / Rak</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:right;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Harga</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:right;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Stok / Safety</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:center;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Status</th>
+              <th style="background:#f8fafc;padding:0.75rem 1.25rem;text-align:center;font-size:0.65rem;font-weight:700;color:#94a3b8;text-transform:uppercase;border-bottom:1px solid #e2e8f0">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="(item, idx) in filteredItems" :key="item.kode">
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9">
+                <code style="font-weight:700;color:#2563eb;font-size:0.75rem">{{ item.kode }}</code>
+                <div style="font-weight:600;color:#334155;font-size:0.825rem">{{ item.judul }}</div>
+              </td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;font-size:0.75rem;color:#64748b">{{ item.kategori }}</td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;font-weight:500;font-size:0.75rem">
+                <div>{{ item.upbjj }}</div>
+                <div style="font-size:0.65rem;color:#94a3b8">{{ item.lokasiRak }}</div>
+              </td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;text-align:right;font-weight:700;color:#2563eb;font-size:0.825rem">{{ item.harga | currency }}</td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;text-align:right">
+                <div style="font-weight:700;font-size:0.825rem">{{ item.qty | satuan }}</div>
+                <div style="font-size:0.6rem;color:#94a3b8">Safety: {{ item.safety | satuan }}</div>
+              </td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;text-align:center">
+                <status-badge :qty="item.qty" :safety="item.safety" :catatan-html="item.catatanHTML"></status-badge>
+              </td>
+              <td style="padding:0.85rem 1.25rem;border-bottom:1px solid #f1f5f9;text-align:center">
+                <button @click="$emit('edit-item', item)" style="background:none;border:none;color:#2563eb;font-weight:700;cursor:pointer;font-size:0.7rem;margin-right:0.5rem">Ubah</button>
+                <button @click="$emit('delete-item', item)" style="background:none;border:none;color:#dc2626;font-weight:700;cursor:pointer;font-size:0.7rem">Hapus</button>
+              </td>
+            </tr>
+            <tr v-if="filteredItems.length === 0">
+              <td colspan="7" style="padding:3rem;text-align:center;color:#94a3b8;font-weight:600;font-size:0.8rem">Tidak ada data ditemukan</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

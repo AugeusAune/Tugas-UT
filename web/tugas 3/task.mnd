@@ -1,0 +1,214 @@
+# Tugas Praktik 3 - Aplikasi Pemesanan Bahan Ajar UT (Vue.js)
+
+## Context
+Buat aplikasi website sederhana untuk pemesanan Bahan Ajar Universitas Terbuka menggunakan Vue.js (CDN, bukan Vue CLI). Data dari JSON file lokal, bukan database.
+
+## Struktur Proyek (WAJIB)
+tugas3-vue-ut/
+├─ index.html
+├─ /assets/
+│   ├─ css/style.css
+│   └─ img/
+├─ /data/
+│   └─ dataBahanAjar.json
+├─ /js/
+│   ├─ app.js
+│   ├─ components/
+│   │   ├─ stock-table.js      → Vue.component('ba-stock-table', ...)
+│   │   ├─ do-tracking.js      → Vue.component('do-tracking', ...)
+│   │   ├─ order-form.js       → Vue.component('order-form', ...)
+│   │   ├─ status-badge.js     → Vue.component('status-badge', ...)
+│   │   └─ app-modal.js        → Vue.component('app-modal', ...)
+│   └─ services/
+│       └─ api.js
+└─ /templates/
+├─ stock-table.html
+├─ do-tracking.html
+├─ order-form.html
+├─ status-badge.html
+└─ app-modal.html
+
+## Aturan Penting
+- Naming convention: kebab-case untuk nama file dan component
+- Template id: tpl-stock, tpl-tracking, tpl-order, tpl-badge, tpl-modal
+- Routing pakai tab state di root: `tab: 'stok' | 'tracking' | 'order'`
+- Vue versi 2 (CDN: https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js)
+- Semua component didaftarkan dengan `Vue.component('nama-component', ...)`
+
+## index.html Structure
+```html
+<body>
+  <div id="app">
+    <nav>
+      <button @click="tab='stok'">Stok</button>
+      <button @click="tab='tracking'">Tracking DO</button>
+      <button @click="tab='order'">Pemesanan</button>
+    </nav>
+
+    <section v-show="tab==='stok'">
+      <ba-stock-table :items="state.stok"></ba-stock-table>
+    </section>
+    <section v-show="tab==='tracking'">
+      <do-tracking :data="state.tracking"></do-tracking>
+    </section>
+    <section v-show="tab==='order'">
+      <order-form :paket="state.paket" :ekspedisi="state.pengirimanList" @created="handleNewDO"></order-form>
+    </section>
+
+    <app-modal ref="modal"></app-modal>
+  </div>
+
+  <!-- Templates -->
+  <template id="tpl-stock"> ... </template>
+  <template id="tpl-tracking"> ... </template>
+  <template id="tpl-order"> ... </template>
+  <template id="tpl-badge"> ... </template>
+  <template id="tpl-modal"> ... </template>
+
+  <!-- Scripts (urutan penting) -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="/js/services/api.js"></script>
+  <script src="/js/components/stock-table.js"></script>
+  <script src="/js/components/do-tracking.js"></script>
+  <script src="/js/components/order-form.js"></script>
+  <script src="/js/components/status-badge.js"></script>
+  <script src="/js/components/app-modal.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+```
+
+---
+
+## Halaman 1: Stok Bahan Ajar (ba-stock-table)
+
+### Tampilan Data (Tabel/List)
+Kolom yang wajib ditampilkan:
+| Field JSON | Label Kolom |
+|---|---|
+| kode, judul | Kode/Nama Mata Kuliah |
+| kategori | Kategori Mata Kuliah |
+| upbjj | UT-Daerah |
+| lokasiRak | Lokasi Rak |
+| harga | Harga (format: Rp X.XXX) |
+| qty | Jumlah Stok (format: X buah) |
+| safety | Stok Safety (format: X buah) |
+| status | Status (dengan tooltip dari catatanHTML saat hover) |
+
+### Status Badge
+- qty >= safety → "Aman" (hijau / simbol aman)
+- qty < safety && qty > 0 → "Menipis" (orange / simbol warning)
+- qty = 0 → "Kosong" (merah / simbol bahaya)
+- Tooltip/preview dari field `catatanHTML` muncul saat hover kolom Status
+
+### Filter & Sort
+- Filter by UT-Daerah (dropdown dari upbjjList)
+- Filter by Kategori Mata Kuliah (DEPENDENT: muncul hanya setelah UT-Daerah dipilih)
+- Filter: tampilkan hanya qty < safety (stok menipis)
+- Filter: tampilkan hanya qty = 0 (stok kosong)
+- Sort by: judul, stok, harga
+- Tombol reset filter
+- WAJIB: gunakan `computed` untuk filter (tidak recompute berulang) → pakai `computed` bukan `methods`
+
+### CRUD
+CREATE:
+- Form tambah bahan ajar baru
+- Validasi sederhana semua field
+- Tekan Enter → langsung simpan dan update tampilan
+
+UPDATE:
+- Form edit inline atau modal
+- Validasi sederhana semua field  
+- Tekan Enter → langsung update tampilan
+
+DELETE:
+- Tombol/icon delete
+- Konfirmasi popup sebelum hapus
+
+---
+
+## Halaman 2: Tracking Delivery Order (do-tracking)
+
+### Pencarian
+- Search by Nomor DO atau NIM
+- Tekan Enter → submit pencarian
+- Tekan Esc → clear/reset pencarian
+
+### Form Tambah DO Baru
+Field yang wajib ada:
+
+| Field | Keterangan |
+|---|---|
+| Nomor DO | Auto-generate. Format: DO{TAHUN}-{SEQ}. Contoh: DO2025-001, DO2025-002 |
+| NIM | Input manual |
+| Nama | Input manual |
+| Ekspedisi | Select dari upbjjList (JNE Regular / JNE Express) |
+| Paket Bahan Ajar | Select dari array `paket`, tampilkan kode + nama paket. Setelah pilih → tampilkan detail isi paket di bawah select |
+| Tanggal Kirim | Input manual atau ambil dari Date lokal. Format: DD MMMM YYYY (contoh: 25 Agustus 2025) |
+| Total Harga | Auto dari paket.harga. Format: Rp X.XXX |
+
+- Validasi input sederhana untuk semua field
+
+### Tambah Status Progress Pengiriman
+- Waktu: otomatis dari Date lokal
+- Keterangan: input dari pengguna
+
+---
+
+## Vue.js Requirements (WAJIB semua ada)
+
+### 1. Tampilkan Data
+- Gunakan mustache `{{ }}`, `v-text`, atau `v-html` (untuk catatanHTML)
+
+### 2. Data Binding
+- `v-bind` untuk attribute binding
+- `v-model` untuk two-way binding pada form input
+
+### 3. Conditional
+- `v-if` / `v-else` / `v-else-if` untuk status badge dan kondisi lain
+- `v-show` untuk toggle section tab
+
+### 4. List Rendering
+- `v-for` untuk render array data stok dan tracking
+- Gunakan index maupun name-based
+
+### 5. Filter (Formatting Teks)
+- Filter currency: tambahkan "Rp" pada harga
+- Filter satuan: tambahkan "buah" pada qty dan safety
+- Filter tanggal: format DD MMMM YYYY
+
+### 6. Computed Property (WAJIB)
+- Computed untuk filtered + sorted list stok (agar tidak recompute berulang)
+- Computed untuk generate nomor DO otomatis
+
+### 7. Methods
+- handleNewDO, deleteItem, saveEdit, resetFilter, dll
+
+### 8. Watchers (MINIMAL 2)
+Contoh watcher yang bisa dipakai:
+- Watch filter UT-Daerah → reset filter Kategori saat UT-Daerah berubah
+- Watch tab aktif → reset form saat pindah tab
+- Watch searchQuery → trigger pencarian otomatis
+
+### 9. Event Handling
+- `@click` untuk tombol
+- `@keyup.enter` untuk submit form
+- `@keyup.esc` untuk reset pencarian
+- `@mouseover` / `@mouseout` untuk tooltip di kolom Status
+
+### 10. Vue Component & Template
+- Semua komponen didaftarkan global dengan `Vue.component('nama', { template: '#tpl-id', ... })`
+- Template ada di `<template id="tpl-...">` di index.html atau file .html terpisah
+- Props untuk passing data dari parent ke child
+- `$emit` untuk komunikasi child ke parent
+
+---
+
+## Notes untuk AI
+- Gunakan Vue 2 CDN, bukan Vue 3 atau Vue CLI
+- Tidak ada backend, semua data dari dataBahanAjar.json yang di-fetch via api.js
+- Semua component harus didaftarkan sebelum `new Vue({...})` di app.js
+- Template id harus konsisten: tpl-stock, tpl-tracking, tpl-order, tpl-badge, tpl-modal
+- Dependent filter: filter Kategori hanya muncul setelah filter UT-Daerah dipilih
+- Filter list WAJIB pakai computed, bukan methods
+- Minimal 2 watcher berbeda
+- Generate nomor DO format: DO{YYYY}-{SEQ padded 3 digit}

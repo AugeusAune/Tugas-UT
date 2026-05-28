@@ -1,0 +1,57 @@
+<div class="main" style="max-width:700px;margin:1.5rem auto;padding:0 1.5rem">
+  <div class="track-card" style="background:white;border:1px solid #e2e8f0;border-radius:14px;padding:2rem">
+    <h3 style="margin-top:0;color:#1e3a8a;font-size:1.2rem">Form Pemesanan Baru</h3>
+    <p style="font-size:0.8rem;color:#94a3b8;margin:0.5rem 0 1.5rem">Isi data berikut untuk membuat Delivery Order baru</p>
+
+    <div class="info-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem">
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Nomor DO</label>
+        <input class="f-field" style="width:100%;background:#f1f5f9" :value="autoDO" disabled />
+      </div>
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Tanggal Kirim</label>
+        <input v-model="form.tanggalKirim" class="f-field" style="width:100%" type="date" />
+      </div>
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">NIM</label>
+        <input v-model="form.nim" class="f-field" style="width:100%" placeholder="Masukkan NIM" @keyup.enter="submitOrder" />
+      </div>
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Nama Lengkap</label>
+        <input v-model="form.nama" class="f-field" style="width:100%" placeholder="Masukkan Nama" @keyup.enter="submitOrder" />
+      </div>
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Ekspedisi</label>
+        <select v-model="form.ekspedisi" class="f-field" style="width:100%">
+          <option value="">Pilih Ekspedisi</option>
+          <option v-for="e in ekspedisi" :value="e.nama">{{ e.nama }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">Paket Bahan Ajar</label>
+        <select v-model="form.paketKode" class="f-field" style="width:100%">
+          <option value="">Pilih Paket</option>
+          <option v-for="p in paket" :value="p.kode">{{ p.kode }} - {{ p.nama }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div v-if="selectedPacket" style="background:#f1f5f9;padding:1.25rem;border-radius:12px;margin-top:1.5rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem">
+        <div class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">ISI PAKET</div>
+        <div class="i-lb" style="font-size:0.62rem;font-weight:700;color:#94a3b8;text-transform:uppercase">HARGA</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <ul style="margin:0;padding-left:1.2rem;font-size:0.75rem;font-weight:600;color:#475569">
+          <li v-for="mk in selectedPacket.isi">{{ mk }}</li>
+        </ul>
+        <div style="font-size:1.25rem;font-weight:900;color:#2563eb;text-align:right">{{ selectedPacket.harga | currency }}</div>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem;display:flex;justify-content:flex-end;gap:0.75rem">
+      <button @click="resetForm" style="background:none;border:1px solid #e2e8f0;color:#64748b;padding:0.45rem 1.25rem;border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer">Reset</button>
+      <button @click="submitOrder" style="background:#16a34a;color:white;border:none;padding:0.45rem 1.5rem;border-radius:8px;font-weight:700;font-size:0.8rem;cursor:pointer">Buat Pemesanan</button>
+    </div>
+  </div>
+</div>
