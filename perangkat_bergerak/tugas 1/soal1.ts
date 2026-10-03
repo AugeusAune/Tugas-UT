@@ -11,40 +11,27 @@
  * @returns Array of strings representing each line of the triangle
  */
 export const generateTrianglePattern = (nim: string): string[] => {
-  if (!nim || typeof nim !== 'string') {
-    throw new Error('NIM must be a non-empty string.');
+  const cleanNim = nim?.trim();
+  if (!cleanNim || !/^\d+$/.test(cleanNim)) {
+    throw new Error('NIM must be a non-empty numeric string.');
   }
 
-  const cleanNim = nim.trim();
-  if (!/^\d+$/.test(cleanNim)) {
-    throw new Error('NIM must contain only numeric digits.');
-  }
-
-  const lastChar = cleanNim.slice(-1);
-  const height = Number.parseInt(lastChar, 10);
-
+  const height = Number.parseInt(cleanNim.slice(-1), 10);
   if (height <= 0) {
     throw new Error(`The last digit of NIM is '${height}'. Height must be greater than zero.`);
   }
 
-  const rows: string[] = [];
-  for (let currentRow = 1; currentRow <= height; currentRow++) {
-    const rowNumbers: number[] = [];
-    for (let currentNumber = 1; currentNumber <= currentRow; currentNumber++) {
-      rowNumbers.push(currentNumber);
-    }
-    rows.push(rowNumbers.join(' '));
-  }
-
-  return rows;
+  return Array.from({ length: height }, (_, rowIndex) =>
+    Array.from({ length: rowIndex + 1 }, (_, colIndex) => colIndex + 1).join(' ')
+  );
 };
 
 /**
  * Executes and prints the output for Question 1.
  *
- * @param nim - Student Identification Number (default: '230411013')
+ * @param nim - Student Identification Number
  */
-export const runSoal1 = (nim: string = '230411013'): void => {
+export const runSoal1 = (nim: string): void => {
   try {
     const rows = generateTrianglePattern(nim);
     const height = nim.trim().slice(-1);
@@ -53,10 +40,10 @@ export const runSoal1 = (nim: string = '230411013'): void => {
     console.log(`NIM            : ${nim}`);
     console.log(`Tinggi Segitiga: ${height}`);
     console.log('Pola:');
-    for (const row of rows) {
+    rows.forEach((row) => {
       console.log(row);
       console.log();
-    }
+    });
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown error';
     console.error(`[Soal 1 Error]: ${message}`);

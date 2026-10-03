@@ -11,19 +11,23 @@ export interface PrimeSearchResult {
 }
 
 /**
- * Checks if a number is a prime number.
+ * Checks if an integer is a prime number.
  *
  * @param value - Candidate number to evaluate
  * @returns boolean indicating whether value is prime
  */
 export const isPrime = (value: number): boolean => {
-  // Bilangan prima hanya berlaku untuk integer >= 2 (NaN dan Infinity ikut tertolak)
   if (!Number.isInteger(value) || value < 2) {
     return false;
   }
+  if (value === 2) {
+    return true;
+  }
+  if (value % 2 === 0) {
+    return false;
+  }
 
-  // Cukup cek pembagi sampai akar kuadrat value
-  for (let divisor = 2; divisor * divisor <= value; divisor++) {
+  for (let divisor = 3; divisor * divisor <= value; divisor += 2) {
     if (value % divisor === 0) {
       return false;
     }
@@ -39,13 +43,9 @@ export const isPrime = (value: number): boolean => {
  * @returns PrimeSearchResult containing boundary and list of primes
  */
 export const findPrimesFromNim = (nim: string): PrimeSearchResult => {
-  if (!nim || typeof nim !== 'string') {
-    throw new Error('NIM must be a non-empty string.');
-  }
-
-  const cleanNim = nim.trim();
-  if (!/^\d+$/.test(cleanNim)) {
-    throw new Error('NIM must contain only numeric digits.');
+  const cleanNim = nim?.trim();
+  if (!cleanNim || !/^\d+$/.test(cleanNim)) {
+    throw new Error('NIM must be a non-empty numeric string.');
   }
 
   if (cleanNim.length < 2) {
@@ -56,18 +56,12 @@ export const findPrimesFromNim = (nim: string): PrimeSearchResult => {
   const lastTwoDigits = Number.parseInt(cleanNim.slice(-2), 10);
   const upperLimit = lastTwoDigits + OFFSET;
 
-  const primes: number[] = [];
-  for (let candidate = 1; candidate <= upperLimit; candidate++) {
-    if (isPrime(candidate)) {
-      primes.push(candidate);
-    }
-  }
+  const primes = Array.from(
+    { length: upperLimit },
+    (_, index) => index + 1
+  ).filter(isPrime);
 
-  return {
-    lastTwoDigits,
-    upperLimit,
-    primes,
-  };
+  return { lastTwoDigits, upperLimit, primes };
 };
 
 /**
@@ -75,7 +69,7 @@ export const findPrimesFromNim = (nim: string): PrimeSearchResult => {
  *
  * @param nim - Student Identification Number (default: '230411013')
  */
-export const runSoal3 = (nim: string = '230411013'): void => {
+export const runSoal3 = (nim = '230411013'): void => {
   try {
     const result = findPrimesFromNim(nim);
 
