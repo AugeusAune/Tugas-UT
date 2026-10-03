@@ -1,0 +1,1334 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dineug/erd-editor/main/json-schema/schema.json",
+  "version": "3.0.0",
+  "settings": {
+    "width": 2500,
+    "height": 2000,
+    "scrollTop": 0,
+    "scrollLeft": 0,
+    "originX": 152.2647,
+    "originY": 128.372,
+    "zoomLevel": 0.82,
+    "show": 431,
+    "database": 4,
+    "databaseName": "rumah_sakit_db",
+    "canvasType": "ERD",
+    "language": 1,
+    "tableNameCase": 4,
+    "columnNameCase": 2,
+    "bracketType": 1,
+    "relationshipDataTypeSync": true,
+    "relationshipOptimization": false,
+    "columnOrder": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "maxWidthComment": -1,
+    "ignoreSaveSettings": 0
+  },
+  "doc": {
+    "tableIds": [
+      "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+      "77d1b498-d130-46c0-9930-5300d7932043",
+      "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+      "32d44bea-a521-49a9-ab7b-8c914fc63208",
+      "5a49d256-00be-4c2f-a9d2-425070abd629",
+      "f64f9446-077d-4662-a1eb-813d01d07847",
+      "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+      "a0d53687-21c7-4bbd-ba7d-5ad25b180752"
+    ],
+    "relationshipIds": [
+      "3c7abf3d-67a8-44fb-a19d-293d65bf137a",
+      "ca7a825d-ca6a-4201-afbf-2fcc1a0fc926",
+      "4cbaf738-694a-48f8-89ea-599703e836b8",
+      "5b33de4d-c2d5-4367-90cd-68f8aeba0db4",
+      "d3174045-02b2-4734-ae3a-c4c0dae645cb",
+      "b6a69d86-2296-4443-8062-4b273c224e5d",
+      "d6189ee0-497b-4c86-96b6-45d17b8c2fc0"
+    ],
+    "indexIds": [],
+    "memoIds": []
+  },
+  "collections": {
+    "tableEntities": {
+      "c46c9f06-ce71-488b-bc7d-8f0da5902690": {
+        "id": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "pasien",
+        "comment": "",
+        "columnIds": [
+          "09b4dcf5-93fc-48d1-a55c-4f7e8f3601a3",
+          "cb24fa44-daf0-4403-9dc1-2e514678c6be",
+          "78534cec-13d3-412c-b111-69a2ee35acea",
+          "9e2cd6d1-7602-469f-a73b-758768209f2a",
+          "8db76c68-b69a-4232-9729-41a3bd4955cd",
+          "3325e0e3-de9c-4141-b5a8-57128b1e3dff",
+          "7e55b745-0bff-476b-b85c-cdaef5a78b03"
+        ],
+        "seqColumnIds": [
+          "09b4dcf5-93fc-48d1-a55c-4f7e8f3601a3",
+          "cb24fa44-daf0-4403-9dc1-2e514678c6be",
+          "78534cec-13d3-412c-b111-69a2ee35acea",
+          "9e2cd6d1-7602-469f-a73b-758768209f2a",
+          "8db76c68-b69a-4232-9729-41a3bd4955cd",
+          "3325e0e3-de9c-4141-b5a8-57128b1e3dff",
+          "7e55b745-0bff-476b-b85c-cdaef5a78b03"
+        ],
+        "ui": {
+          "x": 26,
+          "y": 26,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994234900,
+          "createAt": 1790994216044
+        }
+      },
+      "77d1b498-d130-46c0-9930-5300d7932043": {
+        "id": "77d1b498-d130-46c0-9930-5300d7932043",
+        "name": "petugas_administrasi",
+        "comment": "",
+        "columnIds": [
+          "af3ae8a5-7008-49f6-b4cf-2b4ec27fd64a",
+          "406222aa-8ce2-4478-bcd6-a572b7887dfd",
+          "e548e633-f44d-42a4-8ea6-9ab04b78ac2b"
+        ],
+        "seqColumnIds": [
+          "af3ae8a5-7008-49f6-b4cf-2b4ec27fd64a",
+          "406222aa-8ce2-4478-bcd6-a572b7887dfd",
+          "e548e633-f44d-42a4-8ea6-9ab04b78ac2b"
+        ],
+        "ui": {
+          "x": 8,
+          "y": 589,
+          "zIndex": 1,
+          "widthName": 116,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994225432,
+          "createAt": 1790994216044
+        }
+      },
+      "077560b5-33d2-4a0a-ac0a-c957fbfda03f": {
+        "id": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "pendaftaran",
+        "comment": "",
+        "columnIds": [
+          "71f7e175-faa3-4f89-9af3-cba915c415de",
+          "a253dc77-3377-45c4-8161-edf400319285",
+          "a7553b6d-43a0-4cc3-bdc6-c20c168c0965",
+          "9487a78c-1d2f-4a95-9aa8-53258f7dace9",
+          "98daa7d4-6a76-4ce8-b8b2-c09ec8387ea6"
+        ],
+        "seqColumnIds": [
+          "71f7e175-faa3-4f89-9af3-cba915c415de",
+          "a253dc77-3377-45c4-8161-edf400319285",
+          "a7553b6d-43a0-4cc3-bdc6-c20c168c0965",
+          "9487a78c-1d2f-4a95-9aa8-53258f7dace9",
+          "98daa7d4-6a76-4ce8-b8b2-c09ec8387ea6"
+        ],
+        "ui": {
+          "x": 291,
+          "y": 328,
+          "zIndex": 1,
+          "widthName": 69,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994264397,
+          "createAt": 1790994216044
+        }
+      },
+      "32d44bea-a521-49a9-ab7b-8c914fc63208": {
+        "id": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "dokter",
+        "comment": "",
+        "columnIds": [
+          "42bcb7e0-4fc9-4cdb-86fa-787e5f9fe330",
+          "b4660df6-fd28-4f95-a693-3a78bd6ce142",
+          "587b75bd-7c5f-451a-ba59-3a916ffd878c",
+          "4a8a0812-f0e8-41d2-80f5-87c85d37180b",
+          "116cfa63-1d24-4a61-85e8-0e6b961af32a"
+        ],
+        "seqColumnIds": [
+          "42bcb7e0-4fc9-4cdb-86fa-787e5f9fe330",
+          "b4660df6-fd28-4f95-a693-3a78bd6ce142",
+          "587b75bd-7c5f-451a-ba59-3a916ffd878c",
+          "4a8a0812-f0e8-41d2-80f5-87c85d37180b",
+          "116cfa63-1d24-4a61-85e8-0e6b961af32a"
+        ],
+        "ui": {
+          "x": 682,
+          "y": 45,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994256972,
+          "createAt": 1790994216044
+        }
+      },
+      "5a49d256-00be-4c2f-a9d2-425070abd629": {
+        "id": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "pemeriksaan",
+        "comment": "",
+        "columnIds": [
+          "c36cb5a5-558c-43c1-ae8f-e1b3944b4294",
+          "ea5069ef-c9b4-416b-bac1-68069f1d95d9",
+          "488216d2-56fa-4aef-b6d1-f1bbf4f3caeb",
+          "cea57a7c-f506-444d-9740-06b6279d2e80",
+          "0fd01515-b52e-44d7-ba12-2ff0c6bb4695",
+          "76c7cf78-a74c-4ec0-901b-417a56eac889",
+          "31139270-846c-4392-bf0f-771cddd32be6"
+        ],
+        "seqColumnIds": [
+          "c36cb5a5-558c-43c1-ae8f-e1b3944b4294",
+          "ea5069ef-c9b4-416b-bac1-68069f1d95d9",
+          "488216d2-56fa-4aef-b6d1-f1bbf4f3caeb",
+          "cea57a7c-f506-444d-9740-06b6279d2e80",
+          "0fd01515-b52e-44d7-ba12-2ff0c6bb4695",
+          "76c7cf78-a74c-4ec0-901b-417a56eac889",
+          "31139270-846c-4392-bf0f-771cddd32be6"
+        ],
+        "ui": {
+          "x": 670,
+          "y": 654,
+          "zIndex": 1,
+          "widthName": 71,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994254067,
+          "createAt": 1790994216044
+        }
+      },
+      "f64f9446-077d-4662-a1eb-813d01d07847": {
+        "id": "f64f9446-077d-4662-a1eb-813d01d07847",
+        "name": "resep",
+        "comment": "",
+        "columnIds": [
+          "d4d68997-f45e-4c3f-811c-4630806730ee",
+          "62484a60-5a17-4d5f-bdef-894a65bc4fb6",
+          "db4a73a4-1b1d-4223-a58b-a7f5e5dee950",
+          "502ae0bc-e16d-4aa9-9784-18032c56ec1e"
+        ],
+        "seqColumnIds": [
+          "d4d68997-f45e-4c3f-811c-4630806730ee",
+          "62484a60-5a17-4d5f-bdef-894a65bc4fb6",
+          "db4a73a4-1b1d-4223-a58b-a7f5e5dee950",
+          "502ae0bc-e16d-4aa9-9784-18032c56ec1e"
+        ],
+        "ui": {
+          "x": 1121.9574,
+          "y": 284.6603,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994429786,
+          "createAt": 1790994216044
+        }
+      },
+      "f6b96a58-bcb6-45da-903c-dc36a5c9d51a": {
+        "id": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "obat",
+        "comment": "",
+        "columnIds": [
+          "a09cb18b-98f0-47b9-aeb4-ef3633d44c34",
+          "37088699-2883-4123-bd69-1e4b6bd179b8",
+          "c7918de3-f36a-4a98-8b5a-db9e8f6aa673",
+          "8d77951e-c870-4714-836a-105d6064f701",
+          "80a1f392-e5ff-4fb0-8024-f8697c95026a"
+        ],
+        "seqColumnIds": [
+          "a09cb18b-98f0-47b9-aeb4-ef3633d44c34",
+          "37088699-2883-4123-bd69-1e4b6bd179b8",
+          "c7918de3-f36a-4a98-8b5a-db9e8f6aa673",
+          "8d77951e-c870-4714-836a-105d6064f701",
+          "80a1f392-e5ff-4fb0-8024-f8697c95026a"
+        ],
+        "ui": {
+          "x": 1650,
+          "y": 50,
+          "zIndex": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "a0d53687-21c7-4bbd-ba7d-5ad25b180752": {
+        "id": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "detail_resep",
+        "comment": "",
+        "columnIds": [
+          "bf85e4f9-e1e7-47d7-be24-c38cab7770d1",
+          "034b1a26-cd6e-4c0b-b1f0-c6fbdc379d3a",
+          "2739537f-a9e8-436a-9848-79892095c1c5",
+          "a57e3041-217b-4952-8b07-93b30510cec1",
+          "5a5c8536-862a-4e4f-936d-6a2e355c6590"
+        ],
+        "seqColumnIds": [
+          "bf85e4f9-e1e7-47d7-be24-c38cab7770d1",
+          "034b1a26-cd6e-4c0b-b1f0-c6fbdc379d3a",
+          "2739537f-a9e8-436a-9848-79892095c1c5",
+          "a57e3041-217b-4952-8b07-93b30510cec1",
+          "5a5c8536-862a-4e4f-936d-6a2e355c6590"
+        ],
+        "ui": {
+          "x": 1640.4255,
+          "y": 513.8298,
+          "zIndex": 1,
+          "widthName": 68,
+          "widthComment": 60,
+          "color": ""
+        },
+        "meta": {
+          "updateAt": 1790994414831,
+          "createAt": 1790994216045
+        }
+      }
+    },
+    "tableColumnEntities": {
+      "09b4dcf5-93fc-48d1-a55c-4f7e8f3601a3": {
+        "id": "09b4dcf5-93fc-48d1-a55c-4f7e8f3601a3",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "id_pasien",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "cb24fa44-daf0-4403-9dc1-2e514678c6be": {
+        "id": "cb24fa44-daf0-4403-9dc1-2e514678c6be",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "nik",
+        "comment": "",
+        "dataType": "VARCHAR(16)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "78534cec-13d3-412c-b111-69a2ee35acea": {
+        "id": "78534cec-13d3-412c-b111-69a2ee35acea",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "nama_pasien",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 72,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "9e2cd6d1-7602-469f-a73b-758768209f2a": {
+        "id": "9e2cd6d1-7602-469f-a73b-758768209f2a",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "tanggal_lahir",
+        "comment": "",
+        "dataType": "DATE",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 72,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "8db76c68-b69a-4232-9729-41a3bd4955cd": {
+        "id": "8db76c68-b69a-4232-9729-41a3bd4955cd",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "jenis_kelamin",
+        "comment": "",
+        "dataType": "VARCHAR(1)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 74,
+          "widthComment": 60,
+          "widthDataType": 70,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "3325e0e3-de9c-4141-b5a8-57128b1e3dff": {
+        "id": "3325e0e3-de9c-4141-b5a8-57128b1e3dff",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "alamat",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "7e55b745-0bff-476b-b85c-cdaef5a78b03": {
+        "id": "7e55b745-0bff-476b-b85c-cdaef5a78b03",
+        "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+        "name": "no_telepon",
+        "comment": "",
+        "dataType": "VARCHAR(20)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 64,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "af3ae8a5-7008-49f6-b4cf-2b4ec27fd64a": {
+        "id": "af3ae8a5-7008-49f6-b4cf-2b4ec27fd64a",
+        "tableId": "77d1b498-d130-46c0-9930-5300d7932043",
+        "name": "id_petugas",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "406222aa-8ce2-4478-bcd6-a572b7887dfd": {
+        "id": "406222aa-8ce2-4478-bcd6-a572b7887dfd",
+        "tableId": "77d1b498-d130-46c0-9930-5300d7932043",
+        "name": "nama_petugas",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 81,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "e548e633-f44d-42a4-8ea6-9ab04b78ac2b": {
+        "id": "e548e633-f44d-42a4-8ea6-9ab04b78ac2b",
+        "tableId": "77d1b498-d130-46c0-9930-5300d7932043",
+        "name": "shift",
+        "comment": "",
+        "dataType": "VARCHAR(20)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "71f7e175-faa3-4f89-9af3-cba915c415de": {
+        "id": "71f7e175-faa3-4f89-9af3-cba915c415de",
+        "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "id_pendaftaran",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "a253dc77-3377-45c4-8161-edf400319285": {
+        "id": "a253dc77-3377-45c4-8161-edf400319285",
+        "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "id_pasien",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "a7553b6d-43a0-4cc3-bdc6-c20c168c0965": {
+        "id": "a7553b6d-43a0-4cc3-bdc6-c20c168c0965",
+        "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "id_petugas",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "9487a78c-1d2f-4a95-9aa8-53258f7dace9": {
+        "id": "9487a78c-1d2f-4a95-9aa8-53258f7dace9",
+        "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "tanggal_daftar",
+        "comment": "",
+        "dataType": "DATETIME",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 82,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "98daa7d4-6a76-4ce8-b8b2-c09ec8387ea6": {
+        "id": "98daa7d4-6a76-4ce8-b8b2-c09ec8387ea6",
+        "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+        "name": "keluhan_awal",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 75,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "42bcb7e0-4fc9-4cdb-86fa-787e5f9fe330": {
+        "id": "42bcb7e0-4fc9-4cdb-86fa-787e5f9fe330",
+        "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "id_dokter",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "b4660df6-fd28-4f95-a693-3a78bd6ce142": {
+        "id": "b4660df6-fd28-4f95-a693-3a78bd6ce142",
+        "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "nama_dokter",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 73,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "587b75bd-7c5f-451a-ba59-3a916ffd878c": {
+        "id": "587b75bd-7c5f-451a-ba59-3a916ffd878c",
+        "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "spesialisasi",
+        "comment": "",
+        "dataType": "VARCHAR(50)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 61,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "4a8a0812-f0e8-41d2-80f5-87c85d37180b": {
+        "id": "4a8a0812-f0e8-41d2-80f5-87c85d37180b",
+        "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "no_telepon",
+        "comment": "",
+        "dataType": "VARCHAR(20)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 64,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "116cfa63-1d24-4a61-85e8-0e6b961af32a": {
+        "id": "116cfa63-1d24-4a61-85e8-0e6b961af32a",
+        "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+        "name": "jadwal_praktek",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 84,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "c36cb5a5-558c-43c1-ae8f-e1b3944b4294": {
+        "id": "c36cb5a5-558c-43c1-ae8f-e1b3944b4294",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "id_pemeriksaan",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 86,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "ea5069ef-c9b4-416b-bac1-68069f1d95d9": {
+        "id": "ea5069ef-c9b4-416b-bac1-68069f1d95d9",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "id_pendaftaran",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 85,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "488216d2-56fa-4aef-b6d1-f1bbf4f3caeb": {
+        "id": "488216d2-56fa-4aef-b6d1-f1bbf4f3caeb",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "id_dokter",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "cea57a7c-f506-444d-9740-06b6279d2e80": {
+        "id": "cea57a7c-f506-444d-9740-06b6279d2e80",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "tanggal_pemeriksaan",
+        "comment": "",
+        "dataType": "DATETIME",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 117,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "0fd01515-b52e-44d7-ba12-2ff0c6bb4695": {
+        "id": "0fd01515-b52e-44d7-ba12-2ff0c6bb4695",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "diagnosa",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "76c7cf78-a74c-4ec0-901b-417a56eac889": {
+        "id": "76c7cf78-a74c-4ec0-901b-417a56eac889",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "tindakan",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "31139270-846c-4392-bf0f-771cddd32be6": {
+        "id": "31139270-846c-4392-bf0f-771cddd32be6",
+        "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+        "name": "catatan_dokter",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 84,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "d4d68997-f45e-4c3f-811c-4630806730ee": {
+        "id": "d4d68997-f45e-4c3f-811c-4630806730ee",
+        "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+        "name": "id_resep",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "62484a60-5a17-4d5f-bdef-894a65bc4fb6": {
+        "id": "62484a60-5a17-4d5f-bdef-894a65bc4fb6",
+        "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+        "name": "id_pemeriksaan",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 86,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "db4a73a4-1b1d-4223-a58b-a7f5e5dee950": {
+        "id": "db4a73a4-1b1d-4223-a58b-a7f5e5dee950",
+        "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+        "name": "tanggal_resep",
+        "comment": "",
+        "dataType": "DATETIME",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 79,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "502ae0bc-e16d-4aa9-9784-18032c56ec1e": {
+        "id": "502ae0bc-e16d-4aa9-9784-18032c56ec1e",
+        "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+        "name": "catatan_resep",
+        "comment": "",
+        "dataType": "TEXT",
+        "default": "",
+        "options": 0,
+        "ui": {
+          "keys": 0,
+          "widthName": 78,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216044,
+          "createAt": 1790994216044
+        }
+      },
+      "a09cb18b-98f0-47b9-aeb4-ef3633d44c34": {
+        "id": "a09cb18b-98f0-47b9-aeb4-ef3633d44c34",
+        "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "id_obat",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 14,
+        "ui": {
+          "keys": 1,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "37088699-2883-4123-bd69-1e4b6bd179b8": {
+        "id": "37088699-2883-4123-bd69-1e4b6bd179b8",
+        "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "nama_obat",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 62,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "c7918de3-f36a-4a98-8b5a-db9e8f6aa673": {
+        "id": "c7918de3-f36a-4a98-8b5a-db9e8f6aa673",
+        "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "jenis_obat",
+        "comment": "",
+        "dataType": "VARCHAR(50)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "8d77951e-c870-4714-836a-105d6064f701": {
+        "id": "8d77951e-c870-4714-836a-105d6064f701",
+        "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "stok",
+        "comment": "",
+        "dataType": "INT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "80a1f392-e5ff-4fb0-8024-f8697c95026a": {
+        "id": "80a1f392-e5ff-4fb0-8024-f8697c95026a",
+        "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+        "name": "harga",
+        "comment": "",
+        "dataType": "DECIMAL(12,2)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "bf85e4f9-e1e7-47d7-be24-c38cab7770d1": {
+        "id": "bf85e4f9-e1e7-47d7-be24-c38cab7770d1",
+        "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "id_detail_resep",
+        "comment": "",
+        "dataType": "INT",
+        "default": "",
+        "options": 15,
+        "ui": {
+          "keys": 1,
+          "widthName": 84,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "034b1a26-cd6e-4c0b-b1f0-c6fbdc379d3a": {
+        "id": "034b1a26-cd6e-4c0b-b1f0-c6fbdc379d3a",
+        "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "id_resep",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "2739537f-a9e8-436a-9848-79892095c1c5": {
+        "id": "2739537f-a9e8-436a-9848-79892095c1c5",
+        "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "id_obat",
+        "comment": "",
+        "dataType": "VARCHAR(10)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 2,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 76,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "a57e3041-217b-4952-8b07-93b30510cec1": {
+        "id": "a57e3041-217b-4952-8b07-93b30510cec1",
+        "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "jumlah",
+        "comment": "",
+        "dataType": "INT",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 60,
+          "widthComment": 60,
+          "widthDataType": 60,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "5a5c8536-862a-4e4f-936d-6a2e355c6590": {
+        "id": "5a5c8536-862a-4e4f-936d-6a2e355c6590",
+        "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+        "name": "aturan_pakai",
+        "comment": "",
+        "dataType": "VARCHAR(100)",
+        "default": "",
+        "options": 8,
+        "ui": {
+          "keys": 0,
+          "widthName": 72,
+          "widthComment": 60,
+          "widthDataType": 83,
+          "widthDefault": 60
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      }
+    },
+    "relationshipEntities": {
+      "3c7abf3d-67a8-44fb-a19d-293d65bf137a": {
+        "id": "3c7abf3d-67a8-44fb-a19d-293d65bf137a",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "c46c9f06-ce71-488b-bc7d-8f0da5902690",
+          "columnIds": [
+            "09b4dcf5-93fc-48d1-a55c-4f7e8f3601a3"
+          ],
+          "x": 227,
+          "y": 224,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+          "columnIds": [
+            "a253dc77-3377-45c4-8161-edf400319285"
+          ],
+          "x": 291,
+          "y": 403,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "ca7a825d-ca6a-4201-afbf-2fcc1a0fc926": {
+        "id": "ca7a825d-ca6a-4201-afbf-2fcc1a0fc926",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "77d1b498-d130-46c0-9930-5300d7932043",
+          "columnIds": [
+            "af3ae8a5-7008-49f6-b4cf-2b4ec27fd64a"
+          ],
+          "x": 417,
+          "y": 640,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+          "columnIds": [
+            "a7553b6d-43a0-4cc3-bdc6-c20c168c0965"
+          ],
+          "x": 494,
+          "y": 478,
+          "direction": 8
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "4cbaf738-694a-48f8-89ea-599703e836b8": {
+        "id": "4cbaf738-694a-48f8-89ea-599703e836b8",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "077560b5-33d2-4a0a-ac0a-c957fbfda03f",
+          "columnIds": [
+            "71f7e175-faa3-4f89-9af3-cba915c415de"
+          ],
+          "x": 697,
+          "y": 403,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+          "columnIds": [
+            "ea5069ef-c9b4-416b-bac1-68069f1d95d9"
+          ],
+          "x": 769,
+          "y": 654,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "5b33de4d-c2d5-4367-90cd-68f8aeba0db4": {
+        "id": "5b33de4d-c2d5-4367-90cd-68f8aeba0db4",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "32d44bea-a521-49a9-ab7b-8c914fc63208",
+          "columnIds": [
+            "42bcb7e0-4fc9-4cdb-86fa-787e5f9fe330"
+          ],
+          "x": 888,
+          "y": 195,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+          "columnIds": [
+            "488216d2-56fa-4aef-b6d1-f1bbf4f3caeb"
+          ],
+          "x": 889,
+          "y": 654,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "d3174045-02b2-4734-ae3a-c4c0dae645cb": {
+        "id": "d3174045-02b2-4734-ae3a-c4c0dae645cb",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "5a49d256-00be-4c2f-a9d2-425070abd629",
+          "columnIds": [
+            "c36cb5a5-558c-43c1-ae8f-e1b3944b4294"
+          ],
+          "x": 1009,
+          "y": 654,
+          "direction": 4
+        },
+        "end": {
+          "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+          "columnIds": [
+            "62484a60-5a17-4d5f-bdef-894a65bc4fb6"
+          ],
+          "x": 1121.9574,
+          "y": 347.6603,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "b6a69d86-2296-4443-8062-4b273c224e5d": {
+        "id": "b6a69d86-2296-4443-8062-4b273c224e5d",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "f64f9446-077d-4662-a1eb-813d01d07847",
+          "columnIds": [
+            "d4d68997-f45e-4c3f-811c-4630806730ee"
+          ],
+          "x": 1528.9574,
+          "y": 347.6603,
+          "direction": 2
+        },
+        "end": {
+          "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+          "columnIds": [
+            "034b1a26-cd6e-4c0b-b1f0-c6fbdc379d3a"
+          ],
+          "x": 1640.4255,
+          "y": 588.8298,
+          "direction": 1
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      },
+      "d6189ee0-497b-4c86-96b6-45d17b8c2fc0": {
+        "id": "d6189ee0-497b-4c86-96b6-45d17b8c2fc0",
+        "identification": false,
+        "relationshipType": 16,
+        "startRelationshipType": 2,
+        "start": {
+          "tableId": "f6b96a58-bcb6-45da-903c-dc36a5c9d51a",
+          "columnIds": [
+            "a09cb18b-98f0-47b9-aeb4-ef3633d44c34"
+          ],
+          "x": 1845,
+          "y": 200,
+          "direction": 8
+        },
+        "end": {
+          "tableId": "a0d53687-21c7-4bbd-ba7d-5ad25b180752",
+          "columnIds": [
+            "2739537f-a9e8-436a-9848-79892095c1c5"
+          ],
+          "x": 1846.4255000000003,
+          "y": 513.8298,
+          "direction": 4
+        },
+        "meta": {
+          "updateAt": 1790994216045,
+          "createAt": 1790994216045
+        }
+      }
+    },
+    "indexEntities": {},
+    "indexColumnEntities": {},
+    "memoEntities": {}
+  }
+}
