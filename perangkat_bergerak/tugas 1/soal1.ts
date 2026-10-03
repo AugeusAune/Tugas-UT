@@ -18,11 +18,15 @@ export const generateTrianglePattern = (nim: string): string[] => {
 
   const height = Number.parseInt(cleanNim.slice(-1), 10);
   if (height <= 0) {
-    throw new Error(`The last digit of NIM is '${height}'. Height must be greater than zero.`);
+    throw new Error(
+      `The last digit of NIM is '${height}'. Height must be greater than zero.`,
+    );
   }
 
   return Array.from({ length: height }, (_, rowIndex) =>
-    Array.from({ length: rowIndex + 1 }, (_, colIndex) => colIndex + 1).join(' ')
+    Array.from({ length: rowIndex + 1 }, (_, colIndex) => colIndex + 1).join(
+      ' ',
+    ),
   );
 };
 
