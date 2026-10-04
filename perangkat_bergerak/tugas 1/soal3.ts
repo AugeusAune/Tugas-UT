@@ -58,9 +58,8 @@ export const findPrimesFromNim = (nim: string): PrimeSearchResult => {
 
   const primes: number[] = [];
   for (let candidate = 1; candidate <= upperLimit; candidate++) {
-    if (isPrime(candidate)) {
-      primes.push(candidate);
-    }
+    if (!isPrime(candidate)) continue;
+    primes.push(candidate);
   }
 
   return {

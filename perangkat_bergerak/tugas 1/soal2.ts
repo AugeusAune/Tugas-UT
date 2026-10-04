@@ -52,7 +52,7 @@ export const generateArithmeticSeries = (
   const rawStepDigit = Number.parseInt(cleanNim.charAt(cleanNim.length - 3), 10);
 
   // If 3rd digit from end is 0, add 1 as specified in problem example (0 + 1 = 1 step)
-  const effectiveStep = rawStepDigit === 0 ? rawStepDigit + 1 : rawStepDigit;
+  const effectiveStep = rawStepDigit + 1;
 
   const series: number[] = [];
   for (let index = 0; index < totalTerms; index++) {

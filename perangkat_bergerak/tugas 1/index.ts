@@ -34,6 +34,6 @@ const main = (): void => {
   // Run Question 3
   runSoal3(nimToUse);
   console.log('\n====================================================');
-};
+};;;
 
 main();
