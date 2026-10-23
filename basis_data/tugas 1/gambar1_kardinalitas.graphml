@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:y="http://www.yworks.com/xml/graphml" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://www.yworks.com/xml/schema/graphml/1.1/ygraphml.xsd">
+  <key for="graphml" id="d0" yfiles.type="resources"/>
+  <key attr.name="url" attr.type="string" for="node" id="d1"/>
+  <key attr.name="description" attr.type="string" for="node" id="d2"/>
+  <key for="node" id="d3" yfiles.type="nodegraphics"/>
+  <key attr.name="url" attr.type="string" for="edge" id="d4"/>
+  <key attr.name="description" attr.type="string" for="edge" id="d5"/>
+  <key for="edge" id="d6" yfiles.type="edgegraphics"/>
+  <graph edgedefault="undirected" id="G">
+    <node id="petugas_administrasi">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="200" x="-100.0" y="-30.0"/>
+          <y:Fill color="#C9D6EA" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="bold" modelName="internal" modelPosition="c" textColor="#000000" visible="true">petugas_administrasi</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="pasien">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="200" x="600.0" y="-30.0"/>
+          <y:Fill color="#C9D6EA" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="bold" modelName="internal" modelPosition="c" textColor="#000000" visible="true">pasien</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="dokter">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="200" x="600.0" y="420.0"/>
+          <y:Fill color="#C9D6EA" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="bold" modelName="internal" modelPosition="c" textColor="#000000" visible="true">dokter</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="resep">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="200" x="600.0" y="870.0"/>
+          <y:Fill color="#C9D6EA" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="bold" modelName="internal" modelPosition="c" textColor="#000000" visible="true">resep</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="obat">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="60" width="200" x="1300.0" y="870.0"/>
+          <y:Fill color="#C9D6EA" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="bold" modelName="internal" modelPosition="c" textColor="#000000" visible="true">obat</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="rel.mendaftar">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="90" width="150" x="275.0" y="-45.0"/>
+          <y:Fill color="#E8EEF7" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="plain" modelName="internal" modelPosition="c" textColor="#000000" visible="true">mendaftar</y:NodeLabel>
+          <y:Shape type="diamond"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="rel.memeriksa">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="90" width="150" x="625.0" y="180.0"/>
+          <y:Fill color="#E8EEF7" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="plain" modelName="internal" modelPosition="c" textColor="#000000" visible="true">memeriksa</y:NodeLabel>
+          <y:Shape type="diamond"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="rel.membuat">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="90" width="150" x="625.0" y="630.0"/>
+          <y:Fill color="#E8EEF7" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="plain" modelName="internal" modelPosition="c" textColor="#000000" visible="true">membuat</y:NodeLabel>
+          <y:Shape type="diamond"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <node id="rel.berisi">
+      <data key="d3">
+        <y:ShapeNode>
+          <y:Geometry height="90" width="150" x="975.0" y="855.0"/>
+          <y:Fill color="#E8EEF7" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.5"/>
+          <y:NodeLabel alignment="center" fontFamily="Dialog" fontSize="13" fontStyle="plain" modelName="internal" modelPosition="c" textColor="#000000" visible="true">berisi</y:NodeLabel>
+          <y:Shape type="diamond"/>
+        </y:ShapeNode>
+      </data>
+    </node>
+    <edge id="r.mendaftar.a" source="pasien" target="rel.mendaftar">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.mendaftar.b" source="petugas_administrasi" target="rel.mendaftar">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.memeriksa.a" source="dokter" target="rel.memeriksa">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.memeriksa.b" source="pasien" target="rel.memeriksa">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.membuat.a" source="dokter" target="rel.membuat">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_one_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.membuat.b" source="resep" target="rel.membuat">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.berisi.a" source="resep" target="rel.berisi">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="r.berisi.b" source="obat" target="rel.berisi">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.5"/>
+          <y:Arrows source="crows_foot_many_mandatory" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+  </graph>
+</graphml>
