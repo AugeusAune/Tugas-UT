@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Tugas 2 - Basis Data (MSIM4206)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #1e293b;
+    background-color: #f1f5f9;
+    margin: 0;
+    padding: 24px;
+  }
+
+  .document-container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px 48px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 18pt;
+    text-align: center;
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .sub-title {
+    text-align: center;
+    font-weight: 600;
+    color: #475569;
+    font-size: 11pt;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  /* Identity Table */
+  .id-table {
+    width: auto;
+    min-width: 320px;
+    margin: 12px auto 24px auto;
+    border-collapse: collapse;
+    border: none;
+    background: #f8fafc;
+    padding: 10px 18px;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 1px #e2e8f0;
+  }
+  .id-table td {
+    border: none;
+    padding: 4px 10px;
+    font-size: 10pt;
+    background: transparent !important;
+  }
+  .id-label {
+    font-weight: 600;
+    color: #334155;
+    width: 140px;
+  }
+  .id-sep {
+    width: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #64748b;
+  }
+  .id-val {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  h2 {
+    font-size: 13pt;
+    color: #1e3a8a;
+    border-bottom: 1.5px solid #cbd5e1;
+    padding-bottom: 4px;
+    margin-top: 26px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 11pt;
+    color: #334155;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+
+  p, li {
+    text-align: justify;
+    margin: 6px 0;
+  }
+
+  /* General Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 12px 0 16px 0;
+    font-size: 9pt;
+    table-layout: fixed;
+    page-break-inside: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+
+  th, td {
+    border: 1px solid #cbd5e1;
+    padding: 6px 9px;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  th {
+    background-color: #f1f5f9;
+    color: #1e3a8a;
+    font-weight: 600;
+  }
+
+  tr:nth-child(even) td {
+    background-color: #fcfdfe;
+  }
+
+  /* Code blocks */
+  pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    overflow-x: auto;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace;
+    font-size: 8.5pt;
+    background-color: #f1f5f9;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #0f172a;
+  }
+
+  pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  /* Images */
+  figure.img-container {
+    text-align: center;
+    margin: 14px 0 18px 0;
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 95%;
+    max-height: 270px;
+    height: auto;
+    object-fit: contain;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    background-color: #ffffff;
+  }
+
+  img.wide-img {
+    max-width: 100%;
+    max-height: 310px;
+  }
+
+  figcaption.caption {
+    font-size: 8.5pt;
+    font-weight: 600;
+    color: #475569;
+    text-align: center;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  @media print {
+    body {
+      background-color: #ffffff;
+      padding: 0;
+      font-size: 9.5pt;
+    }
+    .document-container {
+      max-width: 100%;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+      border: 1px solid #cbd5e1;
+      font-size: 8pt;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="document-container">
+<h1>TUGAS 2 – BASIS DATA (MSIM4206)</h1>
+<p><strong>Implementasi ERD Rumah Sakit ke Basis Data MySQL/MariaDB pada XAMPP</strong></p>
+<table class="id-table">
+  <tr><td class="id-label">Nama Mahasiswa</td><td class="id-sep">:</td><td class="id-val">Farhan Aditya</td></tr>
+  <tr><td class="id-label">NIM</td><td class="id-sep">:</td><td class="id-val">054750333</td></tr>
+  <tr><td class="id-label">Program Studi</td><td class="id-sep">:</td><td class="id-val">Sistem Informasi</td></tr>
+</table>
+<h2>SOAL</h2>
+<p>Berdasarkan Entity Relationship Diagram (ERD) kasus rumah sakit, buatlah basis data MySQL/MariaDB pada XAMPP dengan tabel <strong>dokter, pasien, administrator, pasien_dokter, daftar, dan dokter_admin</strong>, lengkap dengan rincian atribut yang sesuai. Kegiatan praktik dilaporkan dalam rekaman video yang memuat: (a) perkenalan identitas mahasiswa, (b) langkah-langkah praktik beserta aktivitas mahasiswa, (c) hasil praktik, dan (d) kata penutup.</p>
+<figure class="img-container"><img class="wide-img" src="./assets/erd.png" alt="GAMBAR 1 – ERD Kasus Rumah Sakit" loading="lazy" /><figcaption class="caption">GAMBAR 1 – ERD Kasus Rumah Sakit</figcaption></figure>
+<h2>JAWAB</h2>
+<h2>A. Langkah-Langkah Praktik</h2>
+<h3>A.1 Analisis ERD</h3>
+<p>ERD pada soal terdiri dari enam entitas. Setiap entitas dibuat menjadi satu tabel, dan relasi antar entitas diwujudkan dengan <em>foreign key</em>.</p>
+<table class="table-entity">
+<colgroup><col style="width: 22%"><col style="width: 20%"><col style="width: 18%"><col style="width: 40%"></colgroup>
+<thead>
+<tr>
+<th>Tabel</th>
+<th>Atribut</th>
+<th>Tipe Data</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>administrator</td>
+<td>id_admin</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>nama_admin</td>
+<td>VARCHAR(30)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>waktu_jaga</td>
+<td>VARCHAR(100)</td>
+<td></td>
+</tr>
+<tr>
+<td>dokter</td>
+<td>id_dokter</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>nama_dokter</td>
+<td>VARCHAR(30)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>alamat_dokter</td>
+<td>VARCHAR(100)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>tanggal_lahir</td>
+<td>DATE</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>no_hp</td>
+<td>VARCHAR(15)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>spesialis</td>
+<td>VARCHAR(30)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>waktu_kerja</td>
+<td>VARCHAR(100)</td>
+<td></td>
+</tr>
+<tr>
+<td>pasien</td>
+<td>id_pasien</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>nama_pasien</td>
+<td>VARCHAR(30)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>alamat_pasien</td>
+<td>VARCHAR(100)</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>jenis_kelamin</td>
+<td>INT(1)</td>
+<td>1 = laki-laki, 2 = perempuan</td>
+</tr>
+<tr>
+<td>dokter_admin</td>
+<td>id_data</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>id_dokter</td>
+<td>INT(3)</td>
+<td>Foreign Key → dokter.id_dokter</td>
+</tr>
+<tr>
+<td></td>
+<td>id_admin</td>
+<td>INT(3)</td>
+<td>Foreign Key → administrator.id_admin</td>
+</tr>
+<tr>
+<td>pasien_dokter</td>
+<td>id</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>id_dokter</td>
+<td>INT(3)</td>
+<td>Foreign Key → dokter.id_dokter</td>
+</tr>
+<tr>
+<td></td>
+<td>id_pasien</td>
+<td>INT(3)</td>
+<td>Foreign Key → pasien.id_pasien</td>
+</tr>
+<tr>
+<td></td>
+<td>waktu_periksa</td>
+<td>DATE</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>resep</td>
+<td>VARCHAR(100)</td>
+<td></td>
+</tr>
+<tr>
+<td>daftar</td>
+<td>id_daftar</td>
+<td>INT(3)</td>
+<td>Primary Key, AUTO_INCREMENT</td>
+</tr>
+<tr>
+<td></td>
+<td>id_pasien</td>
+<td>INT(3)</td>
+<td>Foreign Key → pasien.id_pasien</td>
+</tr>
+<tr>
+<td></td>
+<td>id_admin</td>
+<td>INT(3)</td>
+<td>Foreign Key → administrator.id_admin</td>
+</tr>
+</tbody>
+</table>
+<p>Relasi yang dibentuk (semua <em>one-to-many</em>):</p>
+<table class="table-rel">
+<colgroup><col style="width: 30%"><col style="width: 35%"><col style="width: 35%"></colgroup>
+<thead>
+<tr>
+<th>Relasi pada ERD</th>
+<th>Tabel Induk (PK)</th>
+<th>Tabel Anak (FK)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memberikan data</td>
+<td>administrator.id_admin</td>
+<td>dokter_admin.id_admin</td>
+</tr>
+<tr>
+<td>Menyimpan data</td>
+<td>dokter.id_dokter</td>
+<td>dokter_admin.id_dokter</td>
+</tr>
+<tr>
+<td>Melayani</td>
+<td>administrator.id_admin</td>
+<td>daftar.id_admin</td>
+</tr>
+<tr>
+<td>Melakukan</td>
+<td>pasien.id_pasien</td>
+<td>daftar.id_pasien</td>
+</tr>
+<tr>
+<td>Memeriksa</td>
+<td>dokter.id_dokter</td>
+<td>pasien_dokter.id_dokter</td>
+</tr>
+<tr>
+<td>Diperiksa</td>
+<td>pasien.id_pasien</td>
+<td>pasien_dokter.id_pasien</td>
+</tr>
+</tbody>
+</table>
+<h3>A.2 Menjalankan Layanan Basis Data</h3>
+<p>Jalankan modul Apache dan MySQL/MariaDB pada XAMPP Control Panel (atau menggunakan container Docker). Pastikan status service telah aktif dan siap menerima koneksi.</p>
+<h3>A.3 Masuk ke MySQL/MariaDB Monitor</h3>
+<p>Buka terminal / Command Prompt, lalu masuk ke MySQL monitor sebagai user root:</p>
+<pre><code class="language-bash">docker exec -it mysql_tugas2 mysql -u root -proot
+</code></pre>
+<p><em>(Atau via CMD XAMPP: <code>cd c:\xampp\mysql\bin</code> lalu jalankan <code>mysql -u root</code>)</em></p>
+<figure class="img-container"><img class="term-img" src="./assets/mysql_login.png" alt="GAMBAR 2 – Masuk ke MySQL Monitor" loading="lazy" /><figcaption class="caption">GAMBAR 2 – Masuk ke MySQL Monitor</figcaption></figure>
+<p>Tampilkan daftar basis data yang tersedia saat ini:</p>
+<pre><code class="language-sql">SHOW DATABASES;
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/show_database.png" alt="GAMBAR 3 – Hasil Perintah SHOW DATABASES" loading="lazy" /><figcaption class="caption">GAMBAR 3 – Hasil Perintah SHOW DATABASES</figcaption></figure>
+<h3>A.4 Membuat Basis Data <code>rumah_sakit</code> (DDL)</h3>
+<p>Buat basis data baru bernama <code>rumah_sakit</code>, lalu verifikasi dan aktifkan untuk digunakan:</p>
+<pre><code class="language-sql">CREATE DATABASE rumah_sakit;
+SHOW DATABASES;
+USE rumah_sakit;
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_database.png" alt="GAMBAR 4 – Hasil CREATE DATABASE dan SHOW DATABASES" loading="lazy" /><figcaption class="caption">GAMBAR 4 – Hasil CREATE DATABASE dan SHOW DATABASES</figcaption></figure>
+<h3>A.5 Membuat Tabel (DDL)</h3>
+<p>Tabel yang tidak memiliki <em>foreign key</em> dibuat lebih dulu, yaitu <code>administrator</code>, <code>dokter</code>, dan <code>pasien</code>. Setelah itu dibuat tabel anak yaitu <code>dokter_admin</code>, <code>pasien_dokter</code>, dan <code>daftar</code>.</p>
+<p><strong>1) Tabel administrator</strong></p>
+<pre><code class="language-sql">CREATE TABLE administrator (
+  id_admin INT(3) PRIMARY KEY AUTO_INCREMENT,
+  nama_admin VARCHAR(30),
+  waktu_jaga VARCHAR(100)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_administrator_table.png" alt="GAMBAR 5 – Hasil CREATE TABLE administrator" loading="lazy" /><figcaption class="caption">GAMBAR 5 – Hasil CREATE TABLE administrator</figcaption></figure>
+<p><strong>2) Tabel dokter</strong></p>
+<pre><code class="language-sql">CREATE TABLE dokter (
+  id_dokter INT(3) PRIMARY KEY AUTO_INCREMENT,
+  nama_dokter VARCHAR(30),
+  alamat_dokter VARCHAR(100),
+  tanggal_lahir DATE,
+  no_hp VARCHAR(15),
+  spesialis VARCHAR(30),
+  waktu_kerja VARCHAR(100)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_dokter_table.png" alt="GAMBAR 6 – Hasil CREATE TABLE dokter" loading="lazy" /><figcaption class="caption">GAMBAR 6 – Hasil CREATE TABLE dokter</figcaption></figure>
+<p><strong>3) Tabel pasien</strong></p>
+<pre><code class="language-sql">CREATE TABLE pasien (
+  id_pasien INT(3) PRIMARY KEY AUTO_INCREMENT,
+  nama_pasien VARCHAR(30),
+  alamat_pasien VARCHAR(100),
+  jenis_kelamin INT(1)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_table_pasien.png" alt="GAMBAR 7 – Hasil CREATE TABLE pasien" loading="lazy" /><figcaption class="caption">GAMBAR 7 – Hasil CREATE TABLE pasien</figcaption></figure>
+<p><strong>4) Tabel dokter_admin</strong></p>
+<pre><code class="language-sql">CREATE TABLE dokter_admin (
+  id_data INT(3) PRIMARY KEY AUTO_INCREMENT,
+  id_dokter INT(3),
+  id_admin INT(3)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_dokter_admin_table.png" alt="GAMBAR 8 – Hasil CREATE TABLE dokter_admin" loading="lazy" /><figcaption class="caption">GAMBAR 8 – Hasil CREATE TABLE dokter_admin</figcaption></figure>
+<p><strong>5) Tabel pasien_dokter</strong></p>
+<pre><code class="language-sql">CREATE TABLE pasien_dokter (
+  id INT(3) PRIMARY KEY AUTO_INCREMENT,
+  id_dokter INT(3),
+  id_pasien INT(3),
+  waktu_periksa DATE,
+  resep VARCHAR(100)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_pasien_dokter_table.png" alt="GAMBAR 9 – Hasil CREATE TABLE pasien_dokter" loading="lazy" /><figcaption class="caption">GAMBAR 9 – Hasil CREATE TABLE pasien_dokter</figcaption></figure>
+<p><strong>6) Tabel daftar</strong></p>
+<pre><code class="language-sql">CREATE TABLE daftar (
+  id_daftar INT(3) PRIMARY KEY AUTO_INCREMENT,
+  id_pasien INT(3),
+  id_admin INT(3)
+);
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/create_daftar_table.png" alt="GAMBAR 10 – Hasil CREATE TABLE daftar" loading="lazy" /><figcaption class="caption">GAMBAR 10 – Hasil CREATE TABLE daftar</figcaption></figure>
+<p>Periksa seluruh tabel yang sudah selesai dibuat:</p>
+<pre><code class="language-sql">SHOW TABLES;
+DESC pasien;
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/show_tables.png" alt="GAMBAR 11 – Hasil SHOW TABLES (6 tabel)" loading="lazy" /><figcaption class="caption">GAMBAR 11 – Hasil SHOW TABLES (6 tabel)</figcaption></figure>
+<figure class="img-container"><img class="wide-img" src="./assets/database_phpmyadmin.png" alt="GAMBAR 12 – Daftar Tabel Basis Data rumah_sakit di phpMyAdmin" loading="lazy" /><figcaption class="caption">GAMBAR 12 – Daftar Tabel Basis Data rumah_sakit di phpMyAdmin</figcaption></figure>
+<h3>A.6 Membuat Relasi Antar Tabel (Foreign Key)</h3>
+<p>Relasi dapat dibuat lewat menu <strong>Designer</strong> phpMyAdmin atau lewat perintah SQL DDL. Pada praktik ini disediakan kedua cara.</p>
+<p><strong>Cara 1 – Perintah SQL DDL (Terminal atau Menu SQL phpMyAdmin)</strong></p>
+<ol>
+<li>Relasi tabel <code>dokter_admin</code> (menghubungkan ke <code>dokter</code> dan <code>administrator</code>):</li>
+</ol>
+<pre><code class="language-sql">ALTER TABLE dokter_admin
+  ADD CONSTRAINT fk_dokter_admin_dokter
+    FOREIGN KEY (id_dokter) REFERENCES dokter(id_dokter)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT fk_dokter_admin_admin
+    FOREIGN KEY (id_admin) REFERENCES administrator(id_admin)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+</code></pre>
+<figure class="img-container"><img class="wide-img" src="./assets/alter_pertama.png" alt="GAMBAR 13 – Perintah ALTER TABLE dokter_admin" loading="lazy" /><figcaption class="caption">GAMBAR 13 – Perintah ALTER TABLE dokter_admin</figcaption></figure>
+<figure class="img-container"><img class="wide-img" src="./assets/hasil_alter_pertama.png" alt="GAMBAR 14 – Hasil Relasi dokter_admin di phpMyAdmin Designer" loading="lazy" /><figcaption class="caption">GAMBAR 14 – Hasil Relasi dokter_admin di phpMyAdmin Designer</figcaption></figure>
+<ol start="2">
+<li>Relasi tabel <code>daftar</code> (menghubungkan ke <code>pasien</code> dan <code>administrator</code>):</li>
+</ol>
+<pre><code class="language-sql">ALTER TABLE daftar
+  ADD CONSTRAINT fk_daftar_pasien
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT fk_daftar_admin
+    FOREIGN KEY (id_admin) REFERENCES administrator(id_admin)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+</code></pre>
+<figure class="img-container"><img class="wide-img" src="./assets/alter_kedua.png" alt="GAMBAR 15 – Perintah ALTER TABLE daftar" loading="lazy" /><figcaption class="caption">GAMBAR 15 – Perintah ALTER TABLE daftar</figcaption></figure>
+<figure class="img-container"><img class="wide-img" src="./assets/hasil_alter_kedua.png" alt="GAMBAR 16 – Hasil Relasi daftar di phpMyAdmin Designer" loading="lazy" /><figcaption class="caption">GAMBAR 16 – Hasil Relasi daftar di phpMyAdmin Designer</figcaption></figure>
+<ol start="3">
+<li>Relasi tabel <code>pasien_dokter</code> (menghubungkan ke <code>dokter</code> dan <code>pasien</code>):</li>
+</ol>
+<pre><code class="language-sql">ALTER TABLE pasien_dokter
+  ADD CONSTRAINT fk_pasien_dokter_dokter
+    FOREIGN KEY (id_dokter) REFERENCES dokter(id_dokter)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT fk_pasien_dokter_pasien
+    FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien)
+    ON DELETE CASCADE ON UPDATE CASCADE;
+</code></pre>
+<figure class="img-container"><img class="wide-img" src="./assets/alter_ketiga.png" alt="GAMBAR 17 – Perintah ALTER TABLE pasien_dokter" loading="lazy" /><figcaption class="caption">GAMBAR 17 – Perintah ALTER TABLE pasien_dokter</figcaption></figure>
+<figure class="img-container"><img class="wide-img" src="./assets/hasil_alter_ketiga.png" alt="GAMBAR 18 – Hasil Relasi pasien_dokter di phpMyAdmin Designer" loading="lazy" /><figcaption class="caption">GAMBAR 18 – Hasil Relasi pasien_dokter di phpMyAdmin Designer</figcaption></figure>
+<p><code>ON DELETE CASCADE</code> dan <code>ON UPDATE CASCADE</code> dipilih agar data pada tabel anak ikut terhapus atau berubah ketika data pada tabel induk dihapus atau diubah, sehingga integritas referensial data tetap konsisten.</p>
+<p><strong>Cara 2 – Designer phpMyAdmin</strong></p>
+<ol>
+<li>Buka browser menuju phpMyAdmin (<code>http://localhost/phpmyadmin</code> atau <code>http://localhost:8080</code>), pilih basis data <strong>rumah_sakit</strong>.</li>
+<li>Pada tabel <code>dokter_admin</code>, <code>daftar</code>, dan <code>pasien_dokter</code>, pastikan kolom yang akan menjadi foreign key sudah memiliki index (menu <strong>Structure</strong> → <strong>Index</strong>).</li>
+<li>Buka tab <strong>Designer</strong>, lalu posisikan letak tabel agar rapi dan mudah dibaca.</li>
+<li>Klik tombol <strong>Create relationship</strong>, klik kolom primary key pada tabel induk sebagai <em>referenced key</em>, lalu klik kolom foreign key pada tabel anak.</li>
+<li>Pada kotak dialog <em>Create relationship FOREIGN KEY</em>, atur opsi <strong>CASCADE</strong> pada <em>on delete</em> dan <em>on update</em>, kemudian klik <strong>OK</strong>.</li>
+<li>Ulangi langkah di atas hingga keenam relasi terbentuk, lalu klik <strong>Save page</strong>.</li>
+</ol>
+<h3>A.7 Verifikasi Relasi</h3>
+<p>Jalankan query ke <code>information_schema</code> untuk memeriksa apakah seluruh foreign key sudah terdaftar aktif:</p>
+<pre><code class="language-sql">SELECT TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
+FROM information_schema.KEY_COLUMN_USAGE
+WHERE TABLE_SCHEMA = 'rumah_sakit'
+  AND REFERENCED_TABLE_NAME IS NOT NULL;
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/verifikasi_relasi.png" alt="GAMBAR 19 – Hasil Query Verifikasi Relasi Foreign Key" loading="lazy" /><figcaption class="caption">GAMBAR 19 – Hasil Query Verifikasi Relasi Foreign Key</figcaption></figure>
+<h3>A.8 Uji Relasi dengan Data Contoh (Opsional)</h3>
+<p>Data contoh dimasukkan untuk menguji integritas dan fungsi relasi antar tabel. Urutan pengisian dimulai dari tabel induk (master), baru kemudian tabel anak:</p>
+<pre><code class="language-sql">INSERT INTO administrator (nama_admin, waktu_jaga) VALUES ('Siti Aminah', 'Senin-Jumat 08.00-16.00');
+INSERT INTO dokter (nama_dokter, alamat_dokter, tanggal_lahir, no_hp, spesialis, waktu_kerja)
+  VALUES ('Budi Harmoko', 'Jl. Melati No. 1 Jakarta', '1985-04-12', '081234567890', 'Umum', 'Senin-Rabu 09.00-14.00');
+INSERT INTO pasien (nama_pasien, alamat_pasien, jenis_kelamin) VALUES ('Andi Pratama', 'Jl. Mawar No. 5 Bekasi', 1);
+INSERT INTO daftar (id_pasien, id_admin) VALUES (1, 1);
+INSERT INTO dokter_admin (id_dokter, id_admin) VALUES (1, 1);
+INSERT INTO pasien_dokter (id_dokter, id_pasien, waktu_periksa, resep) VALUES (1, 1, '2026-10-18', 'RSP0001');
+
+SELECT p.nama_pasien, pd.waktu_periksa, pd.resep, d.nama_dokter
+FROM pasien p
+JOIN pasien_dokter pd ON p.id_pasien = pd.id_pasien
+JOIN dokter d ON pd.id_dokter = d.id_dokter;
+</code></pre>
+<figure class="img-container"><img class="term-img" src="./assets/uji_relasi.png" alt="GAMBAR 20 – Hasil INSERT dan SELECT JOIN Tiga Tabel" loading="lazy" /><figcaption class="caption">GAMBAR 20 – Hasil INSERT dan SELECT JOIN Tiga Tabel</figcaption></figure>
+<h2>B. Hasil Praktik</h2>
+<p>Hasil akhir dari praktikum ini adalah basis data <strong>rumah_sakit</strong> yang memuat enam tabel sesuai ERD rumah sakit, dilengkapi kunci utama (primary key) dan enam relasi foreign key yang saling terhubung secara utuh:</p>
+<table class="table-hasil">
+<colgroup><col style="width: 8%"><col style="width: 28%"><col style="width: 28%"><col style="width: 36%"></colgroup>
+<thead>
+<tr>
+<th>No</th>
+<th>Tabel</th>
+<th>Primary Key</th>
+<th>Foreign Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>administrator</td>
+<td>id_admin</td>
+<td>–</td>
+</tr>
+<tr>
+<td>2</td>
+<td>dokter</td>
+<td>id_dokter</td>
+<td>–</td>
+</tr>
+<tr>
+<td>3</td>
+<td>pasien</td>
+<td>id_pasien</td>
+<td>–</td>
+</tr>
+<tr>
+<td>4</td>
+<td>dokter_admin</td>
+<td>id_data</td>
+<td>id_dokter, id_admin</td>
+</tr>
+<tr>
+<td>5</td>
+<td>pasien_dokter</td>
+<td>id</td>
+<td>id_dokter, id_pasien</td>
+</tr>
+<tr>
+<td>6</td>
+<td>daftar</td>
+<td>id_daftar</td>
+<td>id_pasien, id_admin</td>
+</tr>
+</tbody>
+</table>
+<figure class="img-container"><img class="wide-img" src="./assets/tampilan_designer.png" alt="GAMBAR 21 – Tampilan Designer phpMyAdmin: Relasi Final Enam Tabel Basis Data" loading="lazy" /><figcaption class="caption">GAMBAR 21 – Tampilan Designer phpMyAdmin: Relasi Final Enam Tabel Basis Data</figcaption></figure>
+<p>Struktur tabel dan relasi pada basis data telah terverifikasi sesuai dengan spesifikasi ERD kasus rumah sakit pada soal tugas.</p>
+<h2>Referensi</h2>
+<ol>
+<li>Universitas Terbuka. <em>Basis Data</em> (MSIM4206), BMP, bagian Data Definition Language (DDL) dan Data Manipulation Language (DML).</li>
+<li>Suryadi, A. <em>Panduan Praktikum SQL</em> (STSI4105), Edisi 2. Universitas Terbuka, Bab 2 (Prosedur Pelaksanaan Praktik).</li>
+</ol>
+
+</div>
+</body>
+</html>
