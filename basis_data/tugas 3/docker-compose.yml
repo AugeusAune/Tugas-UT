@@ -1,0 +1,71 @@
+services:
+  mysql_master:
+    image: mysql:latest
+    container_name: mysql_tugas3_master
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rumah_sakit
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./config/master.cnf:/etc/mysql/conf.d/master.cnf:ro
+      - ./init:/docker-entrypoint-initdb.d:ro
+      - mysql_master_data:/var/lib/mysql
+    networks:
+      - tugas3_net
+
+  mysql_slave:
+    image: mysql:latest
+    container_name: mysql_tugas3_slave
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rumah_sakit
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./config/slave.cnf:/etc/mysql/conf.d/slave.cnf:ro
+      - mysql_slave_data:/var/lib/mysql
+    networks:
+      - tugas3_net
+
+  pma_master:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: pma_tugas3_master
+    restart: always
+    environment:
+      PMA_HOST: mysql_master
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql_master
+    networks:
+      - tugas3_net
+
+  pma_slave:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: pma_tugas3_slave
+    restart: always
+    environment:
+      PMA_HOST: mysql_slave
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8081:80"
+    depends_on:
+      - mysql_slave
+    networks:
+      - tugas3_net
+
+networks:
+  tugas3_net:
+    driver: bridge
+
+volumes:
+  mysql_master_data:
+  mysql_slave_data:
