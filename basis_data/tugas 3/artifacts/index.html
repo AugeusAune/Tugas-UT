@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Tugas 3 - Basis Data (MSIM4206)</title>
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 18mm 16mm 18mm 16mm;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: #1e293b;
+    background-color: #f1f5f9;
+    margin: 0;
+    padding: 24px;
+  }
+
+  .document-container {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 40px 48px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 18pt;
+    text-align: center;
+    color: #1e3a8a;
+    margin-top: 0;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+
+  .sub-title {
+    text-align: center;
+    font-weight: 600;
+    color: #475569;
+    font-size: 11pt;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .id-table {
+    width: auto;
+    min-width: 340px;
+    margin: 12px auto 24px auto;
+    border-collapse: collapse;
+    border: none;
+  }
+
+  .id-table td {
+    padding: 3px 8px;
+    font-size: 10pt;
+    border: none;
+  }
+
+  .id-table td:first-child {
+    font-weight: 600;
+    width: 90px;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1.5px solid #e2e8f0;
+    margin: 20px 0;
+  }
+
+  h2 {
+    font-size: 13pt;
+    color: #1e3a8a;
+    border-bottom: 2px solid #bfdbfe;
+    padding-bottom: 4px;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    font-size: 11pt;
+    color: #0f172a;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+
+  h4 {
+    font-size: 10pt;
+    color: #1e293b;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 10px;
+    text-align: justify;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0 16px 0;
+    font-size: 9pt;
+    page-break-inside: avoid;
+  }
+
+  table.data-table th, table.data-table td {
+    border: 1px solid #cbd5e1;
+    padding: 6px 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  table.data-table th {
+    background-color: #f8fafc;
+    color: #1e293b;
+    font-weight: 600;
+  }
+
+  table.data-table tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+
+  .figure-box {
+    margin: 14px 0 18px 0;
+    text-align: center;
+    page-break-inside: avoid;
+  }
+
+  .figure-box img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .caption {
+    font-size: 9pt;
+    font-weight: 600;
+    color: #475569;
+    margin-top: 6px;
+  }
+
+  pre {
+    background-color: #0f172a;
+    color: #f8fafc;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 8.5pt;
+    line-height: 1.4;
+    overflow-x: auto;
+    margin: 8px 0 12px 0;
+    page-break-inside: avoid;
+  }
+
+  code {
+    font-family: "Consolas", "Monaco", "Courier New", monospace;
+    font-size: 9pt;
+    color: #0f172a;
+    background-color: #f1f5f9;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  pre code {
+    background-color: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  .badge-success {
+    display: inline-block;
+    background-color: #dcfce7;
+    color: #166534;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 8.5pt;
+  }
+
+  @media print {
+    body {
+      background-color: #ffffff;
+      padding: 0;
+      color: #000000;
+    }
+    .document-container {
+      max-width: 100%;
+      padding: 0;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    a {
+      text-decoration: none;
+      color: #000000;
+    }
+    pre {
+      background-color: #1e293b !important;
+      color: #ffffff !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .badge-success {
+      background-color: #dcfce7 !important;
+      color: #166534 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="document-container">
+  <h1>TUGAS 3 – BASIS DATA (MSIM4206)</h1>
+  <div class="sub-title">Praktikum Transaksi dan Basis Data Terdistribusi (Replikasi Master–Slave)</div>
+
+  <table class="id-table">
+    <tr><td>Nama</td><td>:</td><td><strong>Farhan Aditya</strong></td></tr>
+    <tr><td>NIM</td><td>:</td><td><strong>054750333</strong></td></tr>
+    <tr><td>Program Studi</td><td>:</td><td>Sistem Informasi</td></tr>
+    <tr><td>Mata Kuliah</td><td>:</td><td>MSIM4206 – Basis Data</td></tr>
+  </table>
+
+  <hr>
+
+  <h2>SOAL</h2>
+  <p>Berdasarkan Panduan Praktikum Mata Kuliah MSIM4206 Basis Data Edisi 2 dan instruksi Tugas 3:</p>
+  <ol>
+    <li><strong>Praktikum Transaksi:</strong> Lakukan evaluasi <em>storage engine</em> InnoDB pada basis data rumah sakit, uji coba kontrol transaksi (<code>COMMIT</code>, <code>ROLLBACK</code>, <code>SAVEPOINT</code>), penambahan tabel <code>obat</code> dan <code>transaksi_obat</code>, serta pembuatan dan pengujian <em>trigger</em> pengurangan stok otomatis.</li>
+    <li><strong>Praktikum Basis Data Terdistribusi:</strong> Lakukan konfigurasi replikasi basis data Master–Slave (multi-node), verifikasi status aktif replikasi (<code>Slave_IO_Running</code> dan <code>Slave_SQL_Running</code>), serta uji sinkronisasi data secara <em>real-time</em>.</li>
+  </ol>
+  <p>Kegiatan praktik dilaporkan dalam naskah laporan formal dan rekaman video yang memuat: (a) perkenalan identitas mahasiswa, (b) langkah-langkah praktik beserta aktivitas mahasiswa, (c) hasil praktik, dan (d) kata penutup.</p>
+
+  <div class="figure-box">
+    <img src="./assets/erd.png" alt="ERD Rumah Sakit">
+    <div class="caption">GAMBAR 1 – Entity Relationship Diagram (ERD) Kasus Rumah Sakit</div>
+  </div>
+
+  <hr>
+
+  <h2>JAWAB</h2>
+
+  <h2>A. Langkah-Langkah Praktik</h2>
+
+  <h3>A.1 Analisis Kebutuhan Basis Data &amp; Keterkaitan Tugas 2</h3>
+  <p>Praktikum Tugas 3 merupakan kelanjutan langsung dari basis data <strong><code>rumah_sakit</code></strong> yang telah dirancang pada Tugas 2. Pada tugas sebelumnya, telah dibuat 6 tabel utama: <code>administrator</code>, <code>dokter</code>, <code>pasien</code>, <code>dokter_admin</code>, <code>pasien_dokter</code>, dan <code>daftar</code>.</p>
+  <p>Pada Tugas 3 ini, basis data dikembangkan lebih lanjut dengan menambahkan:</p>
+  <ul>
+    <li><strong>Tabel Katalog Obat (<code>obat</code>):</strong> Menyimpan daftar obat beserta persediaan (<em>stok</em>).</li>
+    <li><strong>Tabel Penjualan/Transaksi Obat (<code>transaksi_obat</code>):</strong> Mencatat transaksi pembelian obat oleh pasien, yang berelasi dengan tabel <code>pasien</code> dan <code>obat</code>.</li>
+    <li><strong>Event Trigger (<code>tg_jual</code>):</strong> Menjamin integritas data persediaan dengan memicu pengurangan kuantitas stok pada tabel <code>obat</code> setiap kali transaksi baru dicatat pada tabel <code>transaksi_obat</code>.</li>
+    <li><strong>Arsitektur Terdistribusi (Replikasi):</strong> Menghubungkan server basis data Master (port 3306) ke server basis data Slave (port 3307) agar seluruh perubahan data tersinkronisasi secara otomatis.</li>
+  </ul>
+
+  <p>Rincian atribut 2 tabel baru pada Tugas 3:</p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 22%;">Tabel</th>
+        <th style="width: 25%;">Atribut</th>
+        <th style="width: 18%;">Tipe Data</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="5"><strong>obat</strong></td>
+        <td><code>id_obat</code></td>
+        <td>INT(6)</td>
+        <td>Primary Key, <code>AUTO_INCREMENT</code></td>
+      </tr>
+      <tr><td><code>kode_obat</code></td><td>VARCHAR(5)</td><td>Kode katalog unik obat</td></tr>
+      <tr><td><code>nama_obat</code></td><td>VARCHAR(30)</td><td>Nama komersial/generik obat</td></tr>
+      <tr><td><code>harga</code></td><td>INT(10)</td><td>Harga satuan obat (Rupiah)</td></tr>
+      <tr><td><code>stok</code></td><td>INT(5)</td><td>Jumlah persediaan fisik obat</td></tr>
+      <tr>
+        <td rowspan="5"><strong>transaksi_obat</strong></td>
+        <td><code>id_transaksi</code></td>
+        <td>INT(3)</td>
+        <td>Primary Key, <code>AUTO_INCREMENT</code></td>
+      </tr>
+      <tr><td><code>id_pasien</code></td><td>INT(3)</td><td>Foreign Key &rarr; <code>pasien.id_pasien</code></td></tr>
+      <tr><td><code>id_obat</code></td><td>INT(3)</td><td>Foreign Key &rarr; <code>obat.id_obat</code></td></tr>
+      <tr><td><code>jumlah</code></td><td>INT(10)</td><td>Jumlah kuantitas obat yang dibeli</td></tr>
+      <tr><td><code>total_harga</code></td><td>INT(10)</td><td>Total biaya transaksi</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.2 Menjalankan Layanan Basis Data Multi-Node</h3>
+  <p>Untuk menjalankan praktikum basis data terdistribusi tanpa memerlukan dua komputer fisik atau VM yang berat, lingkungan diorkestrasi menggunakan Docker Compose dengan 4 layanan terisolasi:</p>
+  <ul>
+    <li><code>mysql_tugas3_master</code> (Port 3306): DBMS Server Master dengan binary logging aktif (<code>server-id=1</code>).</li>
+    <li><code>mysql_tugas3_slave</code> (Port 3307): DBMS Server Slave dengan relay logging aktif (<code>server-id=2</code>).</li>
+    <li><code>pma_tugas3_master</code> (Port 8080): phpMyAdmin untuk inspeksi visual server Master.</li>
+    <li><code>pma_tugas3_slave</code> (Port 8081): phpMyAdmin untuk inspeksi visual server Slave.</li>
+  </ul>
+  <pre><code>docker compose up -d</code></pre>
+
+  <h3>A.3 Masuk ke MySQL Monitor Server Master (CLI)</h3>
+  <p>Buka terminal dan masuk ke antarmuka interaktif MySQL monitor pada container Master sebagai user root, lalu aktifkan basis data <code>rumah_sakit</code>:</p>
+  <pre><code>docker exec -it mysql_tugas3_master mysql -u root -proot
+SHOW DATABASES;
+USE rumah_sakit;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/mysql_login.png" alt="Masuk ke MySQL Monitor Master">
+    <div class="caption">GAMBAR 2 – Masuk ke MySQL Monitor Master</div>
+  </div>
+
+  <h3>A.4 Memeriksa Status Storage Engine InnoDB</h3>
+  <p>Transaksi ACID pada MySQL mensyaratkan penggunaan <em>storage engine</em> transaksional, yaitu <strong>InnoDB</strong>. Periksa status engine dari tabel-tabel basis data <code>rumah_sakit</code>:</p>
+  <pre><code>SHOW TABLE STATUS FROM rumah_sakit WHERE Name IN ('pasien', 'dokter', 'administrator')\G</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/show_innodb.png" alt="Verifikasi Storage Engine InnoDB">
+    <div class="caption">GAMBAR 3 – Verifikasi Tipe Storage Engine InnoDB</div>
+  </div>
+
+  <p>Hasil pemeriksaan membuktikan seluruh tabel telah menggunakan <code>Engine: InnoDB</code>, sehingga fitur transaksi, rollback, foreign key constraint, dan crash recovery didukung secara penuh.</p>
+
+  <h3>A.5 Praktikum Kontrol Transaksi (Commit, Rollback, dan Savepoint)</h3>
+
+  <h4>1) Pengujian Transaksi 1 (Tanpa Commit)</h4>
+  <p>Pada pengujian pertama, dibuat stored procedure <code>transaksi1</code> yang menyisipkan data pasien baru (<code>id_pasien=6</code>, <code>nama_pasien='Tito'</code>), namun transaksi sengaja <strong>tidak diakhiri</strong> dengan perintah <code>COMMIT;</code>.</p>
+  <pre><code>DELIMITER $$
+CREATE PROCEDURE transaksi1()
+BEGIN
+  START TRANSACTION;
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (6, 'Tito', 'Jl Pakis haji no 25', 1);
+END$$
+DELIMITER ;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/create_transaksi1.png" alt="Pembuatan Stored Procedure transaksi1">
+    <div class="caption">GAMBAR 4 – Pembuatan Stored Procedure transaksi1 Tanpa Commit</div>
+  </div>
+
+  <p>Jalankan prosedur dengan perintah <code>CALL transaksi1();</code>, lalu periksa isi tabel <code>pasien</code> pada sesi koneksi yang baru:</p>
+  <pre><code>CALL transaksi1();
+SELECT * FROM pasien;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_transaksi1.png" alt="Eksekusi CALL transaksi1">
+    <div class="caption">GAMBAR 5 – Eksekusi CALL transaksi1 dan Verifikasi Data Belum Tersimpan</div>
+  </div>
+  <p><strong>Analisis:</strong> Data pasien Tito (<code>id_pasien=6</code>) tidak tersimpan di dalam basis data. Hal ini membuktikan prinsip transaksi bahwa perubahan data dalam transaksi yang tidak di-<code>COMMIT</code> bersifat sementara dan akan dibatalkan (<em>auto-rollback</em>) saat sesi berakhir.</p>
+
+  <h4>2) Pengujian Transaksi 2 (Dengan Commit)</h4>
+  <p>Modifikasi prosedur transaksi dengan menambahkan perintah <code>COMMIT;</code> di akhir blok perintah:</p>
+  <pre><code>DELIMITER $$
+CREATE PROCEDURE transaksi2()
+BEGIN
+  START TRANSACTION;
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (6, 'Tito', 'Jl Pakis haji no 25', 1);
+  COMMIT;
+END$$
+DELIMITER ;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/create_transaksi2.png" alt="Pembuatan Stored Procedure transaksi2">
+    <div class="caption">GAMBAR 6 – Pembuatan Stored Procedure transaksi2 Dengan Commit</div>
+  </div>
+
+  <p>Jalankan prosedur <code>transaksi2()</code> dan periksa isi tabel <code>pasien</code>:</p>
+  <pre><code>CALL transaksi2();
+SELECT * FROM pasien;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_transaksi2.png" alt="Eksekusi CALL transaksi2">
+    <div class="caption">GAMBAR 7 – Eksekusi CALL transaksi2 dan Verifikasi Data Tersimpan Permanen</div>
+  </div>
+  <p><strong>Analisis:</strong> Data pasien Tito (<code>id_pasien=6</code>) sekarang telah tersimpan permanen di dalam tabel <code>pasien</code> karena pernyataan transaksi telah disahkan secara permanen (<em>committed</em>).</p>
+
+  <h4>3) Pengujian Transaksi 3 (Rollback Sederhana)</h4>
+  <p>Pernyataan <code>ROLLBACK</code> digunakan untuk membatalkan seluruh operasi yang sedang berjalan sebelum transaksi disahkan. Sebagai contoh, dilakukan perintah update nama pasien <code>id_pasien=3</code> (yang awalnya bernama 'Popi') menjadi 'Danar', diikuti perintah <code>ROLLBACK;</code>:</p>
+  <pre><code>START TRANSACTION;
+UPDATE pasien SET nama_pasien = 'Danar' WHERE id_pasien = 3;
+ROLLBACK;
+
+SELECT * FROM pasien WHERE id_pasien = 3;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_transaksi3_rollback.png" alt="Pengujian Rollback">
+    <div class="caption">GAMBAR 8 – Pengujian Transaksi Rollback</div>
+  </div>
+  <p><strong>Analisis:</strong> Nama pasien dengan <code>id_pasien=3</code> tetap bernilai 'Popi'. Perubahan nama menjadi 'Danar' berhasil digagalkan dan kondisi data dikembalikan persis ke titik awal sebelum transaksi dimulai.</p>
+
+  <h4>4) Pengujian Transaksi 4 (Rollback Parsial &amp; Commit)</h4>
+  <p>Skenario transaksi 4 melakukan penyisipan pasien baru (<code>id_pasien=7</code>, nama 'Septin') yang kemudian di-<code>ROLLBACK</code>, diikuti pembaruan nama pasien <code>id_pasien=3</code> menjadi 'Septin' yang di-<code>COMMIT</code>:</p>
+  <pre><code>DELIMITER $$
+CREATE PROCEDURE transaksi4()
+BEGIN
+  START TRANSACTION;
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (7, 'Septin', 'Jl Anggrek no 5', 2);
+  ROLLBACK;
+  
+  START TRANSACTION;
+  UPDATE pasien SET nama_pasien = 'Septin' WHERE id_pasien = 3;
+  COMMIT;
+END$$
+DELIMITER ;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_transaksi4_modifikasi_rollback.png" alt="Pengujian Transaksi 4">
+    <div class="caption">GAMBAR 9 – Pengujian Transaksi 4 (Rollback Insert dan Commit Update)</div>
+  </div>
+  <p><strong>Analisis:</strong> Data <code>id_pasien=7</code> tidak masuk ke dalam tabel karena dibatalkan oleh <code>ROLLBACK</code>, sedangkan data <code>id_pasien=3</code> berhasil diperbarui namanya menjadi 'Septin' karena transaksi kedua disahkan oleh <code>COMMIT</code>.</p>
+
+  <h4>5) Pengujian Transaksi 5 (Savepoint / Check Point)</h4>
+  <p><em>Savepoint</em> memungkinkan transaksi di-rollback secara parsial ke titik tertentu tanpa harus membatalkan seluruh isi transaksi:</p>
+  <pre><code>DELIMITER $$
+CREATE PROCEDURE transaksi5()
+BEGIN
+  START TRANSACTION;
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (7, 'Dedi', 'Jl Melati no 1', 1);
+  SAVEPOINT point1;
+  
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (8, 'Riko', 'Jl Mawar no 2', 1);
+  ROLLBACK TO point1;
+  
+  INSERT INTO pasien (id_pasien, nama_pasien, alamat_pasien, jenis_kelamin)
+  VALUES (9, 'Maya', 'Jl Melur no 3', 2);
+  COMMIT;
+END$$
+DELIMITER ;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_transaksi5_savepoint.png" alt="Pengujian Savepoint">
+    <div class="caption">GAMBAR 10 – Pengujian Savepoint / Check Point</div>
+  </div>
+  <p><strong>Analisis:</strong> Pasien Dedi (<code>id=7</code>) dan Maya (<code>id=9</code>) berhasil tersimpan, sedangkan pasien Riko (<code>id=8</code>) berhasil digagalkan karena dibatalkan ke titik <code>SAVEPOINT point1</code>.</p>
+
+  <h3>A.6 Praktikum Trigger Pengurangan Stok Obat</h3>
+
+  <h4>1) Membuat Tabel <code>obat</code></h4>
+  <p>Tabel <code>obat</code> menyimpan data master katalog obat dan stok persediaan:</p>
+  <pre><code>CREATE TABLE obat (
+  id_obat INT(6) AUTO_INCREMENT PRIMARY KEY,
+  kode_obat VARCHAR(5),
+  nama_obat VARCHAR(30),
+  harga INT(10),
+  stok INT(5)
+) ENGINE=InnoDB;
+
+DESC obat;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/create_tabel_obat.png" alt="Membuat Tabel obat">
+    <div class="caption">GAMBAR 11 – Hasil CREATE TABLE obat</div>
+  </div>
+
+  <h4>2) Membuat Tabel <code>transaksi_obat</code></h4>
+  <p>Tabel <code>transaksi_obat</code> mencatat transaksi dan memiliki relasi <em>Foreign Key</em> ke tabel <code>pasien</code> dan <code>obat</code>:</p>
+  <pre><code>CREATE TABLE transaksi_obat (
+  id_transaksi INT(3) AUTO_INCREMENT PRIMARY KEY,
+  id_pasien INT(3),
+  id_obat INT(3),
+  jumlah INT(10),
+  total_harga INT(10),
+  CONSTRAINT fk_transaksi_pasien FOREIGN KEY (id_pasien) REFERENCES pasien(id_pasien) ON DELETE CASCADE,
+  CONSTRAINT fk_transaksi_obat FOREIGN KEY (id_obat) REFERENCES obat(id_obat) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+DESC transaksi_obat;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/create_tabel_transaksi_obat.png" alt="Membuat Tabel transaksi_obat">
+    <div class="caption">GAMBAR 12 – Hasil CREATE TABLE transaksi_obat</div>
+  </div>
+
+  <h4>3) Membuat Trigger <code>tg_jual</code></h4>
+  <p>Sebelum membuat trigger, isi data awal tabel <code>obat</code> dengan 3 jenis obat (Amoxillin stok 20, Paracetamol stok 50, dan Antasida stok 30). Kemudian rancang trigger <code>tg_jual</code>:</p>
+  <pre><code>INSERT INTO obat (id_obat, kode_obat, nama_obat, harga, stok) VALUES
+(1, 'A001', 'Amoxillin', 5000, 20),
+(2, 'A002', 'Paracetamol', 3000, 50),
+(3, 'A003', 'Antasida', 4000, 30);
+
+DELIMITER $$
+CREATE TRIGGER tg_jual
+AFTER INSERT ON transaksi_obat
+FOR EACH ROW
+BEGIN
+  UPDATE obat
+  SET stok = stok - NEW.jumlah
+  WHERE id_obat = NEW.id_obat;
+END$$
+DELIMITER ;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/create_trigger_tg_jual.png" alt="Membuat Trigger tg_jual">
+    <div class="caption">GAMBAR 13 – Pembuatan Trigger tg_jual</div>
+  </div>
+
+  <h4>4) Pengujian Trigger Pengurangan Stok</h4>
+  <p>Lakukan pengujian transaksi dengan menyimulasikan pasien (<code>id_pasien=3</code>) membeli 5 unit obat Amoxillin (<code>id_obat=1</code>):</p>
+  <pre><code>INSERT INTO transaksi_obat (id_pasien, id_obat, jumlah, total_harga)
+VALUES (3, 1, 5, 25000);
+
+SELECT * FROM transaksi_obat;
+SELECT * FROM obat;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_trigger_stok.png" alt="Pengujian Trigger">
+    <div class="caption">GAMBAR 14 – Pengujian Trigger tg_jual Pengurangan Stok Otomatis</div>
+  </div>
+  <p><strong>Analisis:</strong> Stok obat Amoxillin yang semula berjumlah 20 unit secara otomatis berkurang menjadi <strong>15 unit</strong>. Trigger <code>tg_jual</code> berhasil mendeteksi event <code>AFTER INSERT</code> dan memperbarui data stok secara akurat dan konsisten.</p>
+
+  <h3>A.7 Praktikum Basis Data Terdistribusi (Replikasi Master–Slave)</h3>
+
+  <h4>1) Konfigurasi Server Master &amp; Pembuatan User Replikasi</h4>
+  <p>Pada server Master, binary logging telah diaktifkan (<code>server-id=1</code>, <code>log-bin=mysql-bin</code>, <code>binlog-do-db=rumah_sakit</code>). Dibuat user khusus bernama <code>prodisi</code> dengan hak akses replikasi:</p>
+  <pre><code>CREATE USER 'prodisi'@'%' IDENTIFIED BY 'prodisi';
+GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 'prodisi'@'%';
+FLUSH PRIVILEGES;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/master_user_replikasi.png" alt="Pembuatan Akun Replikasi">
+    <div class="caption">GAMBAR 15 – Pembuatan Akun Replikasi prodisi pada Master</div>
+  </div>
+
+  <p>Periksa posisi binary log aktif pada Master menggunakan perintah:</p>
+  <pre><code>SHOW BINARY LOG STATUS;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/master_status.png" alt="Status Binary Log Master">
+    <div class="caption">GAMBAR 16 – Status Binary Log pada Master</div>
+  </div>
+  <p>Tercatat file binary log adalah <strong><code>mysql-bin.000003</code></strong> pada posisi <strong><code>8520</code></strong>.</p>
+
+  <h4>2) Konfigurasi Server Slave &amp; Menjalankan Replikasi</h4>
+  <p>Masuk ke terminal server Slave (Port 3307). Hubungkan server Slave ke server Master menggunakan parameter yang telah dicatat, kemudian jalankan thread replikasi:</p>
+  <pre><code>STOP REPLICA;
+CHANGE REPLICATION SOURCE TO
+  SOURCE_HOST='mysql_master',
+  SOURCE_USER='prodisi',
+  SOURCE_PASSWORD='prodisi',
+  SOURCE_PORT=3306,
+  SOURCE_LOG_FILE='mysql-bin.000003',
+  SOURCE_LOG_POS=8520,
+  GET_SOURCE_PUBLIC_KEY=1;
+START REPLICA;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/slave_konfigurasi.png" alt="Konfigurasi Slave">
+    <div class="caption">GAMBAR 17 – Konfigurasi Parameter Replikasi pada Slave</div>
+  </div>
+
+  <p>Periksa status kesehatan replikasi pada Slave:</p>
+  <pre><code>SHOW REPLICA STATUS\G</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/slave_status_running.png" alt="Status Slave Running">
+    <div class="caption">GAMBAR 18 – Status Thread Replikasi pada Slave (Replica_IO &amp; SQL Running)</div>
+  </div>
+
+  <p><strong>Verifikasi Status Kunci:</strong></p>
+  <ul>
+    <li><code>Replica_IO_Running: Yes</code> (Slave berhasil terhubung ke Master dan membaca binary log stream).</li>
+    <li><code>Replica_SQL_Running: Yes</code> (Slave berhasil mengeksekusi transaksi dari relay log).</li>
+    <li><code>Seconds_Behind_Source: 0</code> (Tidak ada delay/antrean data replikasi).</li>
+    <li><code>Last_IO_Errno: 0</code> dan <code>Last_SQL_Errno: 0</code> (Kondisi replikasi bebas kesalahan).</li>
+  </ul>
+
+  <h4>3) Pengujian Replikasi Data Nyata (Master ke Slave)</h4>
+  <p>Untuk membuktikan bahwa sistem basis data terdistribusi telah berfungsi penuh secara <em>real-time</em>, dilakukan penambahan satu obat baru pada server Master (Port 3306): obat <strong>Demam</strong> (<code>kode_obat='A005'</code>, <code>harga=150</code>, <code>stok=100</code>):</p>
+  <pre><code>-- [EKSEKUSI PADA SERVER MASTER (Port 3306)]
+INSERT INTO obat (kode_obat, nama_obat, harga, stok)
+VALUES ('A005', 'Demam', 150, 100);
+
+SELECT * FROM obat;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_replikasi_master.png" alt="Input Data Obat di Master">
+    <div class="caption">GAMBAR 19 – Penambahan Data Obat Baru pada Master</div>
+  </div>
+
+  <p>Segera periksa data pada server Slave (Port 3307) tanpa melakukan input manual apapun di Slave:</p>
+  <pre><code>-- [PEMERIKSAAN PADA SERVER SLAVE (Port 3307)]
+SELECT * FROM obat;</code></pre>
+
+  <div class="figure-box">
+    <img src="./assets/uji_replikasi_slave.png" alt="Data Obat Terpantau di Slave">
+    <div class="caption">GAMBAR 20 – Verifikasi Sinkronisasi Data pada Slave</div>
+  </div>
+
+  <p><strong>Analisis:</strong> Record obat baru 'Demam' (<code>id_obat=4</code>, <code>kode_obat='A005'</code>) langsung muncul pada basis data Slave secara instan. Ini membuktikan proses replikasi basis data terdistribusi telah berjalan dengan sempurna.</p>
+
+  <hr>
+
+  <h2>B. Hasil Praktik</h2>
+  <p>Dari serangkaian praktikum yang telah dilakukan, diperoleh rekapitulasi hasil sebagai berikut:</p>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th style="width: 5%; text-align: center;">No</th>
+        <th style="width: 18%;">Modul Pengujian</th>
+        <th style="width: 25%;">Skenario Uji</th>
+        <th style="width: 25%;">Hasil yang Diharapkan</th>
+        <th style="width: 15%; text-align: center;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="text-align: center;">1</td>
+        <td><strong>Storage Engine</strong></td>
+        <td>Cek engine tabel basis data <code>rumah_sakit</code></td>
+        <td>Seluruh tabel berstatus <code>Engine: InnoDB</code></td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">2</td>
+        <td><strong>Transaksi 1</strong></td>
+        <td>Insert pasien ID 6 tanpa <code>COMMIT</code></td>
+        <td>Data tidak tersimpan di tabel <code>pasien</code></td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">3</td>
+        <td><strong>Transaksi 2</strong></td>
+        <td>Insert pasien ID 6 dengan <code>COMMIT</code></td>
+        <td>Data Tito (<code>id=6</code>) tersimpan permanen</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">4</td>
+        <td><strong>Transaksi 3</strong></td>
+        <td>Update nama Popi &rarr; Danar + <code>ROLLBACK</code></td>
+        <td>Perubahan batal, nama tetap 'Popi'</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">5</td>
+        <td><strong>Transaksi 4</strong></td>
+        <td>Rollback insert &amp; Commit update nama</td>
+        <td>Data baru batal, nama berubah 'Septin'</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">6</td>
+        <td><strong>Transaksi 5</strong></td>
+        <td>Insert bertahap dengan <code>SAVEPOINT point1</code></td>
+        <td>ID 7 &amp; 9 tersimpan; ID 8 dibatalkan</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">7</td>
+        <td><strong>Trigger <code>tg_jual</code></strong></td>
+        <td>Pembelian 5 unit Amoxillin (stok 20)</td>
+        <td>Stok Amoxillin otomatis menjadi 15</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">8</td>
+        <td><strong>Koneksi Replikasi</strong></td>
+        <td>Slave terhubung ke Master via user <code>prodisi</code></td>
+        <td><code>Replica_IO_Running: Yes</code>, <code>SQL_Running: Yes</code></td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">9</td>
+        <td><strong>Sinkronisasi Replikasi</strong></td>
+        <td>Insert obat 'Demam' A005 di Master</td>
+        <td>Data otomatis muncul di server Slave</td>
+        <td style="text-align: center;"><span class="badge-success">BERHASIL</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>C. Pembahasan Teknis</h2>
+
+  <h3>C.1 Prinsip ACID &amp; Peran Storage Engine InnoDB</h3>
+  <p>Transaksi merupakan unit kerja logika (<em>logical unit of work</em>) yang harus memenuhi kaidah ACID:</p>
+  <ul>
+    <li><strong>Atomicity:</strong> Seluruh operasi dalam transaksi harus berhasil seluruhnya atau tidak sama sekali. Terbukti pada <code>transaksi1</code> dan <code>transaksi3</code>, ketiadaan commit atau adanya rollback membatalkan seluruh efek operasi.</li>
+    <li><strong>Consistency:</strong> Basis data bertransisi dari satu status valid ke status valid lainnya, dengan integritas constraint relasional yang tetap terjaga.</li>
+    <li><strong>Isolation:</strong> Operasi yang belum disahkan tidak dapat dilihat oleh transaksi lain, mencegah fenomena <em>dirty read</em>.</li>
+    <li><strong>Durability:</strong> Setelah perintah <code>COMMIT</code> dieksekusi (seperti pada <code>transaksi2</code>), perubahan data dijamin tersimpan permanen ke disk walau terjadi restart sistem.</li>
+  </ul>
+  <p>MySQL menyediakan <em>storage engine</em> InnoDB yang memiliki kapabilitas <em>redo log</em> dan <em>undo log</em> untuk mengelola isolasi transaksi dan mekanisme <em>rollback segment</em>.</p>
+
+  <h3>C.2 Mekanisme Otomatisasi Integritas Data via Trigger</h3>
+  <p>Trigger adalah objek basis data yang terikat pada suatu tabel dan dieksekusi secara otomatis saat terjadi event DML (<code>INSERT</code>, <code>UPDATE</code>, atau <code>DELETE</code>). Pada praktikum ini, trigger <code>tg_jual</code> beroperasi dengan spesifikasi:</p>
+  <ul>
+    <li>Event: <code>AFTER INSERT ON transaksi_obat</code></li>
+    <li>Granularitas: <code>FOR EACH ROW</code></li>
+    <li>Variabel Pseudorow: Menggunakan <code>NEW.id_obat</code> untuk mengidentifikasi obat yang dibeli dan <code>NEW.jumlah</code> untuk mengambil kuantitas pembelian.</li>
+  </ul>
+  <p>Penerapan trigger memindahkan logika bisnis pemotongan persediaan langsung ke layer DBMS, sehingga mencegah inkonsistensi stok akibat kesalahan kode di layer aplikasi (<em>data integrity enforcement</em>).</p>
+
+  <h3>C.3 Arsitektur Basis Data Terdistribusi (Replikasi Master–Slave)</h3>
+  <p>Replikasi data pada MySQL bekerja secara asinkron (<em>asynchronous replication</em>) dengan alur sebagai berikut:</p>
+  <ol>
+    <li>Setiap transaksi tulis (DML/DDL) yang terjadi pada <strong>Master</strong> dicatat ke dalam <strong>Binary Log</strong> (<code>mysql-bin</code>).</li>
+    <li>Server <strong>Slave</strong> menjalankan <strong>Replica I/O Thread</strong> yang terhubung ke Master menggunakan akun khusus (<code>prodisi</code>). Thread ini membaca rekaman binary log dari posisi terakhir (<code>MASTER_LOG_POS</code>) dan menulisnya ke dalam berkas <strong>Relay Log</strong> lokal (<code>mysql-relay-bin</code>).</li>
+    <li>Server <strong>Slave</strong> secara paralel menjalankan <strong>Replica SQL Thread</strong> yang membaca event dari Relay Log dan mengeksekusinya kembali pada basis data lokal Slave.</li>
+    <li>Melalui arsitektur ini, beban query baca (<em>read-heavy traffic</em>) dapat didistribusikan ke node Slave (<em>read scaling</em>), dan node Slave sekaligus berfungsi sebagai cadangan data (<em>failover redundancy</em>).</li>
+  </ol>
+
+  <hr>
+
+  <h2>D. Kata Penutup</h2>
+  <p>Demikian laporan pelaksanaan <strong>Tugas 3 Praktikum Transaksi dan Basis Data Terdistribusi (MSIM4206)</strong> ini disusun. Melalui praktikum ini, telah berhasil dibuktikan implementasi manajemen transaksi ACID, otomasi kontrol integritas stok melalui trigger, serta konfigurasi dan sinkronisasi arsitektur basis data terdistribusi Master–Slave multi-node secara <em>real-time</em>.</p>
+  <p>Semoga laporan dan dokumentasi ini dapat memberikan gambaran komprehensif atas seluruh tahapan praktik yang telah dilaksanakan serta memenuhi seluruh kriteria penilaian akademik Universitas Terbuka. Terima kasih.</p>
+</div>
+
+</body>
+</html>

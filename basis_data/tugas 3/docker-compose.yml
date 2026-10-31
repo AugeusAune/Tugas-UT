@@ -2,7 +2,7 @@ services:
   mysql_master:
     image: mysql:latest
     container_name: mysql_tugas3_master
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: rumah_sakit
@@ -18,7 +18,7 @@ services:
   mysql_slave:
     image: mysql:latest
     container_name: mysql_tugas3_slave
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: rumah_sakit
@@ -33,7 +33,7 @@ services:
   pma_master:
     image: phpmyadmin/phpmyadmin:latest
     container_name: pma_tugas3_master
-    restart: always
+    restart: unless-stopped
     environment:
       PMA_HOST: mysql_master
       PMA_PORT: 3306
@@ -49,7 +49,7 @@ services:
   pma_slave:
     image: phpmyadmin/phpmyadmin:latest
     container_name: pma_tugas3_slave
-    restart: always
+    restart: unless-stopped
     environment:
       PMA_HOST: mysql_slave
       PMA_PORT: 3306
