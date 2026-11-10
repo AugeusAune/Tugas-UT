@@ -150,6 +150,8 @@ USE rumah_sakit;
 
 Perintah `DROP DATABASE` menghapus seluruh berkas skema dan data tabel yang ada di dalam database tersebut secara permanen. Setelah eksekusi berhasil, database `db_temp_praktikum` tidak lagi muncul dalam daftar `SHOW DATABASES`.
 
+![GAMBAR 6 – Hasil Pengujian Perintah DROP DATABASE](./artifacts/assets/langkah_4.png)
+
 ---
 
 ### Langkah 5: Pembuatan Seluruh Tabel dari ERD
@@ -164,7 +166,7 @@ CREATE TABLE IF NOT EXISTS administrator (
     waktu_jaga VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 6 – Hasil CREATE TABLE administrator](./artifacts/assets/create_administrator_table.png)
+![GAMBAR 7 – Hasil CREATE TABLE administrator](./artifacts/assets/create_administrator_table.png)
 
 #### 2) Tabel `dokter`
 ```sql
@@ -178,7 +180,7 @@ CREATE TABLE IF NOT EXISTS dokter (
     waktu_kerja VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 7 – Hasil CREATE TABLE dokter](./artifacts/assets/create_dokter_table.png)
+![GAMBAR 8 – Hasil CREATE TABLE dokter](./artifacts/assets/create_dokter_table.png)
 
 #### 3) Tabel `pasien`
 ```sql
@@ -189,7 +191,7 @@ CREATE TABLE IF NOT EXISTS pasien (
     jenis_kelamin INT(1) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 8 – Hasil CREATE TABLE pasien](./artifacts/assets/create_table_pasien.png)
+![GAMBAR 9 – Hasil CREATE TABLE pasien](./artifacts/assets/create_table_pasien.png)
 
 #### 4) Tabel `dokter_admin`
 ```sql
@@ -199,7 +201,7 @@ CREATE TABLE IF NOT EXISTS dokter_admin (
     id_admin INT(3) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 9 – Hasil CREATE TABLE dokter_admin](./artifacts/assets/create_dokter_admin_table.png)
+![GAMBAR 10 – Hasil CREATE TABLE dokter_admin](./artifacts/assets/create_dokter_admin_table.png)
 
 #### 5) Tabel `daftar`
 ```sql
@@ -209,7 +211,7 @@ CREATE TABLE IF NOT EXISTS daftar (
     id_admin INT(3) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 10 – Hasil CREATE TABLE daftar](./artifacts/assets/create_daftar_table.png)
+![GAMBAR 11 – Hasil CREATE TABLE daftar](./artifacts/assets/create_daftar_table.png)
 
 #### 6) Tabel `pasien_dokter`
 ```sql
@@ -221,13 +223,13 @@ CREATE TABLE IF NOT EXISTS pasien_dokter (
     resep VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 ```
-![GAMBAR 11 – Hasil CREATE TABLE pasien_dokter](./artifacts/assets/create_pasien_dokter_table.png)
+![GAMBAR 12 – Hasil CREATE TABLE pasien_dokter](./artifacts/assets/create_pasien_dokter_table.png)
 
 Verifikasi seluruh tabel yang telah terbentuk:
 ```sql
 SHOW TABLES;
 ```
-![GAMBAR 12 – Hasil SHOW TABLES (Enam Tabel Terbentuk)](./artifacts/assets/show_tables.png)
+![GAMBAR 13 – Hasil SHOW TABLES (Enam Tabel Terbentuk)](./artifacts/assets/show_tables.png)
 
 ---
 
@@ -264,7 +266,7 @@ ALTER TABLE pasien_dokter
         ON DELETE CASCADE ON UPDATE CASCADE;
 ```
 
-![GAMBAR 13 – Eksekusi Perintah ALTER TABLE Foreign Key](./artifacts/assets/alter_pertama.png)
+![GAMBAR 14 – Eksekusi Perintah ALTER TABLE Foreign Key](./artifacts/assets/alter_pertama.png)
 
 Verifikasi pendaftaran foreign key pada skema basis data:
 ```sql
@@ -278,7 +280,7 @@ FROM information_schema.KEY_COLUMN_USAGE
 WHERE TABLE_SCHEMA = 'rumah_sakit'
   AND REFERENCED_TABLE_NAME IS NOT NULL;
 ```
-![GAMBAR 14 – Hasil Verifikasi Relasi Foreign Key](./artifacts/assets/verifikasi_relasi.png)
+![GAMBAR 15 – Hasil Verifikasi Relasi Foreign Key](./artifacts/assets/verifikasi_relasi.png)
 
 ---
 
@@ -324,6 +326,8 @@ INSERT INTO pasien_dokter (id_dokter, id_pasien, waktu_periksa, resep) VALUES
 (4, 5, '2026-10-22', 'RSP-006 Ranitidine 150mg');
 ```
 
+![GAMBAR 16 – Hasil Eksekusi INSERT Seluruh Data Master dan Relasi](./artifacts/assets/langkah_7.png)
+
 ---
 
 ### Langkah 8: Penggunaan SELECT
@@ -349,7 +353,7 @@ SELECT
 FROM dokter;
 ```
 
-Hasil kueri menampilkan data terstruktur sesuai proyeksi kolom yang didefinisikan.
+![GAMBAR 17 – Hasil Eksekusi Kueri SELECT Seluruh Kolom dan Proyeksi Kolom](./artifacts/assets/langkah_8.png)
 
 ---
 
@@ -374,6 +378,8 @@ FROM pasien_dokter
 WHERE id_dokter = 1 AND waktu_periksa >= '2026-10-12';
 ```
 
+![GAMBAR 18 – Hasil Eksekusi Kueri WHERE untuk Penyaringan Data](./artifacts/assets/langkah_9.png)
+
 ---
 
 ### Langkah 10: Penggunaan JOIN
@@ -393,6 +399,8 @@ JOIN pasien p ON d.id_pasien = p.id_pasien
 JOIN administrator a ON d.id_admin = a.id_admin;
 ```
 
+![GAMBAR 19 – Hasil Kueri INNER JOIN Pendaftaran Pasien](./artifacts/assets/langkah_10_a.png)
+
 #### B. INNER JOIN 3 Tabel (`pasien`, `pasien_dokter`, dan `dokter`)
 Menampilkan informasi nama pasien, waktu pemeriksaan, resep obat yang diterima, dan nama dokter yang memeriksa:
 ```sql
@@ -408,6 +416,8 @@ JOIN pasien p ON pd.id_pasien = p.id_pasien
 JOIN dokter d ON pd.id_dokter = d.id_dokter;
 ```
 
+![GAMBAR 20 – Hasil Kueri INNER JOIN Tiga Tabel Pemeriksaan Medis](./artifacts/assets/langkah_10_b.png)
+
 #### C. LEFT JOIN
 Menampilkan seluruh dokter beserta jumlah pasien yang pernah ditangani:
 ```sql
@@ -420,7 +430,9 @@ LEFT JOIN pasien_dokter pd ON d.id_dokter = pd.id_dokter
 GROUP BY d.id_dokter, d.nama_dokter, d.spesialis;
 ```
 
-![GAMBAR 15 – Hasil Uji Query JOIN Relasi Tiga Tabel](./artifacts/assets/uji_relasi.png)
+![GAMBAR 21 – Hasil Kueri LEFT JOIN Penanganan Pasien per Dokter](./artifacts/assets/langkah_10_c.png)
+
+![GAMBAR 22 – Hasil Uji Query JOIN Relasi Tiga Tabel pada Monitor CLI](./artifacts/assets/uji_relasi.png)
 
 ---
 
@@ -444,7 +456,7 @@ SELECT
 FROM dokter;
 ```
 
-Kueri di atas menghasilkan nilai rata-rata usia dokter yang dibulatkan hingga 1 angka desimal (`ROUND`), serta mengidentifikasi dokter paling senior dan dokter termuda melalui fungsi `MIN()` dan `MAX()`.
+![GAMBAR 23 – Hasil Eksekusi Fungsi Matematika dan Agregasi](./artifacts/assets/langkah_11.png)
 
 ---
 
@@ -478,6 +490,8 @@ SELECT
 FROM pasien_dokter;
 ```
 
+![GAMBAR 24 – Hasil Eksekusi Fungsi Manipulasi String](./artifacts/assets/langkah_12.png)
+
 ---
 
 ### Langkah 13: Penggunaan BETWEEN
@@ -500,6 +514,8 @@ SELECT id_pasien, nama_pasien, alamat_pasien
 FROM pasien 
 WHERE id_pasien BETWEEN 2 AND 4;
 ```
+
+![GAMBAR 25 – Hasil Eksekusi Kueri Rentang BETWEEN](./artifacts/assets/langkah_13.png)
 
 ---
 
@@ -524,6 +540,8 @@ FROM dokter
 WHERE alamat_dokter LIKE '%Jakarta%';
 ```
 
+![GAMBAR 26 – Hasil Eksekusi Pencocokan Pola LIKE](./artifacts/assets/langkah_14.png)
+
 ---
 
 ### Langkah 15: Penggunaan ORDER BY
@@ -547,11 +565,13 @@ FROM pasien_dokter
 ORDER BY waktu_periksa DESC, id_dokter ASC;
 ```
 
+![GAMBAR 27 – Hasil Eksekusi Pengurutan Data ORDER BY](./artifacts/assets/langkah_15.png)
+
 ---
 
 ### Langkah 16: Penggunaan GROUP BY
 
-Klausa `GROUP BY` mengelompokkan baris data yang memiliki nilai kolom yang sama ke dalam baris ringkasan, biasanya dipadukan dengan fungsi agregasi seperti `COUNT()`:
+Klausa `GROUP BY` mengelompokkan baris data yang memiliki nilai kolom yang sama ke dalam baris ringkasan, dipadukan dengan fungsi agregasi seperti `COUNT()`:
 
 ```sql
 -- A. Menghitung jumlah pasien berdasarkan kelompok jenis kelamin
@@ -582,6 +602,8 @@ JOIN pasien_dokter pd ON d.id_dokter = pd.id_dokter
 GROUP BY d.id_dokter, d.nama_dokter
 HAVING COUNT(pd.id) >= 2;
 ```
+
+![GAMBAR 28 – Hasil Eksekusi Pengelompokan Data GROUP BY dan HAVING](./artifacts/assets/langkah_16.png)
 
 ---
 
@@ -622,40 +644,53 @@ FROM pasien_dokter
 WHERE id = 1;
 ```
 
+![GAMBAR 29 – Hasil Eksekusi Perintah UPDATE dan Verifikasi Data](./artifacts/assets/langkah_17.png)
+
 Hasil verifikasi melalui `SELECT` membuktikan bahwa pembaruan data berhasil disimpan ke dalam basis data tanpa menimbulkan inkonsistensi.
 
 ---
 
 ## C. Hasil Akhir Praktikum
 
-Praktikum ini berhasil menghasilkan basis data relasional **`rumah_sakit`** yang memuat enam tabel terintegrasi penuh sesuai rancangan ERD:
+Seluruh 17 langkah panduan praktikum telah berhasil dilaksanakan dengan hasil yang terverifikasi:
 
-| No | Nama Tabel | Kunci Utama (*Primary Key*) | Kunci Tamu (*Foreign Key*) | Tabel Rujukan Induk |
-| :---: | :--- | :--- | :--- | :--- |
-| 1 | `administrator` | `id_admin` | – | – |
-| 2 | `dokter` | `id_dokter` | – | – |
-| 3 | `pasien` | `id_pasien` | – | – |
-| 4 | `dokter_admin` | `id_data` | `id_dokter`, `id_admin` | `dokter`, `administrator` |
-| 5 | `daftar` | `id_daftar` | `id_pasien`, `id_admin` | `pasien`, `administrator` |
-| 6 | `pasien_dokter` | `id` | `id_dokter`, `id_pasien` | `dokter`, `pasien` |
+| No | Langkah Praktikum | Perintah Utama | Objek Sasaran | Status |
+| :---: | :--- | :--- | :--- | :---: |
+| 1 | Akses MySQL CLI | `docker exec -it ... mysql` | Server MySQL | **BERHASIL** |
+| 2 | Akses phpMyAdmin | Browser `localhost:8080` | Web UI | **BERHASIL** |
+| 3 | Pembuatan Basis Data | `CREATE DATABASE` | `rumah_sakit` | **BERHASIL** |
+| 4 | Drop Database | `DROP DATABASE` | `db_temp_praktikum` | **BERHASIL** |
+| 5 | Pembuatan 6 Tabel ERD | `CREATE TABLE` | Master & Transaksi | **BERHASIL** |
+| 6 | Pengaturan PK, FK, & Relasi | `ALTER TABLE ... ADD CONSTRAINT` | 6 Relasi Relasional | **BERHASIL** |
+| 7 | Penggunaan INSERT | `INSERT INTO ... VALUES` | Seluruh Tabel | **BERHASIL** |
+| 8 | Penggunaan SELECT | `SELECT *`, Proyeksi Kolom | `dokter`, `pasien` | **BERHASIL** |
+| 9 | Penggunaan WHERE | `WHERE` dengan Operator `AND` | Filter Data Spesifik | **BERHASIL** |
+| 10 | Penggunaan JOIN | `INNER JOIN`, `LEFT JOIN` | 2 & 3 Tabel | **BERHASIL** |
+| 11 | Fungsi Matematika | `COUNT`, `AVG`, `ROUND`, `MIN`, `MAX` | Komputasi Numerik | **BERHASIL** |
+| 12 | Fungsi String | `CONCAT`, `UPPER`, `LOWER`, `SUBSTRING` | Format Teks | **BERHASIL** |
+| 13 | Operator BETWEEN | `WHERE ... BETWEEN ... AND` | Filter Rentang Nilai | **BERHASIL** |
+| 14 | Operator LIKE | `LIKE 'S%'`, `'%Wijaya'`, `'%Jakarta%'` | Pencocokan Pola | **BERHASIL** |
+| 15 | Pengurutan ORDER BY | `ORDER BY ... ASC / DESC` | Urutan Huruf & Waktu | **BERHASIL** |
+| 16 | Pengelompokan GROUP BY | `GROUP BY`, `HAVING` | Agregasi Kelompok | **BERHASIL** |
+| 17 | Pembaruan UPDATE | `UPDATE ... SET ... WHERE` | Master & Transaksi | **BERHASIL** |
 
-![GAMBAR 16 – Diagram Relasi Designer phpMyAdmin](./artifacts/assets/tampilan_designer.png)
+Tampilan relasi keseluruhan enam tabel pada menu **Designer** phpMyAdmin membuktikan bahwa seluruh relasi referensial telah terhubung secara utuh:
 
-Seluruh 17 langkah yang disyaratkan oleh panduan praktikum telah diuji dan diverifikasi secara komprehensif.
+![GAMBAR 30 – Diagram Relasi Designer phpMyAdmin](./artifacts/assets/tampilan_designer.png)
 
 ---
 
 ## D. Kesimpulan
 
-Berdasarkan pelaksanaan praktikum Tugas 2 Basis Data (MSIM4206), dapat disimpulkan bahwa:
-1. Pemodelan ERD kasus rumah sakit telah diimplementasikan secara tepat ke dalam struktur tabel fisik MySQL dengan pendefinisian tipe data, panjang field, serta batasan kunci utama (*Primary Key*) dan kunci tamu (*Foreign Key*).
-2. Penerapan integritas referensial dengan opsi `ON DELETE CASCADE ON UPDATE CASCADE` menjamin keterhubungan konsisten antar data induk dan anak.
-3. Seluruh 17 instruksi panduan praktikum—meliputi akses CLI/Web UI, DDL (`CREATE`, `ALTER`, `DROP`), DML (`INSERT`, `UPDATE`), manipulasi query (`SELECT`, `WHERE`, `JOIN`, `BETWEEN`, `LIKE`, `ORDER BY`, `GROUP BY`, `HAVING`), serta pemanfaatan fungsi bawaan matematika dan string—telah tervalidasi berjalan tanpa galat pada mesin MySQL InnoDB.
+1. **Rancangan Relasional:** ERD kasus rumah sakit telah berhasil diwujudkan ke dalam skema fisik basis data relasional MySQL/MariaDB dengan struktur normalisasi yang baik, terdiri dari tiga tabel master (`administrator`, `dokter`, `pasien`) dan tiga tabel relasi/transaksi (`dokter_admin`, `daftar`, `pasien_dokter`).
+2. **Integritas Referensial:** Penggunaan *foreign key constraints* dengan klausul `ON DELETE CASCADE ON UPDATE CASCADE` menjamin tidak terjadinya *orphan records* dan menjaga konsistensi data antar tabel relasional.
+3. **Kepatuhan Praktikum:** Seluruh 17 langkah instruksi praktikum modul basis data telah dilaksanakan secara lengkap, mulai dari manajemen DDL (create/drop database dan tabel), DML (insert dan update), hingga eksplorasi kueri analitik DQL (select, filtering, joins, mathematical & string functions, range, pattern matching, ordering, dan grouping).
+4. **Validasi Visual:** Integritas relasi tabel telah tervalidasi baik melalui kueri SQL di terminal CLI maupun melalui diagram relasi visual pada antarmuka *Designer* phpMyAdmin.
 
 ---
 
 ## Referensi
 
-1. Universitas Terbuka. *Basis Data* (MSIM4206), Buku Materi Pokok (BMP), Modul DDL dan DML.
-2. Suryadi, A. *Panduan Praktikum SQL* (STSI4105), Edisi 2, Universitas Terbuka.
-3. Oracle Corporation. *MySQL 8.0 Reference Manual: SQL Statements and Functions*.
+1. Modul Praktikum MSIM4206 – Basis Data, Universitas Terbuka.
+2. MySQL 8.0 Reference Manual: *Data Definition Statements, Data Manipulation Statements, and Optimization*. Oracle Corporation.
+3. Silberschatz, A., Korth, H. F., & Sudarshan, S. (2020). *Database System Concepts* (7th ed.). McGraw-Hill.

@@ -528,6 +528,11 @@ SHOW DATABASES;
 USE rumah_sakit;</code></pre>
   <p>Setelah dieksekusi, basis data <code>db_temp_praktikum</code> berhasil dihapus dan tidak lagi muncul pada daftar <code>SHOW DATABASES</code>.</p>
 
+  <figure class="img-container">
+    <img src="./assets/langkah_4.png" alt="Pengujian Perintah DROP DATABASE" class="wide-img">
+    <figcaption class="caption">GAMBAR 6 – Hasil Pengujian Perintah DROP DATABASE</figcaption>
+  </figure>
+
   <h3><span class="step-badge">Langkah 5</span>Pembuatan Seluruh Tabel dari ERD</h3>
   <p>Seluruh tabel dibuat berurutan dari tabel master induk tanpa foreign key, kemudian tabel transaksi anak yang memiliki foreign key.</p>
 
@@ -539,7 +544,7 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_administrator_table.png" alt="Tabel administrator">
-    <figcaption class="caption">GAMBAR 6 – DDL Tabel administrator</figcaption>
+    <figcaption class="caption">GAMBAR 7 – Hasil CREATE TABLE administrator</figcaption>
   </figure>
 
   <h4>2) Tabel dokter</h4>
@@ -554,7 +559,7 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_dokter_table.png" alt="Tabel dokter">
-    <figcaption class="caption">GAMBAR 7 – DDL Tabel dokter</figcaption>
+    <figcaption class="caption">GAMBAR 8 – Hasil CREATE TABLE dokter</figcaption>
   </figure>
 
   <h4>3) Tabel pasien</h4>
@@ -566,7 +571,7 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_table_pasien.png" alt="Tabel pasien">
-    <figcaption class="caption">GAMBAR 8 – DDL Tabel pasien</figcaption>
+    <figcaption class="caption">GAMBAR 9 – Hasil CREATE TABLE pasien</figcaption>
   </figure>
 
   <h4>4) Tabel dokter_admin</h4>
@@ -577,7 +582,7 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_dokter_admin_table.png" alt="Tabel dokter_admin">
-    <figcaption class="caption">GAMBAR 9 – DDL Tabel dokter_admin</figcaption>
+    <figcaption class="caption">GAMBAR 10 – Hasil CREATE TABLE dokter_admin</figcaption>
   </figure>
 
   <h4>5) Tabel daftar</h4>
@@ -588,7 +593,7 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_daftar_table.png" alt="Tabel daftar">
-    <figcaption class="caption">GAMBAR 10 – DDL Tabel daftar</figcaption>
+    <figcaption class="caption">GAMBAR 11 – Hasil CREATE TABLE daftar</figcaption>
   </figure>
 
   <h4>6) Tabel pasien_dokter</h4>
@@ -601,14 +606,14 @@ USE rumah_sakit;</code></pre>
 ) ENGINE=InnoDB;</code></pre>
   <figure class="img-container">
     <img src="./assets/create_pasien_dokter_table.png" alt="Tabel pasien_dokter">
-    <figcaption class="caption">GAMBAR 11 – DDL Tabel pasien_dokter</figcaption>
+    <figcaption class="caption">GAMBAR 12 – Hasil CREATE TABLE pasien_dokter</figcaption>
   </figure>
 
   <p>Verifikasi seluruh tabel yang telah terbentuk:</p>
   <pre><code>SHOW TABLES;</code></pre>
   <figure class="img-container">
     <img src="./assets/show_tables.png" alt="SHOW TABLES">
-    <figcaption class="caption">GAMBAR 12 – Hasil SHOW TABLES (Enam Tabel Terbentuk)</figcaption>
+    <figcaption class="caption">GAMBAR 13 – Hasil SHOW TABLES (Enam Tabel Terbentuk)</figcaption>
   </figure>
 
   <h3><span class="step-badge">Langkah 6</span>Setting Primary Key, Foreign Key, dan Relasi Tabel</h3>
@@ -630,7 +635,7 @@ ALTER TABLE pasien_dokter
 
   <figure class="img-container">
     <img src="./assets/alter_pertama.png" alt="ALTER TABLE Foreign Key">
-    <figcaption class="caption">GAMBAR 13 – Eksekusi Perintah ALTER TABLE Foreign Key</figcaption>
+    <figcaption class="caption">GAMBAR 14 – Eksekusi Perintah ALTER TABLE Foreign Key</figcaption>
   </figure>
 
   <p>Verifikasi foreign key aktif pada katalog sistem <code>information_schema</code>:</p>
@@ -640,7 +645,7 @@ WHERE TABLE_SCHEMA = 'rumah_sakit' AND REFERENCED_TABLE_NAME IS NOT NULL;</code>
 
   <figure class="img-container">
     <img src="./assets/verifikasi_relasi.png" alt="Verifikasi Foreign Key" class="wide-img">
-    <figcaption class="caption">GAMBAR 14 – Hasil Query Verifikasi Relasi Foreign Key</figcaption>
+    <figcaption class="caption">GAMBAR 15 – Hasil Verifikasi Relasi Foreign Key</figcaption>
   </figure>
 
   <h3><span class="step-badge">Langkah 7</span>Penggunaan INSERT</h3>
@@ -677,6 +682,11 @@ INSERT INTO pasien_dokter (id_dokter, id_pasien, waktu_periksa, resep) VALUES
 (2, 4, '2026-10-20', 'RSP-005 Metformin 500mg'),
 (4, 5, '2026-10-22', 'RSP-006 Ranitidine 150mg');</code></pre>
 
+  <figure class="img-container">
+    <img src="./assets/langkah_7.png" alt="Eksekusi INSERT Seluruh Data" class="wide-img">
+    <figcaption class="caption">GAMBAR 16 – Hasil Eksekusi INSERT Seluruh Data Master dan Relasi</figcaption>
+  </figure>
+
   <h3><span class="step-badge">Langkah 8</span>Penggunaan SELECT</h3>
   <p>Perintah <code>SELECT</code> mengambil data seluruh kolom maupun kolom spesifik dengan alias (<code>AS</code>):</p>
   <pre><code>-- Menampilkan seluruh kolom tabel dokter:
@@ -688,6 +698,11 @@ SELECT
     nama_pasien AS 'Nama Lengkap Pasien', 
     alamat_pasien AS 'Alamat Domisili'
 FROM pasien;</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_8.png" alt="Eksekusi SELECT" class="wide-img">
+    <figcaption class="caption">GAMBAR 17 – Hasil Eksekusi Kueri SELECT Seluruh Kolom dan Proyeksi Kolom</figcaption>
+  </figure>
 
   <h3><span class="step-badge">Langkah 9</span>Penggunaan WHERE</h3>
   <p>Klausa <code>WHERE</code> memfilter data berdasarkan kondisi tertentu:</p>
@@ -706,10 +721,32 @@ SELECT id, id_dokter, id_pasien, waktu_periksa, resep
 FROM pasien_dokter
 WHERE id_dokter = 1 AND waktu_periksa >= '2026-10-12';</code></pre>
 
+  <figure class="img-container">
+    <img src="./assets/langkah_9.png" alt="Eksekusi WHERE" class="wide-img">
+    <figcaption class="caption">GAMBAR 18 – Hasil Eksekusi Kueri WHERE untuk Penyaringan Data</figcaption>
+  </figure>
+
   <h3><span class="step-badge">Langkah 10</span>Penggunaan JOIN</h3>
   <p>Operasi <code>JOIN</code> menggabungkan data antar tabel berdasarkan relasi foreign key:</p>
-  <pre><code>-- INNER JOIN 3 tabel (Pasien, Riwayat Pemeriksaan, Dokter):
-SELECT 
+
+  <h4>A. INNER JOIN 2 Tabel (daftar, pasien, administrator)</h4>
+  <p>Menampilkan data pendaftaran pasien beserta administrator yang melayani:</p>
+  <pre><code>SELECT 
+    d.id_daftar,
+    p.nama_pasien,
+    a.nama_admin,
+    a.waktu_jaga
+FROM daftar d
+JOIN pasien p ON d.id_pasien = p.id_pasien
+JOIN administrator a ON d.id_admin = a.id_admin;</code></pre>
+  <figure class="img-container">
+    <img src="./assets/langkah_10_a.png" alt="INNER JOIN Pendaftaran Pasien" class="wide-img">
+    <figcaption class="caption">GAMBAR 19 – Hasil Kueri INNER JOIN Pendaftaran Pasien</figcaption>
+  </figure>
+
+  <h4>B. INNER JOIN 3 Tabel (pasien_dokter, pasien, dokter)</h4>
+  <p>Menampilkan informasi nama pasien, waktu pemeriksaan, resep obat yang diterima, dan nama dokter yang memeriksa:</p>
+  <pre><code>SELECT 
     pd.id AS no_pemeriksaan,
     p.nama_pasien,
     d.nama_dokter,
@@ -719,109 +756,220 @@ SELECT
 FROM pasien_dokter pd
 JOIN pasien p ON pd.id_pasien = p.id_pasien
 JOIN dokter d ON pd.id_dokter = d.id_dokter;</code></pre>
+  <figure class="img-container">
+    <img src="./assets/langkah_10_b.png" alt="INNER JOIN Tiga Tabel Pemeriksaan Medis" class="wide-img">
+    <figcaption class="caption">GAMBAR 20 – Hasil Kueri INNER JOIN Tiga Tabel Pemeriksaan Medis</figcaption>
+  </figure>
+
+  <h4>C. LEFT JOIN</h4>
+  <p>Menampilkan seluruh dokter beserta jumlah pasien yang pernah ditangani:</p>
+  <pre><code>SELECT 
+    d.nama_dokter,
+    d.spesialis,
+    COUNT(pd.id) AS total_pasien_diperiksa
+FROM dokter d
+LEFT JOIN pasien_dokter pd ON d.id_dokter = pd.id_dokter
+GROUP BY d.id_dokter, d.nama_dokter, d.spesialis;</code></pre>
+  <figure class="img-container">
+    <img src="./assets/langkah_10_c.png" alt="LEFT JOIN Penanganan Pasien per Dokter" class="wide-img">
+    <figcaption class="caption">GAMBAR 21 – Hasil Kueri LEFT JOIN Penanganan Pasien per Dokter</figcaption>
+  </figure>
 
   <figure class="img-container">
-    <img src="./assets/uji_relasi.png" alt="Uji JOIN Tiga Tabel" class="wide-img">
-    <figcaption class="caption">GAMBAR 15 – Hasil Kueri INNER JOIN Tiga Tabel Relasi</figcaption>
+    <img src="./assets/uji_relasi.png" alt="Uji JOIN Tiga Tabel pada Monitor CLI" class="wide-img">
+    <figcaption class="caption">GAMBAR 22 – Hasil Uji Query JOIN Relasi Tiga Tabel pada Monitor CLI</figcaption>
   </figure>
 
   <h3><span class="step-badge">Langkah 11</span>Penggunaan Fungsi Matematika</h3>
   <p>Menggunakan fungsi matematika dan agregasi bawaan (<code>COUNT</code>, <code>AVG</code>, <code>ROUND</code>, <code>MIN</code>, <code>MAX</code>, <code>TIMESTAMPDIFF</code>):</p>
-  <pre><code>-- Menghitung total data:
+  <pre><code>-- A. Menghitung total entitas menggunakan fungsi COUNT()
 SELECT 
     (SELECT COUNT(*) FROM dokter) AS total_dokter,
     (SELECT COUNT(*) FROM pasien) AS total_pasien,
     (SELECT COUNT(*) FROM administrator) AS total_admin,
     (SELECT COUNT(*) FROM pasien_dokter) AS total_pemeriksaan;
 
--- Menghitung rata-rata usia dokter dan usia termuda/tertua:
+-- B. Menghitung rata-rata usia dokter dengan TIMESTAMPDIFF, AVG, dan ROUND
 SELECT 
     ROUND(AVG(TIMESTAMPDIFF(YEAR, tanggal_lahir, '2026-11-01')), 1) AS rata_rata_usia_dokter,
     MIN(tanggal_lahir) AS tgl_lahir_dokter_tertua,
     MAX(tanggal_lahir) AS tgl_lahir_dokter_termuda
 FROM dokter;</code></pre>
 
+  <figure class="img-container">
+    <img src="./assets/langkah_11.png" alt="Fungsi Matematika dan Agregasi" class="wide-img">
+    <figcaption class="caption">GAMBAR 23 – Hasil Eksekusi Fungsi Matematika dan Agregasi</figcaption>
+  </figure>
+
   <h3><span class="step-badge">Langkah 12</span>Penggunaan Fungsi String</h3>
   <p>Fungsi string (<code>CONCAT</code>, <code>UPPER</code>, <code>LOWER</code>, <code>LENGTH</code>, <code>SUBSTRING</code>) memanipulasi teks:</p>
-  <pre><code>-- Menggabungkan gelar dan spesialisasi dokter:
-SELECT CONCAT('dr. ', nama_dokter, ' (Spesialis ', spesialis, ')') AS profil_dokter FROM dokter;
+  <pre><code>-- A. Fungsi CONCAT: Menggabungkan gelar, nama, dan spesialisasi dokter
+SELECT 
+    CONCAT('dr. ', nama_dokter, ' (Spesialis ', spesialis, ')') AS profil_dokter
+FROM dokter;
 
--- Standarisasi teks kapital dan kecil:
-SELECT UPPER(nama_pasien) AS nama_kapital, LOWER(alamat_pasien) AS alamat_huruf_kecil FROM pasien;
+-- B. Fungsi UPPER dan LOWER: Standarisasi format teks kapital dan kecil
+SELECT 
+    UPPER(nama_pasien) AS nama_kapital,
+    LOWER(alamat_pasien) AS alamat_huruf_kecil
+FROM pasien;
 
--- Menghitung panjang karakter dan mengekstrak kode resep:
-SELECT nama_pasien, LENGTH(nama_pasien) AS panjang_karakter FROM pasien;
-SELECT id, resep, SUBSTRING(resep, 1, 7) AS kode_resep, SUBSTRING(resep, 9) AS rincian_obat FROM pasien_dokter;</code></pre>
+-- C. Fungsi LENGTH dan SUBSTRING: Menghitung karakter dan mengekstrak kode resep
+SELECT 
+    nama_pasien,
+    LENGTH(nama_pasien) AS panjang_karakter_nama
+FROM pasien;
+
+SELECT 
+    id,
+    resep,
+    SUBSTRING(resep, 1, 7) AS kode_resep,
+    SUBSTRING(resep, 9) AS rincian_obat
+FROM pasien_dokter;</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_12.png" alt="Fungsi Manipulasi String" class="wide-img">
+    <figcaption class="caption">GAMBAR 24 – Hasil Eksekusi Fungsi Manipulasi String</figcaption>
+  </figure>
 
   <h3><span class="step-badge">Langkah 13</span>Penggunaan BETWEEN</h3>
   <p>Operator <code>BETWEEN</code> menyeleksi data dalam interval rentang nilai:</p>
-  <pre><code>-- Dokter dengan rentang tanggal lahir tahun 1980 sampai 1989:
+  <pre><code>-- A. Filter dokter dengan rentang tanggal lahir pada dekade 1980-an (1980 - 1989)
 SELECT nama_dokter, spesialis, tanggal_lahir 
 FROM dokter 
 WHERE tanggal_lahir BETWEEN '1980-01-01' AND '1989-12-31';
 
--- Pemeriksaan dalam rentang tanggal 10 Oktober s.d. 18 Oktober 2026:
+-- B. Filter pemeriksaan dalam rentang tanggal 10 Oktober s.d. 18 Oktober 2026
 SELECT id, id_pasien, waktu_periksa, resep 
 FROM pasien_dokter 
-WHERE waktu_periksa BETWEEN '2026-10-10' AND '2026-10-18';</code></pre>
+WHERE waktu_periksa BETWEEN '2026-10-10' AND '2026-10-18';
+
+-- C. Filter ID pasien antara 2 sampai 4
+SELECT id_pasien, nama_pasien, alamat_pasien 
+FROM pasien 
+WHERE id_pasien BETWEEN 2 AND 4;</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_13.png" alt="Kueri Rentang BETWEEN" class="wide-img">
+    <figcaption class="caption">GAMBAR 25 – Hasil Eksekusi Kueri Rentang BETWEEN</figcaption>
+  </figure>
 
   <h3><span class="step-badge">Langkah 14</span>Penggunaan LIKE</h3>
   <p>Pencarian pola teks dengan wildcard <code>%</code>:</p>
-  <pre><code>-- Nama pasien berawalan huruf 'S':
-SELECT id_pasien, nama_pasien, alamat_pasien FROM pasien WHERE nama_pasien LIKE 'S%';
+  <pre><code>-- A. Wildcard awalan: Mencari pasien dengan nama berawalan huruf 'S'
+SELECT id_pasien, nama_pasien, alamat_pasien 
+FROM pasien 
+WHERE nama_pasien LIKE 'S%';
 
--- Nama dokter berakhiran kata 'Wijaya':
-SELECT id_dokter, nama_dokter, spesialis FROM dokter WHERE nama_dokter LIKE '%Wijaya';
+-- B. Wildcard akhiran: Mencari dokter dengan nama berakhiran kata 'Wijaya'
+SELECT id_dokter, nama_dokter, spesialis 
+FROM dokter 
+WHERE nama_dokter LIKE '%Wijaya';
 
--- Dokter dengan alamat domisili di Jakarta:
-SELECT id_dokter, nama_dokter, alamat_dokter FROM dokter WHERE alamat_dokter LIKE '%Jakarta%';</code></pre>
+-- C. Wildcard pola tengah: Mencari dokter dengan alamat domisili di wilayah 'Jakarta'
+SELECT id_dokter, nama_dokter, alamat_dokter 
+FROM dokter 
+WHERE alamat_dokter LIKE '%Jakarta%';</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_14.png" alt="Pencocokan Pola LIKE" class="wide-img">
+    <figcaption class="caption">GAMBAR 26 – Hasil Eksekusi Pencocokan Pola LIKE</figcaption>
+  </figure>
 
   <h3><span class="step-badge">Langkah 15</span>Penggunaan ORDER BY</h3>
   <p>Pengurutan data secara menaik (ASC) atau menurun (DESC):</p>
-  <pre><code>-- Ascending (A-Z) berdasarkan nama pasien:
-SELECT * FROM pasien ORDER BY nama_pasien ASC;
+  <pre><code>-- A. Pengurutan Ascending berdasarkan nama pasien (A ke Z)
+SELECT id_pasien, nama_pasien, alamat_pasien 
+FROM pasien 
+ORDER BY nama_pasien ASC;
 
--- Descending (termuda ke tertua) berdasarkan tanggal lahir dokter:
-SELECT nama_dokter, tanggal_lahir, spesialis FROM dokter ORDER BY tanggal_lahir DESC;
+-- B. Pengurutan Descending berdasarkan tanggal lahir dokter (termuda ke tertua)
+SELECT nama_dokter, tanggal_lahir, spesialis 
+FROM dokter 
+ORDER BY tanggal_lahir DESC;
 
--- Multi-kolom:
-SELECT id, waktu_periksa, id_dokter, id_pasien, resep FROM pasien_dokter ORDER BY waktu_periksa DESC, id_dokter ASC;</code></pre>
+-- C. Pengurutan multi-kolom (waktu periksa terbaru, kemudian id_dokter)
+SELECT id, waktu_periksa, id_dokter, id_pasien, resep 
+FROM pasien_dokter 
+ORDER BY waktu_periksa DESC, id_dokter ASC;</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_15.png" alt="Pengurutan Data ORDER BY" class="wide-img">
+    <figcaption class="caption">GAMBAR 27 – Hasil Eksekusi Pengurutan Data ORDER BY</figcaption>
+  </figure>
 
   <h3><span class="step-badge">Langkah 16</span>Penggunaan GROUP BY</h3>
   <p>Pengelompokan data dengan agregasi dan klausa <code>HAVING</code>:</p>
-  <pre><code>-- Jumlah pasien berdasarkan jenis kelamin:
+  <pre><code>-- A. Menghitung jumlah pasien berdasarkan kelompok jenis kelamin
 SELECT 
-    CASE jenis_kelamin WHEN 1 THEN 'Laki-laki' ELSE 'Perempuan' END AS jenis_kelamin,
-    COUNT(*) AS total_pasien
+    CASE jenis_kelamin 
+        WHEN 1 THEN 'Laki-laki' 
+        WHEN 2 THEN 'Perempuan' 
+    END AS kategori_jenis_kelamin,
+    COUNT(*) AS jumlah_pasien
 FROM pasien 
 GROUP BY jenis_kelamin;
 
--- Jumlah pemeriksaan per dokter dengan HAVING:
-SELECT d.nama_dokter, COUNT(pd.id) AS total_pemeriksaan
+-- B. Menghitung jumlah pemeriksaan yang ditangani oleh tiap dokter
+SELECT 
+    d.nama_dokter, 
+    d.spesialis, 
+    COUNT(pd.id) AS jumlah_pemeriksaan
+FROM dokter d
+LEFT JOIN pasien_dokter pd ON d.id_dokter = pd.id_dokter
+GROUP BY d.id_dokter, d.nama_dokter, d.spesialis;
+
+-- C. GROUP BY dengan klausa HAVING (dokter dengan minimal 2 kali pemeriksaan)
+SELECT 
+    d.nama_dokter, 
+    COUNT(pd.id) AS total_pemeriksaan
 FROM dokter d
 JOIN pasien_dokter pd ON d.id_dokter = pd.id_dokter
 GROUP BY d.id_dokter, d.nama_dokter
 HAVING COUNT(pd.id) >= 2;</code></pre>
 
+  <figure class="img-container">
+    <img src="./assets/langkah_16.png" alt="Pengelompokan Data GROUP BY dan HAVING" class="wide-img">
+    <figcaption class="caption">GAMBAR 28 – Hasil Eksekusi Pengelompokan Data GROUP BY dan HAVING</figcaption>
+  </figure>
+
   <h3><span class="step-badge">Langkah 17</span>Penggunaan UPDATE</h3>
   <p>Pembaruan data dan verifikasi hasil perubahannya:</p>
-  <pre><code>-- Memperbarui kontak dan jam kerja dokter spesialis (id_dokter = 1):
+  <pre><code>-- A. Memperbarui nomor telepon dan jam kerja dokter spesialis (id_dokter = 1)
 UPDATE dokter 
-SET no_hp = '081299998888', waktu_kerja = 'Senin-Jumat 08.00-15.00' 
+SET no_hp = '081299998888', 
+    waktu_kerja = 'Senin-Jumat 08.00-15.00' 
 WHERE id_dokter = 1;
-SELECT id_dokter, nama_dokter, no_hp, waktu_kerja FROM dokter WHERE id_dokter = 1;
 
--- Memperbarui domisili pasien (id_pasien = 1):
+-- Verifikasi perubahan dokter:
+SELECT id_dokter, nama_dokter, no_hp, waktu_kerja 
+FROM dokter 
+WHERE id_dokter = 1;
+
+-- B. Memperbarui data alamat domisili pasien (id_pasien = 1)
 UPDATE pasien 
 SET alamat_pasien = 'Jl. Boulevard Raya No. 88 Bekasi Barat' 
 WHERE id_pasien = 1;
-SELECT id_pasien, nama_pasien, alamat_pasien FROM pasien WHERE id_pasien = 1;
 
--- Memperbarui resep obat (id = 1):
+-- Verifikasi perubahan alamat pasien:
+SELECT id_pasien, nama_pasien, alamat_pasien 
+FROM pasien 
+WHERE id_pasien = 1;
+
+-- C. Memperbarui isi catatan resep obat pada pemeriksaan (id = 1)
 UPDATE pasien_dokter 
 SET resep = 'RSP-001 Paracetamol 500mg, Amoxicillin 500mg, Vitamin B Complex' 
 WHERE id = 1;
-SELECT id, id_pasien, waktu_periksa, resep FROM pasien_dokter WHERE id = 1;</code></pre>
+
+-- Verifikasi perubahan resep:
+SELECT id, id_pasien, waktu_periksa, resep 
+FROM pasien_dokter 
+WHERE id = 1;</code></pre>
+
+  <figure class="img-container">
+    <img src="./assets/langkah_17.png" alt="Pembaruan UPDATE dan Verifikasi Data" class="wide-img">
+    <figcaption class="caption">GAMBAR 29 – Hasil Eksekusi Perintah UPDATE dan Verifikasi Data</figcaption>
+  </figure>
 
   <h2>C. Hasil Akhir Praktikum</h2>
   <p>Hasil akhir praktikum adalah basis data <strong>rumah_sakit</strong> yang memuat enam tabel relasional yang saling terhubung secara utuh sesuai dengan spesifikasi ERD kasus rumah sakit:</p>
@@ -884,7 +1032,7 @@ SELECT id, id_pasien, waktu_periksa, resep FROM pasien_dokter WHERE id = 1;</cod
 
   <figure class="img-container">
     <img src="./assets/tampilan_designer.png" alt="Tampilan Designer phpMyAdmin" class="wide-img">
-    <figcaption class="caption">GAMBAR 16 – Tampilan Tab Designer phpMyAdmin: Relasi Utuh Enam Tabel Basis Data</figcaption>
+    <figcaption class="caption">GAMBAR 30 – Diagram Relasi Designer phpMyAdmin</figcaption>
   </figure>
 
   <h2>D. Kesimpulan</h2>
